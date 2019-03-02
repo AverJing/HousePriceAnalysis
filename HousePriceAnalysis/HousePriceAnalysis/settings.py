@@ -40,6 +40,10 @@ INSTALLED_APPS = [
 	'login',
 	'captcha',
 	'echarts',
+    # 添加自己的应用
+    'PriceAnalysis',   
+    # 第三方应用程序
+    #'bootstrap3',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +135,7 @@ STATIC_DIRS = [
 	os.path.join(BASE_DIR, 'static'),
 ]
 
+# bootstrap3 的设置 包含 jQuery
+# BOOTSTRAP3 = {
+#     'include_jquery': True
+# }

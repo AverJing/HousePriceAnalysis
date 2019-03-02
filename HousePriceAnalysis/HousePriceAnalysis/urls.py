@@ -17,10 +17,16 @@ from django.contrib import admin
 from django.urls import path,include
 from login import views as loginV
 from echarts import views as chartV
+import PriceAnalysis.views as pv
 
 urlpatterns = [
+    path('', include(('PriceAnalysis.urls', 'PriceAnalysis'), namespace='PriceAnalysis')),  # , namespace='lea
+    path('index/', pv.index),
+    # path('', pv.index, name='index'),
+    # path('show', pv.showHouse, name='showHouse'),  # base :
+    # path('home', pv.homePage, name='homePage'),
     path('admin/', admin.site.urls),
-    path('index/', loginV.index),
+    #path('index/', loginV.index),
     path('login/', loginV.login),
     path('logout/', loginV.logout),
     path('register/', loginV.register),
@@ -28,4 +34,7 @@ urlpatterns = [
     path('map/', chartV.echart),
     path('echarts/index/', chartV.index),
     path('echarts/map/', chartV.getAll),
+    path('admin/', admin.site.urls),
+
+    #path('', pv.showHouse, name='showHouse', namespace='PriceAnalysis'),
 ]
