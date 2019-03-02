@@ -14,8 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
+from login import views as loginV
+from echarts import views as chartV
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('index/', loginV.index),
+    path('login/', loginV.login),
+    path('logout/', loginV.logout),
+    path('register/', loginV.register),
+    path('captcha/', include('captcha.urls')),
+    path('map/', chartV.echart),
+    path('echarts/index/', chartV.index),
+    path('echarts/map/', chartV.getAll),
 ]
