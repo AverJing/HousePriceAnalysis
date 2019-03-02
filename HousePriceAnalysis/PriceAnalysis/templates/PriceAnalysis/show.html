@@ -1,0 +1,288 @@
+
+{% extends "PriceAnalysis/base.html" %}
+
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+
+    {% block title %}
+        <title>
+            房价展示
+        </title>
+    {% endblock title %}
+{% block header %}
+    <div class="jumbotron">
+
+        <div class="panel panel-warning">
+            <h2>
+                苏州  区域 价格 面积 选择框
+            </h2>
+
+            <div class="row">
+
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    城区 <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">姑苏</a></li>
+                          {# a 标签跳转到 views中 传递所选参数#}
+                        <li><a href="#">相城</a></li>
+                        <li><a href="#">吴江</a></li>
+                        <li><a href="#">吴中</a></li>
+                        <li><a href="#">工业园区</a></li>
+                        <li role="separator" class="divider"></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-6">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="输入地区看房价">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">
+                        <span class="glyphicon glyphicon-search"></span>
+                        .
+                    </button>
+                  </span>
+                </div><!-- /input-group -->
+              </div><!-- /.col-lg-6 -->
+
+                <a class="btn btn-default dropdown-toggle" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                  城区选择
+            </a>
+            <!--button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                  Button with data-target
+            </button-->
+                <div class="collapse" id="collapseExample">
+                  <div class="well">
+                      <ol class="breadcrumb">
+                          <li><a href="#">姑苏</a></li>
+                          <li><a href="#">相城</a></li>
+                          <li><a href="#">吴中</a></li>
+                          <li><a href="#">吴江</a></li>
+                          <li><a href="#">工业园区</a></li>
+                      </ol>
+
+                  </div>
+                </div>
+
+                <a class="btn btn-default" href="#" role="button">地图展示</a>
+
+            </div><!-- /.row -->
+
+
+        </div>
+
+
+    </div>
+{% endblock header %}
+
+{% block content %}
+    <h3></h3>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+          XX房价走势图
+      </div>
+      <div class="panel-body">
+        <table>
+            <tr>
+                <td>
+                    <div id="container" style="width: 700; height:300"></div>
+                    <!--script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+                   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+                   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+                   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+                   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+                   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+                   <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=bYDVcpClsHGONyldgXqPxM6q5VnKOp31"></script>
+                   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+                   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script-->
+                   <script type="text/javascript">
+
+                        var dom = document.getElementById("container");
+                        var myChart = echarts.init(dom);
+                        var app = {};
+                        option = null;
+                        option = {
+                            xAxis: {
+                                type: 'category',
+                                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                            },
+                            yAxis: {
+                                type: 'value'
+                            },
+                            series: [{
+                                data: [820, 932, 901, 934, 1290, 1330, 1320],
+                                type: 'line'
+                            }]
+                        };
+                        ;
+                        if (option && typeof option === "object") {
+                            myChart.setOption(option, true);
+                        }
+                   </script>
+                </td>
+
+                <td>
+                    <div id="showinfo" style="font-size: 16px;font-weight: bold;">
+                    <p>吴中2月二手房均价
+                        <em style="color: #f60;font-style: normal; font-size: 20px; font-family:Microsoft YaHei;">
+                            17379
+                        </em>
+                        元/m²
+                    </p>
+                    <p>吴中1月二手房均价
+                        <em style="color: #f60;font-style: normal; font-size: 20px; font-family:Microsoft YaHei;">
+                            17150
+                        </em>
+                        元/m²</p>
+                    <p>环比上月上涨 1.32% ↑，同比去年同期上涨 18.47% ↑</p>
+                </div>
+                </td>
+            </tr>
+        </table>
+
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+          各区房价对比图
+      </div>
+      <div class="panel-body">
+          <div id="container2" style="height:300"></div>
+
+            <script type="text/javascript">
+                var dom = document.getElementById("container2");
+                var myChart = echarts.init(dom);
+                var app = {};
+                option = null;
+                var dataAxis = ['点', '击', '柱', '子', '或', '者', '两', '指', '在', '触', '屏', '上', '滑', '动', '能', '够', '自', '动', '缩', '放'];
+                var data = [220, 182, 191, 234, 290, 330, 310, 123, 442, 321, 90, 149, 210, 122, 133, 334, 198, 123, 125, 220];
+                var yMax = 500;
+                var dataShadow = [];
+
+                for (var i = 0; i < data.length; i++) {
+                    dataShadow.push(yMax);
+                }
+
+                option = {
+                    title: {
+                        text: '特性示例：渐变色 阴影 点击缩放',
+                        subtext: 'Feature Sample: Gradient Color, Shadow, Click Zoom'
+                    },
+                    xAxis: {
+                        data: dataAxis,
+                        axisLabel: {
+                            inside: true,
+                            textStyle: {
+                                color: '#fff'
+                            }
+                        },
+                        axisTick: {
+                            show: false
+                        },
+                        axisLine: {
+                            show: false
+                        },
+                        z: 10
+                    },
+                    yAxis: {
+                        axisLine: {
+                            show: false
+                        },
+                        axisTick: {
+                            show: false
+                        },
+                        axisLabel: {
+                            textStyle: {
+                                color: '#999'
+                            }
+                        }
+                    },
+                    dataZoom: [
+                        {
+                            type: 'inside'
+                        }
+                    ],
+                    series: [
+                        { // For shadow
+                            type: 'bar',
+                            itemStyle: {
+                                normal: {color: 'rgba(0,0,0,0.05)'}
+                            },
+                            barGap:'-100%',
+                            barCategoryGap:'40%',
+                            data: dataShadow,
+                            animation: false
+                        },
+                        {
+                            type: 'bar',
+                            itemStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(
+                                        0, 0, 0, 1,
+                                        [
+                                            {offset: 0, color: '#83bff6'},
+                                            {offset: 0.5, color: '#188df0'},
+                                            {offset: 1, color: '#188df0'}
+                                        ]
+                                    )
+                                },
+                                emphasis: {
+                                    color: new echarts.graphic.LinearGradient(
+                                        0, 0, 0, 1,
+                                        [
+                                            {offset: 0, color: '#2378f7'},
+                                            {offset: 0.7, color: '#2378f7'},
+                                            {offset: 1, color: '#83bff6'}
+                                        ]
+                                    )
+                                }
+                            },
+                            data: data
+                        }
+                    ]
+                };
+
+                // Enable data zoom when user click bar.
+                var zoomSize = 6;
+                myChart.on('click', function (params) {
+                    console.log(dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)]);
+                    myChart.dispatchAction({
+                        type: 'dataZoom',
+                        startValue: dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)],
+                        endValue: dataAxis[Math.min(params.dataIndex + zoomSize / 2, data.length - 1)]
+                    });
+                });;
+                if (option && typeof option === "object") {
+                    myChart.setOption(option, true);
+                }
+            </script>
+
+
+      </div>
+    </div>
+    <ul>
+    {% for info in house %}
+        <ul>
+             <li> {{ info.name }}</li>
+             <li> {{ info.location }}</li>
+             <li> {{ info.status }}</li>
+             <li> {{ info.price }} 元/平方</li>
+             <li> {{ info.total_price }} 万元</li>
+             <li> {{ info.area }} 平方米</li>
+        </ul>
+
+
+    {% empty %}
+        <li>没有信息</li>
+    {% endfor %}
+</ul>
+
+{% endblock content %}
+
+

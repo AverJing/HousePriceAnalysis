@@ -37,6 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+
+    # 添加自己的应用
+    'PriceAnalysis',
+    
+    # 第三方应用程序
+    'bootstrap3',
 ]
 
 MIDDLEWARE = [
@@ -118,3 +125,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+
+# bootstrap3 的设置 包含 jQuery
+BOOTSTRAP3 = {
+    'include_jquery': True
+}

@@ -1,0 +1,60 @@
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% block title %}
+        <title>
+            唯家
+        </title>
+        {% endblock title %}
+        <script src="{% static 'js/echarts.min.js' %}"></script>
+
+    </head>
+
+    <body style="background-color:#f5f5f6">
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed"
+                        data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                </button>
+
+
+                </div>
+
+            <!--导航链接-->
+            {# 导航链接 #}
+                <div class="navbar-brand"> 唯 家</div>
+                <a class="navbar-brand" href="{% url 'PriceAnalysis:homePage' %}">首页</a>
+                <a class="navbar-brand" href="{% url 'PriceAnalysis:showHouse' %}">房价展示</a>
+
+
+                <div id="navbar" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <a class="navbar-brand" href="">注册</a>
+                        <a class="navbar-brand" href="">登录</a>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+            <div class="container">
+                <div class="page-header">
+                    {% block header %}{% endblock header %}
+                </div>
+                <div class="page-content">
+                    {% block content %}{% endblock content %}
+                </div>
+
+            </div>
+    </body>
+</html>

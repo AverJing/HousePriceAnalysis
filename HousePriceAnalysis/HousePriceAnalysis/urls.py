@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+import PriceAnalysis.views as pv
+from django.conf.urls import include,url
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include(('PriceAnalysis.urls', 'PriceAnalysis'), namespace='PriceAnalysis')),  # , namespace='lea
+    #path('', pv.showHouse, name='showHouse', namespace='PriceAnalysis'),
 ]
