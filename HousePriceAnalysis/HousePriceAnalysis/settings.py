@@ -32,20 +32,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
 
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-
-
-    # 添加自己的应用
-    'PriceAnalysis',
-    
-    # 第三方应用程序
-    'bootstrap3',
-
 	'django.contrib.admin',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',

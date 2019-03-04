@@ -1,8 +1,5 @@
 from django.shortcuts import render
 
-
-from .models import House
-
 from echarts import models
 
 # Create your views here.
@@ -23,11 +20,10 @@ def showHouse(request):
 
     """显示房子信息 从model.House中"""
 
+    """显示房子信息 从model.House中"""
 
-    houses = House.objects.all()
-
-    houses = models.House.objects[0:5]
-    print(houses)
-
-    context = {'house': houses}  # 上下文字典
-    return render(request, 'PriceAnalysis/show.html', context)
+    # houses = models.House.objects[0:5]
+    # print(houses)
+    # context = {'house': houses}  # 上下文字典
+    #return render(request, 'PriceAnalysis/show.html', context)
+    return render(request, 'PriceAnalysis/show.html')

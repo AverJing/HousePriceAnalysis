@@ -16,13 +16,13 @@ Including another URLconf
 from django.contrib import admin
 
 from django.urls import path
-import HousePriceAnalysis.PriceAnalysis.views as pv
+import PriceAnalysis.views as pv
 from django.conf.urls import include,url
 
 from django.urls import path, include
-from HousePriceAnalysis.login import views as loginV
-from HousePriceAnalysis.echarts import views as chartV
-import HousePriceAnalysis.PriceAnalysis.views as pv
+from login import views as loginV
+from echarts import views as chartV
+import PriceAnalysis.views as pv
 
 
 urlpatterns = [

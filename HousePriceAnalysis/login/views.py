@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.shortcuts import HttpResponse
-from HousePriceAnalysis.login import models
-from HousePriceAnalysis.login import forms
+from login import models
+from login import forms
 import hashlib
 
 # Create your views here.
