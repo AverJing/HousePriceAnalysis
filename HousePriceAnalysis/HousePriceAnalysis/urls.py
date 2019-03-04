@@ -14,11 +14,37 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+
 from django.urls import path
-import PriceAnalysis.views as pv
+import HousePriceAnalysis.PriceAnalysis.views as pv
 from django.conf.urls import include,url
+
+from django.urls import path, include
+from HousePriceAnalysis.login import views as loginV
+from HousePriceAnalysis.echarts import views as chartV
+import HousePriceAnalysis.PriceAnalysis.views as pv
+
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', include(('PriceAnalysis.urls', 'PriceAnalysis'), namespace='PriceAnalysis')),  # , namespace='lea
+    path('index/', pv.index),
+    # path('', pv.index, name='index'),
+    # path('show', pv.showHouse, name='showHouse'),  # base :
+    # path('home', pv.homePage, name='homePage'),
+    path('admin/', admin.site.urls),
+
+    path('', include(('PriceAnalysis.urls', 'PriceAnalysis'), namespace='PriceAnalysis')),  # , namespace='lea
+
+    #path('index/', loginV.index),
+    path('login/', loginV.login),
+    path('logout/', loginV.logout),
+    path('register/', loginV.register),
+    path('captcha/', include('captcha.urls')),
+    path('map/', chartV.echart),
+    path('echarts/index/', chartV.index),
+    path('echarts/map/', chartV.getAll),
+    path('admin/', admin.site.urls),
+
+
     #path('', pv.showHouse, name='showHouse', namespace='PriceAnalysis'),
 ]
