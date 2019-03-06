@@ -1,77 +1,18 @@
-{% extends "../login/base.html" %}
-
- {% block title %}
-        <title>
-            首页
-        </title>
-{% endblock title %}
-
-{% block header %}
-
-    <div class="input-group" style="width:700; margin:20 438 30 auto">
-        <input type="text" class="form-control" style="height:50" placeholder="输入地区看房价">
-        <span class="input-group-btn">
-            <button class="btn btn-default" type="button" style="height:50">
-                <span class="glyphicon glyphicon-search"></span>
-
-            </button>
-        </span>
-    </div><!-- /input-group -->
-    <div style="height:450; background-color: #f9f9f9;">
-        <div style="float:left;">
-            <div id="left" style="color: #fff; background-color: #61d2c6; height:385; width:800;">
-                 <div style="padding: 45 40 45 40;">
-                     <div id="title" style="height:55; width:720">
-                         <div style="float: left; font-weight: 700; font-size: 55px; line-height: 55px;">
-                             苏州
-                         </div>
-                     </div>
-
-                     <div style="height:100; width:620; margin-top:140">
-                         <div style="height:24; width:620; margin-bottom:20">
-                             <span style="font-size: 18px; font-weight: 700; float: left;">
-                                02月链家参考均价
-                             </span>
-                         </div>
-                         <div style="height:60; width:620;">
-                             <span id="price" style="font-family: tahoma;font-weight: 700;font-size: 80px;line-height: 60px; float: left;">
-                                 25920
-                             </span>
-                             <span style="font-size: 24px;line-height: 24px;margin-left: 10px;position: relative;top: 38px;float:left">
-                                    元/㎡
-                             </span>
-                         </div>
-                     </div>
-                 </div>
-            </div>
-        </div>
-        <div id="right" style="float: right; width: 340;">
-            <div style="padding: 0 20px 0 30px;">
-                <ul style="list-style: none;">
-
-                    <li style="height: 80px; line-height: 20px; padding: 20px 0 9px;border-bottom: 1px solid #f8f8f8; font-weight: 700;">
-                        简要展示信息
-                    </li>
-                </ul>
-
-            </div>
-        </div>
-    </div>
-
-
-{% endblock header %}
-
-{% block content %}
-
-    <div id="pricemap_china" style="color: #fff; background-color: #61d2c6; height:600; width:800;"></div>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+<!DOCTYPE html>
+<html style="height: 100%">
+   <head>
+       <meta charset="utf-8">
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors//static/echarts-gl//static/echarts-gl.min.js"></script>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors//static/echarts-stat/ecStat.min.js"></script>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
-    <script type="text/javascript">
-           var myChart = echarts.init(document.getElementById('pricemap_china'), 'light', {renderer: 'canvas'});
+   </head>
+   <body style="height: 100%; margin: 0">
+       <div id="main" style="height: 100%"></div>
+       <script type="text/javascript">
+           var myChart = echarts.init(document.getElementById('main'), 'light', {renderer: 'canvas'});
 
 var option = {
     title: [
@@ -100,11 +41,11 @@ var option = {
                 show: true,
                 title: "save as image"
             },
-            /*myBack: {
+            myBack: {
                 show: true,
                 title: "返回",
                 icon: 'image://http://echarts.baidu.com/images/favicon.png',
-                onclick: function () {
+                /*onclick: function () {
                     var map_level = {{ map_level|safe }};
                     if (map_level == 2){
                         window.location.href = '../';
@@ -112,8 +53,8 @@ var option = {
                     else if (map_level == 3){
                         window.location.href = './';
                     }
-                }
-            },*/
+                }*/
+            },
         },
     },
     series_id: 7858556,
@@ -236,4 +177,5 @@ myChart.setOption(option);
     }
 })*/
        </script>
-{% endblock content %}
+   </body>
+</html>

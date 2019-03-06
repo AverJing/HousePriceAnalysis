@@ -2,54 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="472bc691-d3a3-4b29-bd80-af455a691fdc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/PriceAnalysis/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/PriceAnalysis/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/PriceAnalysis/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/PriceAnalysis/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/PriceAnalysis/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/PriceAnalysis/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/PriceAnalysis/static/js/echarts.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/PriceAnalysis/templates/PriceAnalysis/base.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/PriceAnalysis/templates/PriceAnalysis/home.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/PriceAnalysis/templates/PriceAnalysis/show.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/PriceAnalysis/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/PriceAnalysis/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/PriceAnalysis/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/echarts/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/echarts/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/echarts/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/echarts/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/echarts/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/echarts/static/echarts/js/echarts.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/echarts/templates/echarts/echarts.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/echarts/templates/echarts/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/echarts/templates/echarts/map.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/echarts/templates/echarts/map2.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/echarts/templates/map.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/echarts/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/echarts/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/jcyTest.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/login/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/login/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/login/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/login/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/login/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/login/migrations/0002_auto_20190228_1513.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/login/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/login/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/login/static/css/login.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/login/static/login.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/login/templates/login/base.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/login/templates/login/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/login/templates/login/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/login/templates/login/nav.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/login/templates/login/register.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/login/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/login/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/HousePriceAnalysis/echarts/templates/echarts/pricemap_china.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/HousePriceAnalysis.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/HousePriceAnalysis.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HousePriceAnalysis/HousePriceAnalysis/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/HousePriceAnalysis/HousePriceAnalysis/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HousePriceAnalysis/HousePriceAnalysis/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/HousePriceAnalysis/HousePriceAnalysis/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HousePriceAnalysis/PriceAnalysis/templates/PriceAnalysis/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/HousePriceAnalysis/PriceAnalysis/templates/PriceAnalysis/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HousePriceAnalysis/PriceAnalysis/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/HousePriceAnalysis/PriceAnalysis/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HousePriceAnalysis/app1/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/HousePriceAnalysis/app1/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HousePriceAnalysis/app1/templates/app1/map.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HousePriceAnalysis/app1/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/HousePriceAnalysis/app1/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HousePriceAnalysis/app1/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/HousePriceAnalysis/app1/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HousePriceAnalysis/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/HousePriceAnalysis/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HousePriceAnalysis/echarts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/HousePriceAnalysis/echarts/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HousePriceAnalysis/echarts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/HousePriceAnalysis/echarts/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -62,11 +28,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/echarts/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="192">
+              <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/echarts/templates/echarts/baidumap.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="279" column="32" selection-start-line="279" selection-start-column="31" selection-end-line="279" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/echarts/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="20" lean-forward="true" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/HousePriceAnalysis/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="113">
-              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+            <state relative-caret-position="360">
+              <caret line="36" column="42" selection-start-line="36" selection-start-column="42" selection-end-line="36" selection-end-column="42" />
               <folding>
                 <element signature="e#642#674#0" expanded="true" />
               </folding>
@@ -75,27 +71,57 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/PriceAnalysis/urls.py">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/HousePriceAnalysis/settings.py">
+        <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/PriceAnalysis/templates/PriceAnalysis/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-608">
-              <caret line="88" column="18" selection-start-line="88" selection-start-column="18" selection-end-line="88" selection-end-column="18" />
+            <state relative-caret-position="255">
+              <caret line="69" column="70" selection-start-line="69" selection-start-column="70" selection-end-line="69" selection-end-column="70" />
+              <folding>
+                <element signature="e#566#612#0#HTML" expanded="true" />
+                <element signature="e#627#646#0#HTML" expanded="true" />
+                <element signature="e#675#745#0#HTML" expanded="true" />
+                <element signature="e#769#798#0#HTML" expanded="true" />
+                <element signature="e#837#865#0#HTML" expanded="true" />
+                <element signature="e#897#971#0#HTML" expanded="true" />
+                <element signature="e#1092#1137#0#HTML" expanded="true" />
+                <element signature="e#1169#1215#0#HTML" expanded="true" />
+                <element signature="e#1252#1307#0#HTML" expanded="true" />
+                <element signature="e#1450#1479#0#HTML" expanded="true" />
+                <element signature="e#1527#1619#0#HTML" expanded="true" />
+                <element signature="e#1732#1831#0#HTML" expanded="true" />
+                <element signature="e#2513#2583#0#HTML" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/echarts/templates/map.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-627" />
-          </provider>
-        </entry>
-      </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>bmap</find>
+      <find>{{</find>
+      <find>g_</find>
+      <find>o.</find>
+      <find>data</find>
+      <find>map_level</find>
+      <find>100</find>
+      <find>100}</find>
+      <find>value</find>
+      <find>mainpricemap</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>{name:</replace>
+      <replace>}</replace>
+      <replace>value: 100}</replace>
+      <replace>&quot;value&quot;</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -103,14 +129,27 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/HousePriceAnalysis/HousePriceAnalysis/urls.py" />
+        <option value="$PROJECT_DIR$/HousePriceAnalysis/login/forms.py" />
+        <option value="$PROJECT_DIR$/HousePriceAnalysis/app1/urls.py" />
+        <option value="$PROJECT_DIR$/HousePriceAnalysis/app1/models.py" />
+        <option value="$PROJECT_DIR$/HousePriceAnalysis/app1/views.py" />
+        <option value="$PROJECT_DIR$/HousePriceAnalysis/echarts/models.py" />
         <option value="$PROJECT_DIR$/HousePriceAnalysis/HousePriceAnalysis/settings.py" />
+        <option value="$PROJECT_DIR$/HousePriceAnalysis/echarts/templates/echarts/map-1.html" />
+        <option value="$PROJECT_DIR$/HousePriceAnalysis/app1/templates/app1/map.html" />
+        <option value="$PROJECT_DIR$/HousePriceAnalysis/app1/templates/app1/pricemap_china.html" />
+        <option value="$PROJECT_DIR$/HousePriceAnalysis/echarts/templates/echarts/pricemap_china.html" />
+        <option value="$PROJECT_DIR$/HousePriceAnalysis/PriceAnalysis/views.py" />
+        <option value="$PROJECT_DIR$/HousePriceAnalysis/PriceAnalysis/templates/PriceAnalysis/home.html" />
+        <option value="$PROJECT_DIR$/HousePriceAnalysis/HousePriceAnalysis/urls.py" />
+        <option value="$PROJECT_DIR$/HousePriceAnalysis/echarts/views.py" />
+        <option value="$PROJECT_DIR$/HousePriceAnalysis/echarts/templates/echarts/baidumap.html" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="138" />
-    <option name="y" value="-19" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
     <option name="width" value="1032" />
     <option name="height" value="677" />
   </component>
@@ -119,7 +158,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -136,35 +174,60 @@
               <item name="HousePriceAnalysis" type="b2602c69:ProjectViewProjectNode" />
               <item name="HousePriceAnalysis" type="462c0819:PsiDirectoryNode" />
               <item name="HousePriceAnalysis" type="462c0819:PsiDirectoryNode" />
-              <item name="HousePriceAnalysis" type="462c0819:PsiDirectoryNode" />
+              <item name="app1" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="HousePriceAnalysis" type="b2602c69:ProjectViewProjectNode" />
               <item name="HousePriceAnalysis" type="462c0819:PsiDirectoryNode" />
               <item name="HousePriceAnalysis" type="462c0819:PsiDirectoryNode" />
-              <item name="PriceAnalysis" type="462c0819:PsiDirectoryNode" />
+              <item name="app1" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="HousePriceAnalysis" type="b2602c69:ProjectViewProjectNode" />
               <item name="HousePriceAnalysis" type="462c0819:PsiDirectoryNode" />
               <item name="HousePriceAnalysis" type="462c0819:PsiDirectoryNode" />
-              <item name="PriceAnalysis" type="462c0819:PsiDirectoryNode" />
-              <item name="migrations" type="462c0819:PsiDirectoryNode" />
+              <item name="echarts" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="HousePriceAnalysis" type="b2602c69:ProjectViewProjectNode" />
               <item name="HousePriceAnalysis" type="462c0819:PsiDirectoryNode" />
               <item name="HousePriceAnalysis" type="462c0819:PsiDirectoryNode" />
-              <item name="PriceAnalysis" type="462c0819:PsiDirectoryNode" />
+              <item name="echarts" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="HousePriceAnalysis" type="b2602c69:ProjectViewProjectNode" />
               <item name="HousePriceAnalysis" type="462c0819:PsiDirectoryNode" />
               <item name="HousePriceAnalysis" type="462c0819:PsiDirectoryNode" />
+              <item name="echarts" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HousePriceAnalysis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HousePriceAnalysis" type="462c0819:PsiDirectoryNode" />
+              <item name="HousePriceAnalysis" type="462c0819:PsiDirectoryNode" />
+              <item name="echarts" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="echarts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HousePriceAnalysis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HousePriceAnalysis" type="462c0819:PsiDirectoryNode" />
+              <item name="HousePriceAnalysis" type="462c0819:PsiDirectoryNode" />
+              <item name="HousePriceAnalysis" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HousePriceAnalysis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HousePriceAnalysis" type="462c0819:PsiDirectoryNode" />
+              <item name="HousePriceAnalysis" type="462c0819:PsiDirectoryNode" />
+              <item name="login" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HousePriceAnalysis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HousePriceAnalysis" type="462c0819:PsiDirectoryNode" />
+              <item name="HousePriceAnalysis" type="462c0819:PsiDirectoryNode" />
               <item name="PriceAnalysis" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="HousePriceAnalysis" type="b2602c69:ProjectViewProjectNode" />
@@ -180,23 +243,29 @@
               <item name="PriceAnalysis" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="PriceAnalysis" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HousePriceAnalysis" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HousePriceAnalysis" type="462c0819:PsiDirectoryNode" />
-              <item name="HousePriceAnalysis" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/HousePriceAnalysis" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\code\py\HousePriceAnalysis\HousePriceAnalysis\echarts\templates\echarts" />
+      <recent name="F:\code\py\HousePriceAnalysis\HousePriceAnalysis\app1\templates\app1" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\code\py\HousePriceAnalysis\HousePriceAnalysis\echarts\templates\echarts" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -217,6 +286,7 @@
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="HousePriceAnalysis.settings" />
       </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="" />
@@ -245,67 +315,265 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1551145022526</updated>
-      <workItem from="1551666585254" duration="1151000" />
+      <workItem from="1551666585254" duration="17651000" />
+      <workItem from="1551751431095" duration="28259000" />
+      <workItem from="1551836039912" duration="19746000" />
     </task>
+    <task id="LOCAL-00001" summary="Merge branch 'jcy' of https://github.com/AverJing/HousePriceAnalysis into qtl&#10;&#10;# Conflicts:&#10;#&#9;HousePriceAnalysis/HousePriceAnalysis/settings.py&#10;#&#9;HousePriceAnalysis/HousePriceAnalysis/urls.py&#10;#&#9;HousePriceAnalysis/db.sqlite3">
+      <created>1551667964741</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1551667964741</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2676000" />
+    <option name="totallyTimeSpent" value="67181000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18353474" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18353474" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32874617" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.32874617" />
-      <window_info anchor="bottom" id="Python Console" order="9" weight="0.2737003" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="right" id="Mongo Explorer" />
-      <window_info anchor="right" id="Database" />
-      <window_info anchor="right" id="SciView" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Database Changes" order="0" />
+      <window_info anchor="bottom" id="Docker" order="1" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Message" order="2" />
+      <window_info anchor="bottom" id="Find" order="3" />
+      <window_info anchor="bottom" id="Run" order="4" visible="true" weight="0.09174312" />
+      <window_info anchor="bottom" id="Debug" order="5" weight="0.39908257" />
+      <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="8" weight="0.32874617" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32874617" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32874617" />
+      <window_info anchor="bottom" id="Python Console" order="11" weight="0.2737003" />
+      <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
+      <window_info anchor="right" id="SciView" order="0" />
+      <window_info anchor="right" id="Database" order="1" />
+      <window_info anchor="right" id="Mongo Explorer" order="2" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="3" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="4" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="5" weight="0.25" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Merge branch 'jcy' of https://github.com/AverJing/HousePriceAnalysis into qtl&#10;&#10;# Conflicts:&#10;#&#9;HousePriceAnalysis/HousePriceAnalysis/settings.py&#10;#&#9;HousePriceAnalysis/HousePriceAnalysis/urls.py&#10;#&#9;HousePriceAnalysis/db.sqlite3" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'jcy' of https://github.com/AverJing/HousePriceAnalysis into qtl&#10;&#10;# Conflicts:&#10;#&#9;HousePriceAnalysis/HousePriceAnalysis/settings.py&#10;#&#9;HousePriceAnalysis/HousePriceAnalysis/urls.py&#10;#&#9;HousePriceAnalysis/db.sqlite3" />
+  </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/HousePriceAnalysis/LICENSE.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://D:/Python37-32/Lib/site-packages/captcha/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Python37-32/Lib/site-packages/captcha/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Python37-32/Lib/site-packages/captcha/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="30" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/login/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="9" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/深圳地图找房_深圳房价地图(深圳链家网).html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="45" column="7933" selection-start-line="45" selection-start-column="7933" selection-end-line="45" selection-end-column="7933" />
+          <folding>
+            <element signature="n#style#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/PriceAnalysis/models.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/login/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1314">
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/app1/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="24" column="31" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/app1/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="25" selection-start-line="3" selection-start-column="25" selection-end-line="3" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/app1/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="1" lean-forward="true" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/echarts/templates/echarts/baidumap.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="74" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/echarts/templates/echarts/index.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/echarts/templates/echarts/map.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1173" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/PriceAnalysis/templates/PriceAnalysis/show.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1445">
+          <caret line="29" column="53" selection-start-line="29" selection-start-column="53" selection-end-line="29" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/HousePriceAnalysis/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="95" selection-start-line="95" selection-end-line="95" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/echarts/templates/echarts/echarts.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-749" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/PriceAnalysis/urls.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/echarts/templates/echarts/pricemap_china.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-612">
+          <caret line="9" column="105" lean-forward="true" selection-start-line="4" selection-start-column="7" selection-end-line="9" selection-end-column="105" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/PriceAnalysis/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="28" column="63" selection-start-line="28" selection-start-column="63" selection-end-line="28" selection-end-column="63" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/login/models.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/echarts/templates/map.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/echarts/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="20" lean-forward="true" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/echarts/templates/echarts/baidumap.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="279" column="32" selection-start-line="279" selection-start-column="31" selection-end-line="279" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/HousePriceAnalysis/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+        <state relative-caret-position="360">
+          <caret line="36" column="42" selection-start-line="36" selection-start-column="42" selection-end-line="36" selection-end-column="42" />
           <folding>
             <element signature="e#642#674#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/HousePriceAnalysis/settings.py">
+    <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/PriceAnalysis/templates/PriceAnalysis/home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-608">
-          <caret line="88" column="18" selection-start-line="88" selection-start-column="18" selection-end-line="88" selection-end-column="18" />
+        <state relative-caret-position="255">
+          <caret line="69" column="70" selection-start-line="69" selection-start-column="70" selection-end-line="69" selection-end-column="70" />
+          <folding>
+            <element signature="e#566#612#0#HTML" expanded="true" />
+            <element signature="e#627#646#0#HTML" expanded="true" />
+            <element signature="e#675#745#0#HTML" expanded="true" />
+            <element signature="e#769#798#0#HTML" expanded="true" />
+            <element signature="e#837#865#0#HTML" expanded="true" />
+            <element signature="e#897#971#0#HTML" expanded="true" />
+            <element signature="e#1092#1137#0#HTML" expanded="true" />
+            <element signature="e#1169#1215#0#HTML" expanded="true" />
+            <element signature="e#1252#1307#0#HTML" expanded="true" />
+            <element signature="e#1450#1479#0#HTML" expanded="true" />
+            <element signature="e#1527#1619#0#HTML" expanded="true" />
+            <element signature="e#1732#1831#0#HTML" expanded="true" />
+            <element signature="e#2513#2583#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/echarts/templates/map.html">
+    <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/echarts/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-627" />
+        <state relative-caret-position="192">
+          <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
+        </state>
       </provider>
     </entry>
   </component>

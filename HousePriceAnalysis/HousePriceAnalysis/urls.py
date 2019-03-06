@@ -20,6 +20,7 @@ from echarts import views as chartV
 import PriceAnalysis.views as pv
 
 urlpatterns = [
+    path('app1/', include('app1.urls')),
     path('', include(('PriceAnalysis.urls', 'PriceAnalysis'), namespace='PriceAnalysis')),  # , namespace='lea
     path('index/', pv.index),
     # path('', pv.index, name='index'),
@@ -33,7 +34,7 @@ urlpatterns = [
     path('captcha/', include('captcha.urls')),
     path('map/', chartV.echart),
     path('echarts/index/', chartV.index),
-    path('echarts/map/', chartV.getAll),
+    path('echarts/map/', chartV.baiduMap),
     path('admin/', admin.site.urls),
 
     #path('', pv.showHouse, name='showHouse', namespace='PriceAnalysis'),

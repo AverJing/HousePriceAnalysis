@@ -37,6 +37,7 @@ INSTALLED_APPS = [
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
+	'app1',
 	'login',
 	'captcha',
 	'echarts',
@@ -91,7 +92,7 @@ DATABASES = {
 }
 
 from mongoengine import connect
-connect('lianjia')
+connect('houseprice')
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
