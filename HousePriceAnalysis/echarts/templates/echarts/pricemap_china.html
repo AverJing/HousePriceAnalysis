@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+   <head>
+       <meta charset="utf-8">
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors//static/echarts-gl//static/echarts-gl.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors//static/echarts-stat/ecStat.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+   </head>
+   <body style="height: 100%; margin: 0">
+       <div id="main" style="height: 100%"></div>
+       <script type="text/javascript">
+           var myChart = echarts.init(document.getElementById('main'), 'light', {renderer: 'canvas'});
+
+var option = {
+    title: [
+        {
+
+            text: "全国房价热度图",
+            subtext: "data from 安居客",
+            left: "center",
+            top: "auto",
+            textStyle: {
+                color: "#fff",
+                fontSize: 18
+            },
+            "subtextStyle": {
+                "fontSize": 12
+            }
+        }
+    ],
+    toolbox: {
+        show: true,
+        orient: "vertical",
+        left: "95%",
+        top: "center",
+        feature: {
+            saveAsImage: {
+                show: true,
+                title: "save as image"
+            },
+            myBack: {
+                show: true,
+                title: "返回",
+                icon: 'image://http://echarts.baidu.com/images/favicon.png',
+                /*onclick: function () {
+                    var map_level = {{ map_level|safe }};
+                    if (map_level == 2){
+                        window.location.href = '../';
+                    }
+                    else if (map_level == 3){
+                        window.location.href = './';
+                    }
+                }*/
+            },
+        },
+    },
+    series_id: 7858556,
+    tooltip: {
+        trigger: "item",
+        triggerOn: "mousemove|click",
+        axisPointer: {
+            type: "line"
+        },
+        textStyle: {
+            fontSize: 14
+        },
+        backgroundColor: "rgba(50,50,50,0.7)",
+        borderColor: "#333",
+        borderWidth: 0,
+        formatter: '{b}平均房价：{c}'
+    },
+    series: [
+        {
+            type: "map",
+            symbol: "circle",
+            label: {
+                normal: {
+                    show: true,
+                    position: "inside",
+                    textStyle: {
+                        fontSize: 12
+                    }
+                },
+                emphasis: {
+                    show: true,
+                    position: "inside",
+                    textStyle: {
+                        "fontSize": 16
+                    }
+                }
+            },
+            mapType: 'china',
+            data: {{ data|safe }},
+            roam: true,
+            showLegendSymbol: false,
+        }
+    ],
+    legend: [
+        {
+            data: [
+                ""
+            ],
+            selectedMode: "multiple",
+            show: true,
+            left: "center",
+            top: "top",
+            orient: "horizontal",
+            textStyle: {
+                fontSize: 12
+            }
+        }
+    ],
+    backgroundColor: "#404a59",
+    animation: true,
+    color: [
+        "#c23531",
+        "#2f4554",
+        "#61a0a8",
+        "#d48265",
+        "#749f83",
+        "#ca8622",
+        "#bda29a",
+        "#6e7074",
+        "#546570",
+        "#c4ccd3",
+        "#f05b72",
+        "#ef5b9c",
+        "#f47920",
+        "#905a3d",
+        "#fab27b",
+        "#2a5caa",
+        "#444693",
+        "#726930",
+        "#b2d235",
+        "#6d8346",
+        "#ac6767",
+        "#1d953f",
+        "#6950a1",
+        "#918597",
+        "#f6f5ec"
+    ],
+    visualMap: {
+        type: "continuous",
+        min: 0,
+        max: 200,
+        text: [
+            "high",
+            "low"
+        ],
+        textStyle: {
+            "color": "#fff"
+        },
+        inRange: {
+            color: [
+                "#50a3ba",
+                "#eac763",
+                "#d94e5d"
+            ]
+        },
+        calculable: true,
+        splitNumber: 5,
+        orient: "vertical",
+        left: "left",
+        top: "bottom",
+        showLabel: true
+    }
+};
+myChart.setOption(option);
+/*myChart.on('click', function (params) {
+    var next_map = params.name.split("市")[0];
+    var map_level = 12;
+    if (map_level != 3){
+        window.location.href = next_map;
+    }
+})*/
+       </script>
+   </body>
+</html>
