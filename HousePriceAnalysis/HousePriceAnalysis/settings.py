@@ -91,7 +91,8 @@ DATABASES = {
 }
 
 from mongoengine import connect
-connect('lianjia')
+#connect('lianjia')
+connect('lianjia', host='mongodb://housepricedata:22kWqyxYCbP4HgMvmUSyb7ciZ6l002uZGYl9QVT35d3CwN437u9vlcv3Gp9E47KQwco5DpUI1fEhhLeFfWUFXQ==@housepricedata.documents.azure.cn:10255/?ssl=true&replicaSet=globaldb')
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
