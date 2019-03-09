@@ -1,17 +1,20 @@
 
 from django.db import models
+from mongoengine import *
+
+connect('import', host='127.0.0.1', port = 27017)
 
 # Create your models here.
-#
-# class House(models.Model):
-#     "住房信息"
-#     name = models.CharField(max_length=100)
-#     location = models.CharField(max_length=100)
-#     status = models.CharField(max_length=50)
-#     price = models.IntegerField()
-#     total_price = models.IntegerField()
-#     area = models.CharField(max_length=50)
-#
-#     def __str__(self):
-#
-#         return self.name
+class PriceHistory(Document):
+    #city = StringField()
+    city_name = StringField()
+    area = StringField()
+    year = StringField()
+    month = StringField()
+    price = StringField()
+    trendency = StringField()
+
+    meta = {
+        "collection" : "JS_suzhou",
+    }
+
