@@ -43,6 +43,7 @@ urlpatterns = [
     path('map/', chartV.echart),
     path('echarts/index/', chartV.index),
     path('echarts/map/', chartV.getAll),
+    path('echarts/baidumap/',chartV.baiduMap),
     path('admin/', admin.site.urls),
 
 

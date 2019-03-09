@@ -93,7 +93,7 @@ DATABASES = {
 }
 
 from mongoengine import connect
-#connect('lianjia')
+connect('lianjia')
 connect('import')
 
 
