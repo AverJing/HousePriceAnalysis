@@ -12,4 +12,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('show', views.showHouse, name='showHouse'),  # base :
     path('home', views.homePage, name='homePage'),
+    path('show/<int:value>/', views.showHouse2, name='showHouse2'),  # base :
+    path('showHouse/', views.showHouse3, name='showHouse3'),
+    path('findCity/', views.showHouse3, name='findCity')
 ]

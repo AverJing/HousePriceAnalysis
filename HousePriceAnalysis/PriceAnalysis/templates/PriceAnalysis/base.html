@@ -1,5 +1,7 @@
 
 
+
+
 {% load static %}
 <html lang="en">
     <head>
@@ -30,7 +32,7 @@
             {# 导航链接 #}
                 <div class="navbar-brand"> 唯 家</div>
                 <a class="navbar-brand" href="{% url 'PriceAnalysis:homePage' %}">首页</a>
-                <a class="navbar-brand" href="{% url 'PriceAnalysis:showHouse' %}">房价展示</a>
+                <a class="navbar-brand" href="{% url 'PriceAnalysis:showHouse'%}">房价展示</a>
 
 
                 <div id="navbar" class="navbar-collapse collapse">
@@ -51,6 +53,7 @@
                 <div class="page-content">
                     {% block content %}{% endblock content %}
                 </div>
+
             </div>
     </body>
 </html>

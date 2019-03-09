@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+
 	'django.contrib.admin',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     'PriceAnalysis',   
     # 第三方应用程序
     #'bootstrap3',
+
 ]
 
 MIDDLEWARE = [
@@ -92,7 +94,8 @@ DATABASES = {
 
 from mongoengine import connect
 #connect('lianjia')
-connect('lianjia', host='mongodb://housepricedata:22kWqyxYCbP4HgMvmUSyb7ciZ6l002uZGYl9QVT35d3CwN437u9vlcv3Gp9E47KQwco5DpUI1fEhhLeFfWUFXQ==@housepricedata.documents.azure.cn:10255/?ssl=true&replicaSet=globaldb')
+connect('import')
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -132,6 +135,17 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
+STATIC_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+
+# bootstrap3 的设置 包含 jQuery
+BOOTSTRAP3 = {
+    'include_jquery': True
+}
+
 STATIC_DIRS = [ 
 	os.path.join(BASE_DIR, 'static'),
 ]
@@ -140,3 +154,4 @@ STATIC_DIRS = [
 # BOOTSTRAP3 = {
 #     'include_jquery': True
 # }
+
