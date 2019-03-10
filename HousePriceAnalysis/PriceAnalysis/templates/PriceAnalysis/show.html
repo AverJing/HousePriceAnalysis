@@ -1,0 +1,346 @@
+
+{% extends "../login/base.html" %}
+
+    {% block title %}
+        <title>
+            房价展示
+        </title>
+    {% endblock title %}
+{% block header %}
+    <div class="jumbotron">
+
+        <div class="panel panel-warning">
+            <h2>
+                苏州  区域 价格 面积 选择框
+            </h2>
+
+            <div class="row">
+
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    城区 <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">姑苏</a></li>
+                          {# a 标签跳转到 views中 传递所选参数#}
+                        <li><a href="#">相城</a></li>
+                        <li><a href="#">吴江</a></li>
+                        <li><a href="#">吴中</a></li>
+                        <li><a href="#">工业园区</a></li>
+                        <li role="separator" class="divider"></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-6">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="输入地区看房价">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">
+                        <span class="glyphicon glyphicon-search"></span>
+                        .
+                    </button>
+                  </span>
+                </div><!-- /input-group -->
+              </div><!-- /.col-lg-6 -->
+
+                <a class="btn btn-default dropdown-toggle" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                  城区选择
+            </a>
+            <!--button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                  Button with data-target
+            </button-->
+                <div class="collapse" id="collapseExample">
+                  <div class="well">
+                      <ol class="breadcrumb">
+                          <li><a href="#">姑苏</a></li>
+                          <li><a href="#">相城</a></li>
+                          <li><a href="#">吴中</a></li>
+                          <li><a href="#">吴江</a></li>
+                          <li><a href="#">工业园区</a></li>
+                      </ol>
+
+                  </div>
+                </div>
+
+                <a class="btn btn-default" href="#" role="button">地图展示</a>
+
+            </div><!-- /.row -->
+
+
+        </div>
+
+
+    </div>
+{% endblock header %}
+
+{% block content %}
+    <h3></h3>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+          苏州2018年房价折线图
+      </div>
+      <div class="panel-body">
+        <table>
+            <tr>
+                <td>
+                    <div id="container" style="width:1200; height:500"></div>
+                    <!--script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+                   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+                   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+                   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+                   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+                   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+                   <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=bYDVcpClsHGONyldgXqPxM6q5VnKOp31"></script>
+                   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+                   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script-->
+
+                   <script type="text/javascript">
+
+                        var dom = document.getElementById("container");
+                        var myChart = echarts.init(dom);
+                        var datalist = {{ datalist|safe  }};
+
+                        var price = datalist['苏州'];
+
+                        option = null;
+                        option = {
+                            xAxis: {
+                                type: 'category',
+                                data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月','8月','9月','10月','11月','12月']
+                            },
+                            yAxis: {
+                                type: 'value',
+                                splitNumber: 4,
+                                scale:true
+                            },
+                            series: [{
+                                itemStyle:{emphasis: {label:{show:true}}},
+                                data: price,
+                                type: 'line'
+                            }]
+                        };
+                        if (option && typeof option === "object") {
+                            myChart.setOption(option, true);
+                        }
+                   </script>
+                </td>
+
+            </tr>
+        </table>
+
+      </div>
+    </div>
+
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+          苏州2018年房价柱状图
+      </div>
+      <div class="panel-body">
+        <table>
+            <tr>
+                <td>
+                    <div id="container2" style="width:1200; height:500"></div>
+                    <!--script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+                   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+                   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+                   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+                   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+                   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+                   <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=bYDVcpClsHGONyldgXqPxM6q5VnKOp31"></script>
+                   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+                   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script-->
+
+
+
+                        <script type="text/javascript">
+
+                        var dom = document.getElementById("container2");
+                        var myChart = echarts.init(dom);
+                        var datalist = {{ datalist|safe  }};
+
+                        var price = datalist['苏州'];
+
+                        option = null;
+                        option = {
+                            title: {
+                                text: '柱状图展示'
+                            },
+                            tooltip: {},
+                            legend: {
+                                data:['房价']
+                            },
+                            xAxis: {
+                                data: ["一月","二月","三月","四月","五月","六月",
+                                "七月","八月","九月","十月","十一月","十二月"]
+                            },
+                            yAxis: {
+                                scale:true
+                            },
+                            series: [{
+                            name: '2018年苏州',
+                            type: 'bar', data: price
+                            }]
+                        };
+                        if (option && typeof option === "object") {
+                            myChart.setOption(option, true);
+                        }
+                   </script>
+
+                </td>
+            </tr>
+        </table>
+
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+          <p style="text-align:center" id="title">{{ title }}房价走势图
+          </p>
+          <p id="result"></p>
+          <!--点击按钮 调用setOption函数，传递所查询年份参数，获取数据，-->
+          <div class="btn-group" role="group" aria-label="...">
+              <button type="button" class="btn btn-default" onclick="set_option(2019)">2019</button>
+              <button type="button" class="btn btn-default" onclick="set_option(2018)">2018</button>
+              <button type="button" class="btn btn-default" onclick="set_option(2017)">2017</button>
+              <button type="button" class="btn btn-default" onclick="set_option(2016)">2016</button>
+              <button type="button" class="btn btn-default" onclick="set_option(2015)">2015</button>
+              <button type="button" class="btn btn-default" onclick="set_option(2014)">2014</button>
+              <button type="button" class="btn btn-default" onclick="set_option(2013)">2013</button>
+
+            </div>
+          苏州各区房价对比图
+          <a href="{% url 'PriceAnalysis:showHouse' 2018 %}" >
+              <button type="button" id="year" >2018年</button>
+          </a>
+      </div>
+      <div class="panel-body">
+          <div id="container3" style="height:600"></div>
+             <script type="text/javascript">
+                 var convertData = function () {
+                     var datalist = {{ datalist|safe }};
+                     var areas = {{ areas|safe }};
+                     var res = [];
+                     for(var i = 0; i < areas.length;i++){
+			            res.push({
+                            name:areas[i],
+                            type:'line',
+                            data:datalist[areas[i]]
+			            });}
+		            return res;
+                 };
+                 var dom = document.getElementById("container3");
+                 var myChart = echarts.init(dom);
+                 var areas = {{ areas|safe }};
+                 //console.log(areas[0]);// 在浏览器中产看控制台
+
+                 //var datalist = {{datalist|safe}};
+                 option = {
+                     title: {
+                         text: '苏州2019年展示'
+                     },
+                     tooltip: {
+                         //trigger: 'axis'//显示全部
+                         trigger: 'item' //显示单个
+                     },
+                     legend: {
+                         data:areas, //展示区域名
+                         selectedMode:'single'
+                     },
+                     grid: {
+                         left: '3%',
+                         right: '4%',
+                         bottom: '3%',
+                         containLabel: true
+                     },
+                     toolbox: {
+                         feature: {
+                             saveAsImage: {}
+                         }
+                     },
+                     xAxis: {
+                         type: 'category',
+                         boundaryGap: false,
+                         data: ["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"]
+                     },
+                     yAxis: {
+                         type: 'value',
+                         scale:true //根据数据自动调整
+                     },
+                     series: convertData()/*[{
+                         name:areas[0],
+                         type:'line',
+                         //stack: '总量',
+                         data:datalist[areas[0]]
+                     }, {
+                         name:areas[1],
+                         type:'line',
+                         //stack: '总量',
+                         data:datalist[areas[1]]
+                     }, {
+                         name:areas[2],
+                         type:'line',
+                         //stack: '总量',
+                         data:datalist[areas[2]]
+                     }, {
+                         name:areas[3],
+                         type:'line',
+                         //stack: '总量',
+                         data:datalist[areas[3]]
+                     }, {
+                         name:areas[4],
+                         type:'line',
+                         //stack: '总量',
+                         data:datalist[areas[4]]
+                     }, {
+                         name:areas[5],
+                         type:'line',
+                         //stack: '总量',
+                         data:datalist[areas[5]]
+                     }, {
+                         name:areas[6],
+                         type:'line',
+                         //stack: '总量',
+                         data:datalist[areas[6]]
+                     }, {
+                         name:areas[7],
+                         type:'line',
+                         //stack: '总量',
+                         data:datalist[areas[7]]
+                     }, {
+                         name:areas[8],
+                         type:'line',
+                         //stack: '总量',
+                         data:datalist[areas[8]]
+                     }]*/
+                 };
+
+                 if (option && typeof option === "object") {
+                     myChart.setOption(option, true);
+                 }
+             </script>
+      </div>
+    </div>
+    <ul>
+    {% for info in house %}
+        <ul>
+             <li> {{ info.name }}</li>
+             <li> {{ info.location }}</li>
+             <li> {{ info.status }}</li>
+             <li> {{ info.main_price }} 元/平方</li>
+             <li> {{ info.second_price }} 万元</li>
+             <li> {{ info.area }} 平方米</li>
+        </ul>
+
+
+    {% empty %}
+        <li>没有信息</li>
+    {% endfor %}
+</ul>
+
+{% endblock content %}
+
+
