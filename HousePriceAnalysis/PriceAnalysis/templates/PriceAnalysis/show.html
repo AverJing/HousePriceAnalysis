@@ -13,28 +13,12 @@
         <div class="panel panel-warning">
             <script type="text/javascript" src="../../static/js/SelectArea.js"></script>
             <div>
-                省：<select id="cmbProvince"></select>
-                市：<select id="cmbCity" oninput="findCity()"></select>
+                省：<select id="cmbProvince" onclick="set_option()" ></select>
+                市：<select id="cmbCity" oninput="set_option()"></select>
 
                 <br />
                 <script type="text/javascript">
-                    <!--addressInit('cmbProvince', 'cmbCity', '江苏', '苏州市');-->
-
-
-                    <!--function findCity(){-->
-                    <!--var city = document.getElementById("cmbCity").value-->
-                    <!--$.ajax({-->
-                            <!--url:"/findCity",-->
-                            <!--type:"GET",-->
-                            <!--data:{value: city},-->
-
-                             <!--success:function(data){-->
-                                <!--alert("成功传入")-->
-                             <!--}-->
-                             <!--});-->
-
-                    <!--}-->
-
+                    addressInit('cmbProvince', 'cmbCity', '江苏', '苏州市');
 
                 </script>
             </div>
@@ -145,7 +129,7 @@
                    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script-->
                     <script type="text/javascript">
 
-addressInit('cmbProvince', 'cmbCity', '江苏', '苏州市');
+
 
 
 
@@ -160,11 +144,13 @@ myChart.option = null;
 
     var areas = {{ areas|safe }}
     var info_dict = {{ info_dict|safe }}
+
     var mydata = new Array()  //数组存放每个地区某一年的房价
     var myseries = new Array()  // [{},{},{}]
     for (var i=0; i < areas.length; i++)
     {
         mydata[i]= info_dict[areas[i]].reverse();
+
         myseries[i] = {
                 name: areas[i],
                 type:'line',
@@ -213,79 +199,35 @@ myChart.option = null;
 
 
 
-
-                    function findCity(){
-                        var cities = document.getElementById("cmbCity").value
-                        var areas = {{ areas|safe }}
-                        var info_dict = {{ info_dict|safe }}
-                        $.ajax({
-                                url:"/findCity",
-                                type:"GET",
-                                data:{city : cities},
-
-                                 success:function(data){
-                                    <!--alert("成功传入")-->
-                                    <!--alert(cities)-->
-                                    <!--alert("回调函数，修改data")-->
-                                    <!--alert(data.areas)-->
-                                        var mydata = new Array()  //数组存放每个地区某一年的价格
-                                        var myseries = new Array()
-                                        for (var i=0; i < areas.length; i++)
-                                        {
-                                            mydata[i]= data.info_dict[data.areas[i]].reverse();
-                                            myseries[i] = {
-                                                    name: data.areas[i],
-                                                    type:'line',
-                                                    data: mydata[i]
-                                            }
-
-                                        }
-
-                                         myChart.setOption({
-
-                                            legend: {
-                                                selectedMode: 'single', //单选
-                                                data:  data.areas,
-                                                itemWidth: 50,
-                                                itemHeight: 35
-
-                                            },
-
-                                            yAxis: {
-                                                type: 'value',
-                                                scale: true   //刻度自适应
-                                            },
-                                            series: myseries,
-                                        });
-
-                                 }
-                                 });
-
-                    }
-
-
-                  function set_option(year)
+                  function set_option(years='2019',city='苏州市')
                   {
-                        //alert("ssss")
+                        //点击按钮和下拉框会调用Ajax函数， 下拉框可以不传值，按钮只传一个值
                         // 异步刷新 调用views.showHouse3函数，传入year 返回data 该年份各地区的历史房价
+
+                        var cities = document.getElementById("cmbCity").value
+
                         $.ajax({
-                            url:"/showHouse",
+                            url:"/historyPrice",
                             type:"GET",
-                            data:{value: year},
+                            data:{
+                                year: years,
+                                 city: cities,
+                            },
 
                              success:function(data){
 
-                             //console.log(year)
-                             document.getElementById("title").innerHTML=year+"年房价走势图";
+                             //data 是从后台返回的值， 包括地区areas， x轴， 房价
+                             //alert("ssss")
+                             document.getElementById("title").innerHTML=years+"年房价走势图";
 
                                     //alert(data.info_dict['苏州'])
                                     var mydata = new Array()  //数组存放每个地区某一年的价格
                                     var myseries = new Array()
                                     for (var i=0; i < areas.length; i++)
                                     {
-                                        mydata[i]= data.info_dict[areas[i]].reverse();
+                                        mydata[i]= data.info_dict[data.areas[i]];
                                         myseries[i] = {
-                                                name: areas[i],
+                                                name: data.areas[i],
                                                 type:'line',
                                                 data: mydata[i]
                                         }
@@ -293,12 +235,12 @@ myChart.option = null;
                                      myChart.setOption({
 
                                         legend: {
-                                            selectedMode: 'single', //单选
-                                            data:  {{ areas|safe }},
-                                            itemWidth: 50,
-                                            itemHeight: 35
+                                                selectedMode: 'single', //单选
+                                                data:  data.areas,
+                                                itemWidth: 50,
+                                                itemHeight: 35
 
-                                        },
+                                            },
 
                                         yAxis: {
                                             type: 'value',
