@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 	'login',
 	'captcha',
 	'echarts',
+	'main',
     # 添加自己的应用
     'PriceAnalysis',   
     # 第三方应用程序
@@ -71,6 +72,7 @@ TEMPLATES = [
 				'django.template.context_processors.request',
 				'django.contrib.auth.context_processors.auth',
 				'django.contrib.messages.context_processors.messages',
+				'HousePriceAnalysis.context_processors.getuserip',
 			],
 		},
 	},
@@ -93,8 +95,8 @@ DATABASES = {
 }
 
 from mongoengine import connect
-connect('lianjia')
-connect('import')
+connect('lianjia', host='mongodb+srv://averjing:Fu.ture1@housepriceanalysis-7vvvm.azure.mongodb.net/?retryWrites=true')
+connect('yearPriceData', host='mongodb+srv://averjing:Fu.ture1@housepriceanalysis-7vvvm.azure.mongodb.net/?retryWrites=true')
 
 
 # Password validation

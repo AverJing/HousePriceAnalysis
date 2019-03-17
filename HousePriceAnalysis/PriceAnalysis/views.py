@@ -6,8 +6,8 @@ from django.http import JsonResponse
 import pymongo
 import json
 
-client = pymongo.MongoClient('localhost', 27017)
-db = client["import"]
+client = pymongo.MongoClient('mongodb+srv://averjing:Fu.ture1@housepriceanalysis-7vvvm.azure.mongodb.net/?retryWrites=true')
+db = client["yearPriceData"]
 col = db.get_collection("JS_suzhou")  # 找到该城市的集合名 放到showhouse中
 # Create your views here.
 
@@ -48,8 +48,6 @@ def showHouse(request):
 
     """显示房子信息 从model.House中"""
     #从数据库读区域
-
-
 
     info = col.find({"city_name": '苏州'})
     title = '2018'

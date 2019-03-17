@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script  type="text/javascript">
+    function getJSON(){ $.getJSON("/testJSON", {'year':2020}, function(response){ alert(response.url+" "+response.name); }); }
+</script>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+    </script>
+    <title>Title</title>
+</head>
+<body>
+<input type="button" name="btn" id="btn" value="test" onClick="javascript:getJSON();"/>
+</body>
+</html>

@@ -22,6 +22,7 @@ from django.conf.urls import include,url
 from django.urls import path, include
 from login import views as loginV
 from echarts import views as chartV
+from main import views as mainV
 import PriceAnalysis.views as pv
 
 
@@ -45,7 +46,7 @@ urlpatterns = [
     path('echarts/map/', chartV.getAll),
     path('echarts/baidumap/',chartV.baiduMap),
     path('admin/', admin.site.urls),
-
+    path('main/', mainV.main_html),
 
     #path('', pv.showHouse, name='showHouse', namespace='PriceAnalysis'),
 ]
