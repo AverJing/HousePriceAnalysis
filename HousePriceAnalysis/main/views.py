@@ -43,4 +43,4 @@ def ajaxregister(request):
       print("注册成功")
       return JsonResponse({'res': 3})#成功
 def indexAddEcharts(request):
-    return render(request,'indexAddEchart.html')
+    return render(request,'index2.html')

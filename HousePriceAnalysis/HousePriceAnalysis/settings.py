@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 	'captcha',
 	'echarts',
 	'main',
+	'waterflow',
     # 添加自己的应用
     'PriceAnalysis',   
     # 第三方应用程序
@@ -140,16 +141,6 @@ STATIC_URL = '/static/'
 
 STATIC_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-]
-
-
-# bootstrap3 的设置 包含 jQuery
-BOOTSTRAP3 = {
-    'include_jquery': True
-}
-
-STATIC_DIRS = [ 
-	os.path.join(BASE_DIR, 'static'),
 ]
 
 # bootstrap3 的设置 包含 jQuery

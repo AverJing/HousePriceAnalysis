@@ -24,14 +24,19 @@ from login import views as loginV
 from echarts import views as chartV
 from main import views as mainV
 import PriceAnalysis.views as pv
-
+import waterflow.views as waterflowV
 
 urlpatterns = [
     path('', include(('PriceAnalysis.urls', 'PriceAnalysis'), namespace='PriceAnalysis')),  # , namespace='lea
-    path('index/', pv.index),
+    #path('index/', pv.index),
     # path('', pv.index, name='index'),
     # path('show', pv.showHouse, name='showHouse'),  # base :
     # path('home', pv.homePage, name='homePage'),
+    path('main/', mainV.main_html),
+    path('newlogin',mainV.new_login),#转到新的ajax登录页面
+    path('ajaxregister',mainV.new_register),#转到新的ajax注册页面
+    path('index',mainV.indexAddEcharts),
+    path('excellentHouse',waterflowV.excellent_house),
     path('admin/', admin.site.urls),
 
     path('', include(('PriceAnalysis.urls', 'PriceAnalysis'), namespace='PriceAnalysis')),  # , namespace='lea
@@ -46,7 +51,6 @@ urlpatterns = [
     path('echarts/map/', chartV.getAll),
     path('echarts/baidumap/',chartV.baiduMap),
     path('admin/', admin.site.urls),
-    path('main/', mainV.main_html),
 
     #path('', pv.showHouse, name='showHouse', namespace='PriceAnalysis'),
 ]
