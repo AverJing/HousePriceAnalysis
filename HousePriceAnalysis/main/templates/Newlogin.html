@@ -38,7 +38,7 @@
 	      <div class='icon'>
 	        <img alt="" src="{% static 'images/lock_icon_copy.png' %}">
 	      </div>
-	      <input name="pwd" placeholder='密码' maxlength="16"  id="password" type='text' autocomplete="off">
+	      <input name="pwd" placeholder='密码' maxlength="16"  id="password" type='password' autocomplete="off">
 	      <div class='validation'>
 	        <img alt="" src="{% static 'images/tick.png' %}">
 	      </div>
@@ -103,7 +103,7 @@
                'dataType':'json',
                success:function(data){
              if(data.res==1){
-            location.href='/main'<!--跳到首页去location.href='/main'-->
+            location.href='/main'//跳到首页去location.href='/main'
              }
              else{
           alert('用户名或密码错误');

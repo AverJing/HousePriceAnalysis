@@ -76,13 +76,13 @@
 					<h3>苏州</h3>-->
 
                 <li>
-                <div id="container3"   class="echartdiv">
+                <div id="container3" class="echartdiv">
 					</div>
 				</li>
 
 
 				<li>
-					 <div id="container2"  class="echartdiv" style="width:2000px;height:800px;">
+					 <div id="container2" class="echartdiv">
                      </div>
                 </li>
 
@@ -177,6 +177,11 @@
 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
  <script type="text/javascript">
         var dom = document.getElementById("container3");
+        var myChartContainer = function () {
+            dom.style.width = window.innerWidth+'px';
+            dom.style.height = window.innerHeight+'px';
+        };
+        myChartContainer();
         var myChart = echarts.init(dom);
 
        var data = [
@@ -780,9 +785,18 @@ option = {
     }]
 };
         myChart.setOption(option);
+        window.onresize = function(){
+             myChartContainer();
+             myChart.resize();
+        }
     </script>
  <script type="text/javascript">
         var dom = document.getElementById("container2");
+        var myChartContainer = function () {
+            dom.style.width = window.innerWidth+'px';
+            dom.style.height = window.innerHeight+'px';
+        };
+        myChartContainer();
         var myChart = echarts.init(dom);
         var Data = [
                 {name: '鄂尔多斯', value: 250 },
@@ -1268,6 +1282,10 @@ option = {
     ]
 };
         myChart.setOption(option);
+        window.onresize = function(){
+            myChartContainer();
+            myChart.resize();
+        }
     </script>
 
 <!--上面是增加Echarts的js代码-->

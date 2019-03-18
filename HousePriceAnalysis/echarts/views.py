@@ -81,8 +81,6 @@ def baiduMap(request):
                 avg_prices[index] /= 10000
                 avg_prices[index] = round(avg_prices[index], 2)#小数点后保留两位
 
-
-
         json_data = {
             'area': json.dumps(area),
             'prices': json.dumps(avg_prices),

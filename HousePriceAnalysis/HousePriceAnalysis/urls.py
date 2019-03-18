@@ -33,11 +33,13 @@ urlpatterns = [
     # path('show', pv.showHouse, name='showHouse'),  # base :
     # path('home', pv.homePage, name='homePage'),
     path('main/', mainV.main_html),
-    path('newlogin',mainV.new_login),#转到新的ajax登录页面
-    path('ajaxregister',mainV.new_register),#转到新的ajax注册页面
-    path('index',mainV.indexAddEcharts),
-    path('excellentHouse',waterflowV.excellent_house),
+    path('newlogin/',mainV.new_login),#转到新的ajax登录页面
+    path('ajaxregister/',mainV.new_register),#转到新的ajax注册页面
+    path('ajaxlogin',mainV.login),
+    path('index/',mainV.indexAddEcharts),
+    path('excellentHouse/',waterflowV.excellent_house),
     path('admin/', admin.site.urls),
+    path('reg',mainV.ajaxregister),
 
     path('', include(('PriceAnalysis.urls', 'PriceAnalysis'), namespace='PriceAnalysis')),  # , namespace='lea
 
