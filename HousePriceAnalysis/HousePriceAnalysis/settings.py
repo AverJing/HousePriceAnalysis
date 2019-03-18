@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+
 	'django.contrib.admin',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
@@ -40,10 +41,13 @@ INSTALLED_APPS = [
 	'login',
 	'captcha',
 	'echarts',
+	'main',
+	'waterflow',
     # 添加自己的应用
     'PriceAnalysis',   
     # 第三方应用程序
     #'bootstrap3',
+
 ]
 
 MIDDLEWARE = [
@@ -69,6 +73,7 @@ TEMPLATES = [
 				'django.template.context_processors.request',
 				'django.contrib.auth.context_processors.auth',
 				'django.contrib.messages.context_processors.messages',
+				'HousePriceAnalysis.context_processors.getuserip',
 			],
 		},
 	},
@@ -91,7 +96,9 @@ DATABASES = {
 }
 
 from mongoengine import connect
-connect('lianjia')
+connect('lianjia', host='mongodb+srv://averjing:Fu.ture1@housepriceanalysis-7vvvm.azure.mongodb.net/?retryWrites=true')
+connect('yearPriceData', host='mongodb+srv://averjing:Fu.ture1@housepriceanalysis-7vvvm.azure.mongodb.net/?retryWrites=true')
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -131,11 +138,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_DIRS = [ 
-	os.path.join(BASE_DIR, 'static'),
+
+STATIC_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 # bootstrap3 的设置 包含 jQuery
 # BOOTSTRAP3 = {
 #     'include_jquery': True
 # }
+

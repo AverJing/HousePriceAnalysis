@@ -55,6 +55,23 @@ var addressInit = function(_cmbProvince, _cmbCity, defaultProvince, defaultCity)
 	cmbProvince.onchange = changeProvince;
 }
 
+
+function changeProvince(_cmbProvince,_cmbCity)
+	{
+	    var cmbProvince = document.getElementById(_cmbProvince);
+        var cmbCity = document.getElementById(_cmbCity);
+		cmbCity.options.length = 0;
+		cmbCity.onchange = null;
+		if(cmbProvince.selectedIndex == -1)return;
+		var item = cmbProvince.options[cmbProvince.selectedIndex].obj;
+		for(var i=0; i<item.cityList.length; i++)
+		{
+			cmbAddOption(cmbCity, item.cityList[i].name, item.cityList[i]);
+		}
+		cmbSelect(cmbCity, defaultCity);
+		changeCity();
+		cmbCity.onchange = changeCity;
+	}
 var provinceList = [
 {name:'一线城市',cityList:[
 {name:'北京'},

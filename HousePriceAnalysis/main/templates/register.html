@@ -1,0 +1,137 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% load static %}
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0"> 
+	<title>注册界面</title>
+    <link href="{% static 'css/default.css' %}" rel="stylesheet" type="text/css" />
+	<!--必要样式-->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/demo.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/loaders.css' %}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div id="particles-js">
+	<div class='login'>
+	  <div class='login_title'>
+	    <span>会员注册</span>
+	  </div>
+	  <div class='login_fields'>
+	    <div class='login_fields__user'>
+	      <div class='icon'>
+	        <img alt="" src="{% static 'img/user_icon_copy.png' %}">
+	      </div>
+	      <input name="username" placeholder='用户名' id="username" maxlength="16" type='text' autocomplete="off">
+	        <div class='validation'>
+	          <img alt="" src="{% static 'images/tick.png' %}">
+	        </div>
+	    </div>
+	    <div class='login_fields__password'>
+	      <div class='icon'>
+	        <img alt="" src="{% static 'images/lock_icon_copy.png' %}">
+	      </div>
+	      <input name="pwd" placeholder='密码' id="password" maxlength="16" type='password' autocomplete="off">
+	      <div class='validation'>
+	        <img alt="" src="{% static 'images/tick.png' %}">
+	      </div>
+	    </div>
+		  <div class='login_fields__password'>
+	      <div class='icon'>
+	        <img alt="" src="{% static 'images/lock_icon_copy.png' %}">
+	      </div>
+	      <input name="pwd" placeholder='确认密码' id="confirmpassword" maxlength="16" type='password' autocomplete="off">
+	      <div class='validation'>
+	        <img alt="" src="{% static 'images/tick.png' %}">
+	      </div>
+	    </div>
+		  <div class='login_fields__password'>
+	      <div class='icon'>
+	        <img alt="" src="{% static 'img/user_icon_copy.png' %}">
+	      </div>
+	      <input name="pwd" placeholder='邮箱' id="email" maxlength="16" type='text' autocomplete="off">
+	      <div class='validation'>
+	        <img alt="" src="{% static 'images/tick.png'%}">
+	      </div>
+	    </div>
+
+	    <div class='login_fields__submit'>
+	      <input type='button' id="regbutton" value='注册'>
+		</div>
+	  </div>
+	  <div class='success'>
+	  </div>
+
+	</div>
+	<div class='authent'>
+	  <div class="loader" style="height: 44px;width: 44px;margin-left: 28px;">
+        <div class="loader-inner ball-clip-rotate-multiple">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        </div>
+	  <p>认证中...</p>
+	</div>
+	<div class="OverWindows"></div>
+</div>
+    <link href="{% static 'layui/css/layui.css' %}" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery-ui.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/stopExecutionOnTimeout.js?t=1' %}"></script>
+    <script type="text/javascript" src="{% static 'layui/layui.js' %}"></script>
+   <!-- <script type="text/javascript" src="js/Particleground.js"></script>-->
+<script src="{% static 'js/particles.min.js' %}"></script>
+<script src="{% static 'js/app.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/Treatment.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.mockjax.js' %"}></script>
+<script type="text/javascript">
+
+           $(document).ready(function (){
+           $("#regbutton").click(function(){
+             var myReg=/^[a-zA-Z0-9_-]+@([a-zA-Z0-9]+\.)+(com|cn|net|org)$/;
+             username=$('#username').val();
+             password=$('#password').val();
+             confirmpassword=$('#confirmpassword').val();
+             email=$('#email').val();
+             if(username=='' || password==''|| confirmpassword=='')
+             {
+            alert('用户名或密码不能为空')
+             }
+             else if (!myReg.test(email)){
+             alert('邮箱格式不正确')
+             }
+             else{
+             $.ajax({
+               'url':'/reg',
+               'type':'post',
+               'data':{'username':username,'password':password,'confirmpassword':confirmpassword,'email':email} ,
+               'dataType':'json',
+               success:function(data){
+             if(data.res==3){
+            alert("注册成功")
+             location.href='/newlogin'
+             }
+             else if(data.res==2){
+              alert("两次密码不一致")
+             }
+             else{
+          alert('用户名已存在');
+
+             }
+             }
+             })
+             }
+            });
+            });
+
+</script>
+</body>
+</html>

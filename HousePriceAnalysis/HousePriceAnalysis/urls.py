@@ -14,18 +14,33 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
+
+from django.urls import path
+import PriceAnalysis.views as pv
+from django.conf.urls import include,url
+
+from django.urls import path, include
 from login import views as loginV
 from echarts import views as chartV
+from main import views as mainV
 import PriceAnalysis.views as pv
+import waterflow.views as waterflowV
 
 urlpatterns = [
     path('', include(('PriceAnalysis.urls', 'PriceAnalysis'), namespace='PriceAnalysis')),  # , namespace='lea
-    path('index/', pv.index),
+    #path('index/', pv.index),
     # path('', pv.index, name='index'),
     # path('show', pv.showHouse, name='showHouse'),  # base :
     # path('home', pv.homePage, name='homePage'),
+    path('main/', mainV.main_html),
+    path('newlogin',mainV.new_login),#转到新的ajax登录页面
+    path('ajaxregister',mainV.new_register),#转到新的ajax注册页面
+    path('index',mainV.indexAddEcharts),
+    path('excellentHouse',waterflowV.excellent_house),
     path('admin/', admin.site.urls),
+
+    path('', include(('PriceAnalysis.urls', 'PriceAnalysis'), namespace='PriceAnalysis')),  # , namespace='lea
+
     #path('index/', loginV.index),
     path('login/', loginV.login),
     path('logout/', loginV.logout),
@@ -34,6 +49,7 @@ urlpatterns = [
     path('map/', chartV.echart),
     path('echarts/index/', chartV.index),
     path('echarts/map/', chartV.getAll),
+    path('echarts/baidumap/',chartV.baiduMap),
     path('admin/', admin.site.urls),
 
     #path('', pv.showHouse, name='showHouse', namespace='PriceAnalysis'),
