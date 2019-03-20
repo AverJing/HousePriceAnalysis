@@ -48,8 +48,8 @@
 
         {# 导航链接 #}
         <a class="navbar-brand" href="{% url 'PriceAnalysis:homePage' %}">首页</a>
-        <a class="navbar-brand" href="{% url 'PriceAnalysis:showHouse' '江苏'%}">房价展示</a>
-
+        <a class="navbar-brand" href="{% url 'PriceAnalysis:showHouse' '江苏' ' ' %}">历史房价</a><!--'空格'-->
+        <a class="navbar-brand" href="{% url 'PriceAnalysis:showHouse'  ' '  '苏州' %}">我要搜房</a>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="my-nav">
@@ -68,7 +68,6 @@
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
-	
 		<div class="container">
                 <div class="page-header">
                     {% block header %}{% endblock header %}

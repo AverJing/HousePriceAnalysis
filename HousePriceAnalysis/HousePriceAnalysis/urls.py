@@ -28,14 +28,12 @@ import PriceAnalysis.views as pv
 urlpatterns = [
     path('', include(('PriceAnalysis.urls', 'PriceAnalysis'), namespace='PriceAnalysis')),  # , namespace='lea
     path('index/', pv.index),
-    # path('', pv.index, name='index'),
-    # path('show', pv.showHouse, name='showHouse'),  # base :
-    # path('home', pv.homePage, name='homePage'),
+
     path('admin/', admin.site.urls),
 
     path('', include(('PriceAnalysis.urls', 'PriceAnalysis'), namespace='PriceAnalysis')),  # , namespace='lea
 
-    #path('index/', loginV.index),
+
     path('login/', loginV.login),
     path('logout/', loginV.logout),
     path('register/', loginV.register),
