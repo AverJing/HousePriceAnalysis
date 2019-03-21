@@ -108,7 +108,7 @@
               <button type="button" class="btn btn-default" onclick="set_option(2015)">2015</button>
               <button type="button" class="btn btn-default" onclick="set_option(2014)">2014</button>
               <button type="button" class="btn btn-default" onclick="set_option(2013)">2013</button>
-
+              <button type="button" class="btn btn-default" onclick="set_option_forecast(2019)">房价预测</button>
             </div>
 
 
@@ -121,22 +121,6 @@
 
                 </td>
 
-                <!--<td>-->
-                    <!--<div id="showinfo" style="font-size: 16px;font-weight: bold;">-->
-                    <!--<p>吴中2月二手房均价-->
-                        <!--<em style="color: #f60;font-style: normal; font-size: 20px; font-family:Microsoft YaHei;">-->
-                            <!--17379-->
-                        <!--</em>-->
-                        <!--元/m²-->
-                    <!--</p>-->
-                    <!--<p>吴中1月二手房均价-->
-                        <!--<em style="color: #f60;font-style: normal; font-size: 20px; font-family:Microsoft YaHei;">-->
-                            <!--17150-->
-                        <!--</em>-->
-                        <!--元/m²</p>-->
-                    <!--<p>环比上月上涨 1.32% ↑，同比去年同期上涨 18.47% ↑</p>-->
-                <!--</div>-->
-                <!--</td>-->
             </tr>
         </table>
 
@@ -151,7 +135,6 @@
           <div id="container2" style="height:500"></div>
             <script type="text/javascript">
 
-
                     // 初始刷新时  从view中传递的数据
                     var dom = document.getElementById("container");
                     var myChart = echarts.init(dom);
@@ -160,9 +143,10 @@
                     //  将option 定于为 mychart对象的属性，Ajax能修改
                     myChart.option = null;
 
-
                     var areas = {{ areas|safe }}
+                    //console.log(areas)
                     var info_dict = {{ info_dict|safe }}
+                    //console.log(info_dict)
 
                     var mydata = new Array()  //数组存放每个地区某一年的房价
                     var myseries = new Array()  // [{},{},{}] 折线图配置
@@ -174,6 +158,7 @@
                         myseries[i] = {
                                 name: areas[i],
                                 type:'line',
+                                symbol:'circule',
                                 smooth: true,
                                 data: mydata[i]
                         };
@@ -261,7 +246,82 @@
                         ]
                     });
 
+                  function set_option_forecast(years='2019',cities='')
+                  {
 
+                        //点击按钮和下拉框会调用Ajax函数， 下拉框可以不传值，按钮只传一个值
+                        // 异步刷新 调用views.showForecast函数，传入year 返回data 该年份各地区的历史房价
+
+
+                        if (cities=='')  //只改变时间 不传城市 获取上次
+                        cities = document.getElementById("title2").value;
+                        $.ajax({
+                            url:"/forecastPrice",
+                            type:"GET",
+                            data:{
+                                 year: years,
+                                 city: cities,
+                            },
+
+                             success:function(data){
+                             //data 是从后台返回的值， 包括地区areas， x轴， 房价
+                             document.getElementById("title").innerHTML=years+"年房价走势预测图";
+                             document.getElementById("title").value=years;
+                                    var mydata = new Array()  //数组存放每个地区某一年的价格
+                                    var myseries = new Array()
+                                    var print_info = '';
+                                    if (data.areas.length == 0)
+                                        print_info = '无法查询到数据'
+                                    for (var i=0; i < data.areas.length; i++) //注意 data.
+                                    {
+                                        mydata[i]= data.info_dict[data.areas[i]];
+                                        myseries[i] = {
+                                                type: 'effectScatter',
+                                                coordinateSystem: 'cartesian2d',
+                                                showEffectOn: 'render',
+                                                hoverAnimation: true,
+                                                symbol:'circule',
+                                                itemStyle: {
+                                                    normal: {
+                                                        //color: 'red',
+                                                        shadowBlur: 10,
+                                                        shadowColor:'rgba(0, 0, 0, 0.5)'
+                                                    }
+                                                },
+                                                zlevel: 1,
+                                                name: data.areas[i],
+                                                type:'line',
+                                                smooth: true, // 曲线平滑
+                                                data:[mydata[i][0],mydata[i][1],mydata[i][2],{value:mydata[i][3],name:'4月预测值',symbolSize:20},
+                                                            {value:mydata[i][4],name:'5月预测值',symbolSize:20},{value:mydata[i][5],name:'6月预测值',symbolSize:20}]
+
+                                        };
+                                    }
+                                    //console.log(myseries);
+                                    //console.log(mydata);
+
+                                    var option = {
+                                        title: {
+                                            text: print_info,
+                                        },
+                                        legend: {
+                                                selectedMode: 'single', //单选
+                                                data:  data.areas,
+                                                inactiveColor:'#a7a7a7',
+                                                itemWidth: 50,
+                                                itemHeight: 35,
+
+                                            },
+                                        yAxis: {
+                                            type: 'value',
+                                            scale: true   //刻度自适应
+                                        },
+                                        series: myseries,
+                                    }
+                                    myChart.setOption(option);
+                             }
+                      });
+                  }
                   function set_option(years='2019',cities='')
                   {
 
@@ -269,8 +329,6 @@
                         // 异步刷新 调用views.showHouse3函数，传入year 返回data 该年份各地区的历史房价
                         //alert('sss')
                         //var cities = document.getElementById("cmbCity").value
-
-
                         if (cities=='')  //只改变时间 不传城市 获取上次
                         cities = document.getElementById("title2").value;
                         $.ajax({
@@ -280,17 +338,12 @@
                                  year: years,
                                  city: cities,
                             },
-
                              success:function(data){
-
                              //data 是从后台返回的值， 包括地区areas， x轴， 房价
-
                              document.getElementById("title").innerHTML=years+"年房价走势图";
                              document.getElementById("title").value=years;
                              document.getElementById("title2").innerHTML=cities+"各区房价对比图";
                              document.getElementById("title2").value = cities;
-
-
                                     var mydata = new Array()  //数组存放每个地区某一年的价格
                                     var myseries = new Array()
                                     var mysource = new Array()
@@ -299,11 +352,11 @@
                                         print_info = '无法查询到数据'
                                     for (var i=0; i < data.areas.length; i++) //注意 data.
                                     {
-
                                         mydata[i]= data.info_dict[data.areas[i]];
                                         myseries[i] = {
                                                 name: data.areas[i],
                                                 type:'line',
+                                                symbol:'circule',
                                                 smooth: true,
                                                 data: mydata[i]
                                         };
@@ -318,7 +371,6 @@
                                         };
 
                                     }
-
                                      myChart.setOption({
                                         title: {
                                             text: print_info,
@@ -338,56 +390,32 @@
                                         },
                                         series: myseries,
                                     });
-
                                     myChart2.setOption({
                                         title: {
                                             text: print_info,
                                         },
-
                                         dataset: {
                                             dimensions: ['month', '一季度', '二季度', '三季度', '四季度'],
                                             source: mysource
-
                                         }
                                     });
-
                              }
                       });
                   }
-
-
-
-if (option && typeof option === "object") {
-myChart.setOption(option, true);
-}
-if (option && typeof option === "object") {
-myChart2.setOption(option, true);
-}
-
-
+                  if (myChart.option && typeof myChart.option === "object") {
+                      myChart.setOption(myChart.option, true);
+                  }
+                  if (myChart2.option && typeof myChart2.option === "object") {
+                      myChart2.setOption(myChart2.option, true);
+                  }
        </script>
-            <script type="text/javascript">
-
-
-
-
-                //var data = [220, 182, 191, 234, 290, 330, 310, 123, 442];
-
-            </script>
-
-
       </div>
     </div>
     <ul>
-        <!--view返回数据集 pricehistory-->
-
         <ul>
              <li>展示信息</li>
-
         </ul>
-
-
-</ul>
+    </ul>
 
 {% endblock content %}
 

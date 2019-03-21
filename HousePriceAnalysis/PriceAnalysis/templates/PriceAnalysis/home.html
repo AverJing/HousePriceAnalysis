@@ -80,7 +80,7 @@ var option = {
         {
 
             text: "全国房价热度图",
-            subtext: "data from 安居客",
+            subtext: "数据来源于安居客",
             left: "center",
             top: "auto",
             textStyle: {
@@ -102,20 +102,6 @@ var option = {
                 show: true,
                 title: "save as image"
             },
-            /*myBack: {
-                show: true,
-                title: "返回",
-                icon: 'image://http://echarts.baidu.com/images/favicon.png',
-                onclick: function () {
-                    var map_level = {{ map_level|safe }};
-                    if (map_level == 2){
-                        window.location.href = '../';
-                    }
-                    else if (map_level == 3){
-                        window.location.href = './';
-                    }
-                }
-            },*/
         },
     },
     series_id: 7858556,
@@ -205,8 +191,8 @@ var option = {
     ],
     visualMap: {
         type: "continuous",
-        min: 0,
-        max: 200,
+        min: 4000, //热力图最小值
+        max: 11000,
         text: [
             "high",
             "low"
@@ -230,12 +216,5 @@ var option = {
     }
 };
 myChart.setOption(option);
-/*myChart.on('click', function (params) {
-    var next_map = params.name.split("市")[0];
-    var map_level = 12;
-    if (map_level != 3){
-        window.location.href = next_map;
-    }
-})*/
        </script>
 {% endblock content %}
