@@ -172,51 +172,7 @@
     <input id="price" type="hidden" value="">
     <input id="house_type" type="hidden" value="">
     <input id="area" type="hidden" value="">
-    <script>
-        document.getElementById("city").value='吴江';
-        document.getElementById("price").value=0;
-        document.getElementById("house_type").value='';
-        document.getElementById("area").value='';
 
-        function select(str,flag){
-        //alert("ffff");
-            if (flag==0)
-                document.getElementById("city").value=str;
-            if (flag==1)
-                document.getElementById("price").value=str;
-            if (flag==2)
-                document.getElementById("house_type").value=str;
-            if (flag==3)
-                document.getElementById("area").value=str;
-        var array = new Array();
-        array[0]=document.getElementById("city").value;
-        array[1]=document.getElementById("price").value;
-        array[2]=document.getElementById("house_type").value;
-        array[3]=document.getElementById("area").value;
-        // 根据参数去数据库中查询
-        query(array[0],array[1],array[2],array[3]);
-        };
-
-        function query(cities, prices, types, areas){
-
-                    $.ajax({
-                            url:"/queryHouse",
-                            type:"GET",
-                            data:{
-                                 city: cities,
-                                 price: prices,
-                                 type:types,
-                                 area:areas
-                            },
-
-                             success:function(data){
-
-                             }
-                           });
-        }
-
-
-    </script>
 </div>
 <i class="list-icons"></i>
 <input type="hidden" id="url_params_encode" value="eyJzZWFyY2hfcGFyYW1zIjpbXSwibmFtZV9wYXJhbXMiOnsiY2l0eV9pZCI6MTksInBhZ2Vfc2l6ZSI6MzB9fQ==">
@@ -230,7 +186,7 @@
             <a class="light" href="#"><span>默认排序</span></a>
             <a class="" href="#" rel="nofollow"><span>价格</span><i class="list-ico defult-down"></i></a>
             <a class="" href="#" rel="nofollow"><span>开盘时间</span><i class="list-ico defult-down"></i></a>
-                                                                    </div>
+        </div>
             <span class="result">
                 共有<em>{{ count }}</em>个符合要求的苏州楼盘</h1>
             </span>
@@ -240,14 +196,13 @@
         <div class="key-list imglazyload" style="width:1160">
                 {% for data in houseData %}
                     <!--<p> {{ data }} 用 data.0 </p>-->
-
+                <p id="aaa">sss</p>
                     <div class="item-mod" rel="nofollow">
                 <a class="pic" >
 		            <img width="180" height="135" src="https://pic4.ajkimg.com/display/xinfang/a49a28c6f89a33a206d41daccb753239/180x135m.jpg" alt="">
                 </a>
             	<div class="infos">
 			        <a class="lp-name" >
-
 				    <h3><span class="items-name">{{ data.3 }}</span></h3>
 
                                     <i class="jian-icon">荐</i>
@@ -282,7 +237,56 @@
         </div>
 </div>
 
+
             <script type="text/javascript">
+
+                    document.getElementById("city").value='吴江';
+                    document.getElementById("price").value=0;
+                    document.getElementById("house_type").value='';
+                    document.getElementById("area").value='';
+
+                    function select(str,flag){
+
+                        if (flag==0)
+                            document.getElementById("city").value=str;
+                        if (flag==1)
+                            document.getElementById("price").value=str;
+                        if (flag==2)
+                            document.getElementById("house_type").value=str;
+                        if (flag==3)
+                            document.getElementById("area").value=str;
+                    var array = new Array();
+                    array[0]=document.getElementById("city").value;
+                    array[1]=document.getElementById("price").value;
+                    array[2]=document.getElementById("house_type").value;
+                    array[3]=document.getElementById("area").value;
+
+                    // 根据参数去数据库中查询
+
+                    //alert(array[0]+array[1]+array[2]+array[3]);
+                    query(array[0],array[1],array[2],array[3]);
+                    };
+
+                    function query(cities, prices, types, areas){
+
+                                $.ajax({
+                                        url:"/queryHouse",
+                                        type:"GET",
+                                        data:{
+                                             city: cities,
+                                             price: prices,
+                                             type:types,
+                                             area:areas
+                                        },
+
+                                         success:function(data){
+                                                // 展示页面
+                                                //data.houseData;
+                                         }
+                                       });
+                    }
+
+
                                 (function() {
                     var j = document.createElement('script'); j.async = true;j.src = '//ifx.anjuke.com/s?p=943&c=19&o=1&f=rec_loupanlist&st=ajk';
                     var k = document.getElementsByTagName('head')[0]; if(k)k.insertBefore(j,k.lastChild);

@@ -3,11 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="432b9b07-62c3-42cf-b3bd-dae3259072c3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HousePriceAnalysis/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/HousePriceAnalysis/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PriceAnalysis/templates/PriceAnalysis/data_analysis.html" beforeDir="false" afterPath="$PROJECT_DIR$/PriceAnalysis/templates/PriceAnalysis/data_analysis.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PriceAnalysis/templates/PriceAnalysis/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/PriceAnalysis/templates/PriceAnalysis/show.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PriceAnalysis/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/PriceAnalysis/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PriceAnalysis/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/PriceAnalysis/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login/templates/login/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/login/templates/login/base.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,6 +23,7 @@
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.14" value="2" />
           <entry key="project.open.time.15" value="3" />
+          <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.18" value="1" />
           <entry key="project.open.time.22" value="1" />
           <entry key="project.open.time.24" value="1" />
@@ -32,12 +31,12 @@
           <entry key="project.open.time.40" value="1" />
           <entry key="project.open.time.5" value="1" />
           <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="15" />
+          <entry key="project.opened" value="16" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="COMMIT_EDITMSG" value="2" />
+          <entry key="COMMIT_EDITMSG" value="3" />
           <entry key="html" value="44" />
           <entry key="js" value="6" />
           <entry key="py" value="86" />
@@ -48,22 +47,22 @@
         <counts>
           <entry key="HTML" value="44" />
           <entry key="JavaScript" value="6" />
-          <entry key="PLAIN_TEXT" value="4" />
+          <entry key="PLAIN_TEXT" value="5" />
           <entry key="Python" value="86" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="11037" />
+          <entry key="html" value="11571" />
           <entry key="js" value="9" />
-          <entry key="py" value="6952" />
+          <entry key="py" value="6964" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="11037" />
+          <entry key="HTML" value="11571" />
           <entry key="JavaScript" value="9" />
-          <entry key="Python" value="6952" />
+          <entry key="Python" value="6964" />
         </counts>
       </usages-collector>
     </session>
@@ -73,8 +72,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PriceAnalysis/templates/PriceAnalysis/show.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="790">
-              <caret line="347" column="37" selection-start-line="347" selection-start-column="37" selection-end-line="351" selection-end-column="39" />
+            <state relative-caret-position="1656">
+              <caret line="297" column="66" selection-start-line="297" selection-start-column="66" selection-end-line="297" selection-end-column="66" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#nav#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -93,43 +92,27 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/PriceAnalysis/templates/PriceAnalysis/data_analysis.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="694">
-              <caret line="212" selection-start-line="212" selection-end-line="212" />
+            <state relative-caret-position="314">
+              <caret line="263" column="34" lean-forward="true" selection-start-line="263" selection-start-column="34" selection-end-line="263" selection-end-column="34" />
               <folding>
                 <element signature="e#986#3771#0" />
-                <element signature="e#10601#10619#0" expanded="true" />
-                <element signature="e#11301#11307#0" expanded="true" />
-                <element signature="e#11307#11313#0" expanded="true" />
+                <element signature="e#11319#13048#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PriceAnalysis/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="98">
-              <caret line="139" column="5" selection-start-line="139" selection-start-column="5" selection-end-line="139" selection-end-column="5" />
+            <state relative-caret-position="908">
+              <caret line="128" lean-forward="true" selection-start-line="128" selection-end-line="128" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/manage.py">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="864">
-              <caret line="84" column="13" lean-forward="true" selection-start-line="84" selection-start-column="13" selection-end-line="84" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -175,18 +158,18 @@
         <option value="$PROJECT_DIR$/HousePriceAnalysis/urls.py" />
         <option value="$PROJECT_DIR$/PriceAnalysis/templates/PriceAnalysis/data.html" />
         <option value="$PROJECT_DIR$/login/templates/login/base.html" />
-        <option value="$PROJECT_DIR$/PriceAnalysis/templates/PriceAnalysis/show.html" />
         <option value="$PROJECT_DIR$/PriceAnalysis/urls.py" />
-        <option value="$PROJECT_DIR$/PriceAnalysis/templates/PriceAnalysis/data_analysis.html" />
         <option value="$PROJECT_DIR$/PriceAnalysis/views.py" />
+        <option value="$PROJECT_DIR$/PriceAnalysis/templates/PriceAnalysis/show.html" />
+        <option value="$PROJECT_DIR$/PriceAnalysis/templates/PriceAnalysis/data_analysis.html" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="244" />
-    <option name="y" value="132" />
-    <option name="width" value="1661" />
-    <option name="height" value="950" />
+    <option name="x" value="-9" />
+    <option name="y" value="106" />
+    <option name="width" value="1932" />
+    <option name="height" value="936" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -257,13 +240,13 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="244" y="132" width="1661" height="950" extended-state="0" />
+    <frame x="347" y="113" width="1932" height="936" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.16882317" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.14466737" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="0" visible="true" weight="0.31533742" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="0" visible="true" weight="0.32084894" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="2" weight="0.32902467" />
       <window_info anchor="bottom" id="Message" order="3" />
@@ -320,13 +303,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
           <caret line="1" column="11" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../.git/COMMIT_EDITMSG">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret lean-forward="true" />
         </state>
       </provider>
     </entry>
@@ -479,23 +455,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PriceAnalysis/templates/PriceAnalysis/data_analysis.html">
+    <entry file="file://$PROJECT_DIR$/login/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="694">
-          <caret line="212" selection-start-line="212" selection-end-line="212" />
-          <folding>
-            <element signature="e#986#3771#0" />
-            <element signature="e#10601#10619#0" expanded="true" />
-            <element signature="e#11301#11307#0" expanded="true" />
-            <element signature="e#11307#11313#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-1415">
+          <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/wsgi.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../.git/COMMIT_EDITMSG">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manage.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1512">
+          <caret line="84" column="13" lean-forward="true" selection-start-line="84" selection-start-column="13" selection-end-line="84" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PriceAnalysis/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="15" column="58" selection-start-line="15" selection-start-column="58" selection-end-line="15" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/login/templates/login/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="69" column="10" selection-start-line="69" selection-start-column="10" selection-end-line="69" selection-end-column="10" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PriceAnalysis/templates/PriceAnalysis/show.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="790">
-          <caret line="347" column="37" selection-start-line="347" selection-start-column="37" selection-end-line="351" selection-end-column="39" />
+        <state relative-caret-position="1656">
+          <caret line="297" column="66" selection-start-line="297" selection-start-column="66" selection-end-line="297" selection-end-column="66" />
           <folding>
             <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#nav#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -513,46 +517,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/login/templates/login/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="69" column="10" selection-start-line="69" selection-start-column="10" selection-end-line="69" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PriceAnalysis/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="15" column="58" selection-start-line="15" selection-start-column="58" selection-end-line="15" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/login/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1415">
-          <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/wsgi.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manage.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HousePriceAnalysis/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="864">
-          <caret line="84" column="13" lean-forward="true" selection-start-line="84" selection-start-column="13" selection-end-line="84" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/PriceAnalysis/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="139" column="5" selection-start-line="139" selection-start-column="5" selection-end-line="139" selection-end-column="5" />
+        <state relative-caret-position="908">
+          <caret line="128" lean-forward="true" selection-start-line="128" selection-end-line="128" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PriceAnalysis/templates/PriceAnalysis/data_analysis.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="263" column="34" lean-forward="true" selection-start-line="263" selection-start-column="34" selection-end-line="263" selection-end-column="34" />
+          <folding>
+            <element signature="e#986#3771#0" />
+            <element signature="e#11319#13048#0" />
           </folding>
         </state>
       </provider>

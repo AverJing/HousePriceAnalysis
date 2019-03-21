@@ -137,12 +137,12 @@ def showHouse3(request):
 def queryHouse(request):
     print('sss')
     name = request.GET.get("city")
-    #print(name)
-    col2 = db.get_collection('collections')  #
-    city = col2.find_one({'city_name': '苏州'}, {'_id': 0, 'collection_name': 1})['collection_name']
-    col = db.get_collection(city)  # 重新切换到新表
-    area_info = col.find().distinct('area')  # 区域信息 包含1 不要
-    del area_info[0]  # 不要1
+    # 获取区
+    # col2 = db.get_collection('collections')  #
+    # city = col2.find_one({'city_name': '苏州'}, {'_id': 0, 'collection_name': 1})['collection_name']
+    # col = db.get_collection(city)  # 重新切换到新表
+    # area_info = col.find().distinct('area')  # 区域信息 包含1 不要
+    # del area_info[0]  # 不要1
 
     db2 = client["lianjia"]
     col = db2.get_collection('suzhou_ershoufang')  # 切换表
@@ -154,6 +154,7 @@ def queryHouse(request):
         data_list.append(
             [item['title'], item['area'], int(item['price']), item['communityName'], item['房屋户型'], item['建筑面积'],
              item['户型结构'], item['装修情况'], item['所在楼层']])
-    # print(data_list[0][0])
-    context = {'city': '苏州','areas': area_info, 'houseData': data_list, 'count': len(data_list)}
-    return render(request, 'PriceAnalysis/data_analysis.html', context)
+    print(data_list[0][0])
+    context = {'city': '苏州', 'houseData': data_list, 'count': len(data_list)}
+    #return render(request, 'PriceAnalysis/data_analysis.html', context)
+    return JsonResponse(context)
