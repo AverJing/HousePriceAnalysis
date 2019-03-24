@@ -56,8 +56,9 @@
 				<div id="navbar" class="navbar-collapse navbar-right collapse">
 					<ul class="nav navbar-nav navbar-right cross-effect" id="cross-effect">
 						<li><a href="/" data-link-alt="首页">首页</a></li>
-						<li><a href="{% url 'PriceAnalysis:showHouse' '江苏'%}" data-link-alt="城市">城市</a></li>
-						<li><a  href="/excellentHouse" data-link-alt="我们">看房</a></li>
+						<li><a href="{% url 'PriceAnalysis:showHistory' location %}" data-link-alt="城市">城市</a></li>
+                        <li><a href="{% url 'baidumap' location %}" data-link-alt="城市">地图</a></li>
+						<li><a href="{% url 'PriceAnalysis:showHouse' location %}" data-link-alt="我们">看房</a></li>
                         {% if request.session.islogin %}
                         <li><a href="#" >{{ request.session.username }}</a></li>
                         <li><a href="/logout" data-link-alt="注销" >注销</a></li>

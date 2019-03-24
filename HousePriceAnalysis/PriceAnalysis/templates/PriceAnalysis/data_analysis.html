@@ -1,0 +1,366 @@
+{% extends "../basenav.html" %}
+
+    {% block title %}
+        房价展示
+
+{% endblock title %}
+{% block header %}
+{% endblock header %}
+{% block content %}
+    <script src="https://zz.bdstatic.com/linksubmit/push.js"></script><script src="//hm.baidu.com/hm.js?c5899c8768ebee272710c9c5f365a6d8"></script><script type="text/javascript" async="" src="https://cdn.zampda.net/s.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" rev="stylesheet" href="https://include.anjukestatic.com/aifang/res/2019031801/b/Aifang_Web_Loupan_Listv4_ListIndex.css" type="text/css">
+    <link rel="stylesheet" rev="stylesheet" href="//pages.anjukestatic.com/kfstouch/icons/Fonts-PC-XF/20181226001/iconfont.css" type="text/css">
+    <script type="text/javascript">var PAGESTART = +new Date();</script>
+    <link rel="shortcut icon" href="//pages.anjukestatic.com/xinfang/favicon.ico">
+    <!-- INIT START -->
+    <script type="text/javascript">
+        var anjuke_web_global_InitTracker=function(city_id,city_cookie_name,guid_cookie_name,base_domain,cookie_path){
+            var expire=365*5;
+            var guid=this.getCookie(guid_cookie_name);
+            if(null==guid){
+                guid=this.createGuid();this.setCookie(guid_cookie_name,guid,expire,cookie_path,base_domain);
+            }else{
+                this.setCookie(guid_cookie_name,guid,expire+1,cookie_path,base_domain);
+            }
+            if(city_id!=this.getCookie(city_cookie_name)){
+                this.setCookie(city_cookie_name,city_id,expire,cookie_path,base_domain);
+            }
+            var session_cookie_name='sessid';var session_id=this.getCookie(session_cookie_name);if(null==session_id){
+                session_id=this.createGuid();this.setCookie(session_cookie_name,session_id,0,cookie_path,base_domain);
+            }
+            this.setCookie('isp', 'true', expire, cookie_path, base_domain);
+        };anjuke_web_global_InitTracker.prototype.createGuid=function(){
+            return(this.S4()+this.S4()+"-"+this.S4()+"-"+this.S4()+"-"+this.S4()+"-"+this.S4()+this.S4()+this.S4());
+        };anjuke_web_global_InitTracker.prototype.S4=function(){
+            return(((1+Math.random())*0x10000)|0).toString(16).substring(1).toUpperCase();
+        };anjuke_web_global_InitTracker.prototype.getCookie=function(check_name){
+            var a_all_cookies=document.cookie.split(';');var a_temp_cookie='';var cookie_name='';var cookie_value='';var b_cookie_found=false;for(i=0;i<a_all_cookies.length;i++){
+                a_temp_cookie=a_all_cookies[i].split('=');cookie_name=a_temp_cookie[0].replace(/^\s+|\s+$/g,'');if(cookie_name==check_name){
+                    b_cookie_found=true;if(a_temp_cookie.length>1){
+                        cookie_value=unescape(a_temp_cookie[1].replace(/^\s+|\s+$/g,''));
+                    }
+                    return cookie_value;break;
+                }
+                a_temp_cookie=null;cookie_name='';
+            }
+            if(!b_cookie_found){
+                return null;
+            }
+        };anjuke_web_global_InitTracker.prototype.setCookie=function(name,value,expires,path,domain,secure){
+            var today=new Date();today.setTime(today.getTime());if(expires){
+                expires=expires*1000*60*60*24;
+            }
+            var expires_date=new Date(today.getTime()+(expires));document.cookie=name+"="+escape(value)+
+                ((expires)?";expires="+expires_date.toGMTString():"")+
+                ((path)?";path="+path:"")+
+                ((domain)?";domain="+domain:"")+
+                ((secure)?";secure":"");
+        };
+        new anjuke_web_global_InitTracker('19','ctid','aQQ_ajkguid','anjuke.com','/');
+    </script>
+
+<div id="header">
+
+<div class="site-search">
+     <div class="navbar-brand" style="font-size:25; padding:5 0 0 0">
+                        <div >
+                            唯家
+                        </div>
+
+     </div>
+
+    <div class="sel-city">
+   <a href="javascript:" class="sel-opt">
+       <span class="city">
+           传过来的城市{{ city }}
+       </span>
+   </a>
+
+</div>
+            <div class="map-search">
+	<a class="map-tab item-on" ><i class="list-ico map-ico"></i>地图搜房</a>
+</div>
+<div class="search-box" id="j-search">
+	<form class="search-form" method="GET" action="">
+        <input class="input-search" type="text" name="kw" maxlength="100" autocomplete="off"  placeholder="请输入楼盘名称、地址或房源特征">
+		<input class="btn-search" type="button" value="搜索" id="search-btn">
+
+        <!-- 阻止enter键自动提交表单 -->
+        <input type="text" name="" style="display: none">
+	</form>
+</div>
+
+
+</div>
+<!-- ===== sub-nav-mod Starts used =====-->
+
+</div>
+<div id="container">
+    <div class="filter-nav">
+        <div class="filter-mod" id="bubble_target">
+            <div class="filter-item" >
+
+                <label class="item-title">区域找房：</label>
+                <div class="item-area">
+                    <div class="item-hd" id="region">
+                        <!-- seo学校列表页-->
+                        {% for item in areas %}
+                            <a class="select-item multi-item" onclick="select('{{ item|addslashes }} ',0)">{{ item }}</a>
+                        {% empty %}
+                         <li>出错了 >_< !!</li>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+            <!-- 单价-->
+            <div class="filter-item" >
+                    <label class="item-title">单价：</label>
+                    <div class="item-mod" id="perprice">
+
+                        <a id="ssss" class="" rel="nofollow" onclick="select('0-1000000',1)">全部</a>
+                        <a class="" rel="nofollow" onclick="select('0-10000',1)">1万以下</a>
+                        <a class="" rel="nofollow" onclick="select('10001-15000',1)" >1-1.5万</a>
+                        <a class="" rel="nofollow" onclick="select('15001-20000',1)">1.5-2万</a>
+                        <a class="" rel="nofollow" onclick="select('20001-25000',1)">2-2.5万</a>
+                        <a class="" rel="nofollow" onclick="select('25001-30000',1)">2.5-3万</a>
+                        <a class="" rel="nofollow" onclick="select('30001-1000000',1)">3万以上</a>
+                    </div>
+            </div>
+
+            <!-- 户型-->
+             <div class="filter-item" >
+                    <label class="item-title">户型：</label>
+                    <div class="item-mod" id="houseDesign">
+                        <a class="multi-item" rel="nofollow" onclick="select('室',2)"><em class="letter iconfont"></em>全部</a>
+                        <a class="multi-item" rel="nofollow" onclick="select('1室',2)"><em class="letter iconfont"></em>一室</a>
+                        <a class="multi-item" rel="nofollow" onclick="select('2室',2)"><em class="letter iconfont"></em>二室</a>
+                        <a class="multi-item" rel="nofollow" onclick="select('3室',2)"><em class="letter iconfont"></em>三室</a>
+                        <a class="multi-item" rel="nofollow" onclick="select('4室',2)"><em class="letter iconfont"></em>四室</a>
+                        <a class="multi-item" rel="nofollow" onclick="select('5室及以上',2)"><em class="letter iconfont"></em>五室及以上</a>
+                    </div>
+             </div>
+                <div class="filter-item">
+                        <label class="item-title"> 房屋面积：</label>
+                        <div class="item-mod" id="houseArea">
+                            <a class="multi-item" onclick="select('0-10000',3)"><em class="letter iconfont"></em>全部</a>
+                            <a class="multi-item" onclick="select('0-50',3)"><em class="letter iconfont"></em>50m²以下</a>
+                            <a class="multi-item" onclick="select('51-90',3)"><em class="letter iconfont"></em>50-90m²</a>
+                            <a class="multi-item" onclick="select('91-120',3)"><em class="letter iconfont"></em>90-120m²</a>
+                            <a class="multi-item" onclick="select('121-150',3)"><em class="letter iconfont"></em>120-150m²</a>
+                            <a class="multi-item" onclick="select('151-200',3)"><em class="letter iconfont"></em>150-200m²</a>
+                            <a class="multi-item" onclick="select('201-10000',3)"><em class="letter iconfont"></em>200m²以上</a>
+                        </div>
+                 </div>
+            <!--更多-->
+            <!--清除-->
+        </div>
+    </div>
+</div>
+<div >
+    <input  id="district" type="hidden" value="">
+    <input id="price" type="hidden" value="">
+    <input id="house_type" type="hidden" value="">
+    <input id="area" type="hidden" value="">
+
+</div>
+<i class="list-icons"></i>
+<input type="hidden" id="url_params_encode" value="eyJzZWFyY2hfcGFyYW1zIjpbXSwibmFtZV9wYXJhbXMiOnsiY2l0eV9pZCI6MTksInBhZ2Vfc2l6ZSI6MzB9fQ==">
+    <div class="list-contents">
+        <input id="emailSubscribe-filter" value="p=1" type="hidden">
+                <div class="list-results">
+            <div class="key-sort">
+
+    <div class="sort-condi" style="width:1160">
+        <div class="condition">
+            <a class="light" href="#"><span>默认排序</span></a>
+            <a class="" href="#" rel="nofollow"><span>价格</span><i class="list-ico defult-down"></i></a>
+            <a class="" href="#" rel="nofollow"><span>开盘时间</span><i class="list-ico defult-down"></i></a>
+        </div>
+            <span class="result">
+                共有<em>{{ count }}</em>个符合要求的{{city}}楼盘</h1>
+            </span>
+    </div>
+</div>
+<div class="resource-ifx resource-ifx-filter" data-resource_id="1310310" data-region_id="" data-subregion_id="" data-city_id="19" data-soj="zybh-pc-31" data-limit="2"></div>
+        <!--房子展示页-->
+                    <div id="houseInfo">
+               <div class="key-list imglazyload" style="width:1160">
+                {% for data in houseData %}
+                   <!-- &lt;!&ndash;<p> {{ data }} 用 data.0 </p>&ndash;&gt;-->
+                <div class="item-mod" rel="nofollow">
+                <a class="pic" >
+		            <img width="180" height="135" src="https://pic4.ajkimg.com/display/xinfang/a49a28c6f89a33a206d41daccb753239/180x135m.jpg" alt="">
+                </a>
+            	<div class="infos">
+			        <a class="lp-name" >
+				    <h3><span class="items-name">{{ data.3 }}</span></h3>
+                    <i class="jian-icon">荐</i>
+                    </a>
+                    <a class="address">
+                        <span class="list-map" >{{ data.0 }}</span>
+                    </a>
+                    <a class="huxing">
+                        户型：<span>{{ data.4 }}</span>&nbsp;&nbsp;<span>建筑面积：{{ data.5 }}</span>
+                    </a>
+                    <a class="tags-wrap" >
+                        <div class="tag-panel">
+                            <i class="status-icon onsale">在售</i>
+                            <i class="status-icon wuyetp">{{ data.8 }}</i>
+                            <span class="tag">{{ data.6 }}</span>
+                            <span class="tag">{{ data.7 }}</span>
+                            <span class="tag">{{ data.1 }}</span>
+                        </div>
+                    </a>
+            </div>
+            <a class="favor-pos">
+                <p class="price">单价<span>{{ data.2 }}</span>元/㎡</p>
+            </a>
+            </div>
+            {% empty %}
+                    <li>暂无数据，我们马上更新 >_< !!</li>
+            {% endfor %}
+            </div>
+                    </div>
+                    <!--房子展示页-->
+</div>
+
+
+            <script type="text/javascript">
+
+                    <!--document.getElementById("city").value='吴江';-->
+                    <!--document.getElementById("price").value=0;-->
+                    <!--document.getElementById("house_type").value='';-->
+                    <!--document.getElementById("area").value='';-->
+
+                    function select(str,flag){
+
+                        if (flag==0)
+                            document.getElementById("district").value=str;
+                        if (flag==1)
+                            document.getElementById("price").value=str;
+                        if (flag==2)
+                            document.getElementById("house_type").value=str;
+                        if (flag==3)
+                            document.getElementById("area").value=str;
+
+                    var array = new Array();
+                    array[0]=document.getElementById("district").value;
+                    array[1]=document.getElementById("price").value;
+                    array[2]=document.getElementById("house_type").value;
+                    array[3]=document.getElementById("area").value;
+
+                    var city = "{{city|safe}}";
+                    // 根据参数去数据库中查询
+
+                    //alert(array[0]+array[1]+array[2]+array[3]);
+                    query(array[0],array[1],array[2],array[3], city);
+                    };
+
+                    function query(district, prices, types, areas, city){
+
+                                $.ajax({
+                                        url:"/queryHouse",
+                                        type:"GET",
+                                        data:{
+                                            district: district,
+                                            price: prices,
+                                            type:types,
+                                            area:areas,
+                                            city:city
+                                        },
+
+                                         success:function(data){
+                                                // 展示页面
+
+                                                 var houseDivRemove=document.getElementById("houseInfo").innerHTML = "";//清空div内容
+                                                //一下为查询数据展示
+                                                var divContent='';
+                                                for(var i=0;i<data.houseData.length;i++){
+                                                divContent+='<div class="key-list imglazyload" style="width:1160"><div class="item-mod" rel="nofollow">';
+                divContent+='<a class="pic" ><img width="180" height="135" src="https://pic4.ajkimg.com/display/xinfang/a49a28c6f89a33a206d41daccb753239/180x135m.jpg" alt=""> </a>';
+            	divContent+='<div class="infos"><a class="lp-name" ><h3><span class="items-name">'+data.houseData[i][3]+'</span></h3><i class="jian-icon">荐</i></a>';
+                divContent+='<a class="address"><span class="list-map" >'+data.houseData[i][0]+'</span></a>';
+                divContent+='<a class="huxing">户型：<span>'+data.houseData[i][4]+'</span>&nbsp;&nbsp;<span>建筑面积：'+data.houseData[i][5]+'</span></a>';
+                divContent+='<a class="tags-wrap" ><div class="tag-panel"><i class="status-icon onsale">在售</i><i class="status-icon wuyetp">'+data.houseData[i][8]+'</i><span class="tag">'+data.houseData[i][6]+'</span>';
+                divContent+='<span class="tag">'+data.houseData[i][7]+'</span> <span class="tag">'+data.houseData[i][1]+'</span> </div></a>';
+                divContent+='</div>';
+                divContent+='<a class="favor-pos"> <p class="price">单价<span>'+data.houseData[i][2]+'</span>元/㎡</p></a></div></div>';
+                }
+                var houseDivAppend=document.getElementById("houseInfo").innerHTML = divContent;
+                }
+                                       });
+                    }
+
+
+                                (function() {
+                    var j = document.createElement('script'); j.async = true;j.src = '//ifx.anjuke.com/s?p=943&c=19&o=1&f=rec_loupanlist&st=ajk';
+                    var k = document.getElementsByTagName('head')[0]; if(k)k.insertBefore(j,k.lastChild);
+                    if (k.lastChild.nodeName === '#comment') {
+                        document.getElementById('div_ad943').setAttribute('style', 'display:none');
+                    }
+                })();
+            </script>
+
+            </div>
+
+<script>
+$(document).ready(function(){
+  $("#region>a").click(function(){
+  $("#region>a").css({"color":"black"});
+  $(this).css({"color":"red"});
+   });
+    $("#perprice>a").click(function(){
+  $("#perprice>a").css({"color":"black"});
+  $(this).css({"color":"red"});
+   });
+    $("#houseDesign>a").click(function(){
+  $("#houseDesign>a").css({"color":"black"});
+  $(this).css({"color":"red"});
+   });
+    $("#houseArea>a").click(function(){
+  $("#houseArea>a").css({"color":"black"});
+  $(this).css({"color":"red"});
+   });
+});
+</script>
+
+
+
+<script type="text/javascript">
+	var google_tag_params = {
+			listing_id         : [440888,441155,443989],
+			listing_pagetype   : "searchresults",
+			listing_totalvalue : 0		};
+    var google_conversion_id    = 947155934;
+    var google_custom_params    = window.google_tag_params;
+    var google_remarketing_only = true;
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script><iframe name="google_cookie_match_frame" title="Google cookie match frame" width="1" height="1" src="https://bid.g.doubleclick.net/xbbe/pixel?d=KAE" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" style="display:none" scrolling="no"></iframe>
+
+
+</div>
+
+
+
+
+
+<script type="text/javascript" async="" defer="" src="//pages.anjukestatic.com/prism/performance.js?v=1456202590"></script>
+<script type="text/javascript">
+;window.perfConfig = {
+    pageName : 'Aifang_Web_Loupan_Listv4_ListIndexPage',
+    siteName : 'aifang'
+};
+</script>
+<script type="text/javascript" src="//pages.anjukestatic.com/xinfang/js/jquery-1.9.1/jquery-underscore.min.js"></script>
+
+
+<script type="text/javascript" crossorigin="" src="https://include.anjukestatic.com/aifang/res/2019031801/b/Aifang_Web_Loupan_Listv4_ListIndex.js"></script>
+<script type="text/javascript" src="//j1.58cdn.com.cn/wmda/js/statistic_v000.js"></script>
+
+<script src="data:text/javascript;charset=utf-8,window"></script><script type="module" src="data:text/javascript;charset=utf-8,var test_module_scope = true; window.callback_989653(typeof window.test_module_scope === 'undefined')"></script></body></html>
+
+{% endblock content %}
