@@ -6,14 +6,14 @@
     {% block title %}
         房价展示
 
-    {% endblock title %}
+{% endblock title %}
 {% block header %}
 {% endblock header %}
 {% block content %}
     <script src="https://zz.bdstatic.com/linksubmit/push.js"></script><script src="//hm.baidu.com/hm.js?c5899c8768ebee272710c9c5f365a6d8"></script><script type="text/javascript" async="" src="https://cdn.zampda.net/s.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
     <link rel="stylesheet" rev="stylesheet" href="https://include.anjukestatic.com/aifang/res/2019031801/b/Aifang_Web_Loupan_Listv4_ListIndex.css" type="text/css">
     <link rel="stylesheet" rev="stylesheet" href="//pages.anjukestatic.com/kfstouch/icons/Fonts-PC-XF/20181226001/iconfont.css" type="text/css">
     <script type="text/javascript">var PAGESTART = +new Date();</script>
@@ -104,11 +104,11 @@
 <div id="container">
     <div class="filter-nav">
         <div class="filter-mod" id="bubble_target">
-            <div class="filter-item">
+            <div class="filter-item" >
 
                 <label class="item-title">区域找房：</label>
                 <div class="item-area">
-                    <div class="item-hd">
+                    <div class="item-hd" id="region">
                         <!-- seo学校列表页-->
                         {% for item in areas %}
                             <a class="select-item multi-item" onclick="select('{{ item|addslashes }} ',0)">{{ item }}</a>
@@ -120,49 +120,45 @@
                 </div>
             </div>
             <!-- 单价-->
-            <div class="filter-item">
+            <div class="filter-item" >
                     <label class="item-title">单价：</label>
-                    <div class="item-mod">
-                        <span class="color-selected">全部</span>
-                        <a id="ssss" class="" rel="nofollow" onclick="select('',1)">全部</a>
-                        <a class="" rel="nofollow" onclick="select('5000',1)">1万以下</a>
-                        <a class="" rel="nofollow" onclick="select('10000',1)" >1-1.5万</a>
-                        <a class="" rel="nofollow" onclick="select('16000',1)">1.5-2万</a>
-                        <a class="" rel="nofollow" onclick="select('20000',1)">2-2.5万</a>
-                        <a class="" rel="nofollow" onclick="select('25000',1)">2.5-3万</a>
-                        <a class="" rel="nofollow" onclick="select('30000',1)">3万以上</a>
+                    <div class="item-mod" id="perprice">
+
+                        <a id="ssss" class="" rel="nofollow" onclick="select('0-1000000',1)">全部</a>
+                        <a class="" rel="nofollow" onclick="select('0-10000',1)">1万以下</a>
+                        <a class="" rel="nofollow" onclick="select('10001-15000',1)" >1-1.5万</a>
+                        <a class="" rel="nofollow" onclick="select('15001-20000',1)">1.5-2万</a>
+                        <a class="" rel="nofollow" onclick="select('20001-25000',1)">2-2.5万</a>
+                        <a class="" rel="nofollow" onclick="select('25001-30000',1)">2.5-3万</a>
+                        <a class="" rel="nofollow" onclick="select('30001-1000000',1)">3万以上</a>
                     </div>
             </div>
-            <script>
-                alert(document.get)
-            </script>
+
             <!-- 户型-->
-             <div class="filter-item">
+             <div class="filter-item" >
                     <label class="item-title">户型：</label>
-                    <div class="item-mod">
-                        <span>全部</span>
-                        <a class="multi-item" rel="nofollow" onclick="select('一室',2)"><em class="letter iconfont"></em>一室</a>
-                        <a class="multi-item" rel="nofollow" onclick="select('二室',2)"><em class="letter iconfont"></em>二室</a>
-                        <a class="multi-item" rel="nofollow" onclick="select('三室',2)"><em class="letter iconfont"></em>三室</a>
-                        <a class="multi-item" rel="nofollow" onclick="select('四室',2)"><em class="letter iconfont"></em>四室</a>
-                        <a class="multi-item" rel="nofollow" onclick="select('五室及以上',2)"><em class="letter iconfont"></em>五室及以上</a>
+                    <div class="item-mod" id="houseDesign">
+                        <a class="multi-item" rel="nofollow" onclick="select('室',2)"><em class="letter iconfont"></em>全部</a>
+                        <a class="multi-item" rel="nofollow" onclick="select('1室',2)"><em class="letter iconfont"></em>一室</a>
+                        <a class="multi-item" rel="nofollow" onclick="select('2室',2)"><em class="letter iconfont"></em>二室</a>
+                        <a class="multi-item" rel="nofollow" onclick="select('3室',2)"><em class="letter iconfont"></em>三室</a>
+                        <a class="multi-item" rel="nofollow" onclick="select('4室',2)"><em class="letter iconfont"></em>四室</a>
+                        <a class="multi-item" rel="nofollow" onclick="select('5室及以上',2)"><em class="letter iconfont"></em>五室及以上</a>
                     </div>
              </div>
                 <div class="filter-item">
                         <label class="item-title"> 房屋面积：</label>
-                        <div class="item-mod">
-                            <span>全部</span>
-                            <a class="multi-item" onclick="select('49',3)"><em class="letter iconfont"></em>50m²以下</a>
-                            <a class="multi-item" onclick="select('50',3)"><em class="letter iconfont"></em>50-70m²</a>
-                            <a class="multi-item" onclick="select('70',3)"><em class="letter iconfont"></em>70-90m²</a>
-                            <a class="multi-item" onclick="select('90',3)"><em class="letter iconfont"></em>90-120m²</a>
-                            <a class="multi-item" onclick="select('120',3)"><em class="letter iconfont"></em>120-150m²</a>
-                            <a class="multi-item" onclick="select('150',3)"><em class="letter iconfont"></em>150-200m²</a>
-                            <a class="multi-item" onclick="select('200',3)"><em class="letter iconfont"></em>200m²以上</a>
+                        <div class="item-mod" id="houseArea">
+                            <a class="multi-item" onclick="select('0-10000',3)"><em class="letter iconfont"></em>全部</a>
+                            <a class="multi-item" onclick="select('0-50',3)"><em class="letter iconfont"></em>50m²以下</a>
+                            <a class="multi-item" onclick="select('51-90',3)"><em class="letter iconfont"></em>50-90m²</a>
+                            <a class="multi-item" onclick="select('91-120',3)"><em class="letter iconfont"></em>90-120m²</a>
+                            <a class="multi-item" onclick="select('121-150',3)"><em class="letter iconfont"></em>120-150m²</a>
+                            <a class="multi-item" onclick="select('151-200',3)"><em class="letter iconfont"></em>150-200m²</a>
+                            <a class="multi-item" onclick="select('201-10000',3)"><em class="letter iconfont"></em>200m²以上</a>
                         </div>
                  </div>
             <!--更多-->
-
             <!--清除-->
         </div>
     </div>
@@ -193,28 +189,25 @@
     </div>
 </div>
 <div class="resource-ifx resource-ifx-filter" data-resource_id="1310310" data-region_id="" data-subregion_id="" data-city_id="19" data-soj="zybh-pc-31" data-limit="2"></div>
-        <div class="key-list imglazyload" style="width:1160">
+        <!--房子展示页-->
+                    <div id="houseInfo">
+               <div class="key-list imglazyload" style="width:1160">
                 {% for data in houseData %}
-                    <!--<p> {{ data }} 用 data.0 </p>-->
-                <p id="aaa">sss</p>
-                    <div class="item-mod" rel="nofollow">
+                   <!-- &lt;!&ndash;<p> {{ data }} 用 data.0 </p>&ndash;&gt;-->
+                <div class="item-mod" rel="nofollow">
                 <a class="pic" >
 		            <img width="180" height="135" src="https://pic4.ajkimg.com/display/xinfang/a49a28c6f89a33a206d41daccb753239/180x135m.jpg" alt="">
                 </a>
             	<div class="infos">
 			        <a class="lp-name" >
 				    <h3><span class="items-name">{{ data.3 }}</span></h3>
-
-                                    <i class="jian-icon">荐</i>
+                    <i class="jian-icon">荐</i>
                     </a>
-
-		            <a class="address">
+                    <a class="address">
                         <span class="list-map" >{{ data.0 }}</span>
                     </a>
                     <a class="huxing">
-                        户型：
-    					<span>{{ data.4 }}</span>&nbsp;&nbsp;
-                        <span>建筑面积：{{ data.5 }}</span>
+                        户型：<span>{{ data.4 }}</span>&nbsp;&nbsp;<span>建筑面积：{{ data.5 }}</span>
                     </a>
                     <a class="tags-wrap" >
                         <div class="tag-panel">
@@ -227,23 +220,24 @@
                     </a>
             </div>
             <a class="favor-pos">
-                        <p class="price">单价<span>{{ data.2 }}</span>元/㎡</p>
+                <p class="price">单价<span>{{ data.2 }}</span>元/㎡</p>
             </a>
             </div>
-                    {% empty %}
+            {% empty %}
                     <li>暂无数据，我们马上更新 >_< !!</li>
-                {% endfor %}
-
-        </div>
+            {% endfor %}
+            </div>
+                    </div>
+                    <!--房子展示页-->
 </div>
 
 
             <script type="text/javascript">
 
-                    document.getElementById("city").value='吴江';
-                    document.getElementById("price").value=0;
-                    document.getElementById("house_type").value='';
-                    document.getElementById("area").value='';
+                    <!--document.getElementById("city").value='吴江';-->
+                    <!--document.getElementById("price").value=0;-->
+                    <!--document.getElementById("house_type").value='';-->
+                    <!--document.getElementById("area").value='';-->
 
                     function select(str,flag){
 
@@ -255,6 +249,7 @@
                             document.getElementById("house_type").value=str;
                         if (flag==3)
                             document.getElementById("area").value=str;
+
                     var array = new Array();
                     array[0]=document.getElementById("city").value;
                     array[1]=document.getElementById("price").value;
@@ -281,8 +276,23 @@
 
                                          success:function(data){
                                                 // 展示页面
-                                                //data.houseData;
-                                         }
+
+                                                 var houseDivRemove=document.getElementById("houseInfo").innerHTML = "";//清空div内容
+                                                //一下为查询数据展示
+                                                var divContent='';
+                                                for(var i=0;i<data.houseData.length;i++){
+                                                divContent+='<div class="key-list imglazyload" style="width:1160"><div class="item-mod" rel="nofollow">';
+                divContent+='<a class="pic" ><img width="180" height="135" src="https://pic4.ajkimg.com/display/xinfang/a49a28c6f89a33a206d41daccb753239/180x135m.jpg" alt=""> </a>';
+            	divContent+='<div class="infos"><a class="lp-name" ><h3><span class="items-name">'+data.houseData[i][3]+'</span></h3><i class="jian-icon">荐</i></a>';
+                divContent+='<a class="address"><span class="list-map" >'+data.houseData[i][0]+'</span></a>';
+                divContent+='<a class="huxing">户型：<span>'+data.houseData[i][4]+'</span>&nbsp;&nbsp;<span>建筑面积：'+data.houseData[i][5]+'</span></a>';
+                divContent+='<a class="tags-wrap" ><div class="tag-panel"><i class="status-icon onsale">在售</i><i class="status-icon wuyetp">'+data.houseData[i][8]+'</i><span class="tag">'+data.houseData[i][6]+'</span>';
+                divContent+='<span class="tag">'+data.houseData[i][7]+'</span> <span class="tag">'+data.houseData[i][1]+'</span> </div></a>';
+                divContent+='</div>';
+                divContent+='<a class="favor-pos"> <p class="price">单价<span>'+data.houseData[i][2]+'</span>元/㎡</p></a></div></div>';
+                }
+                var houseDivAppend=document.getElementById("houseInfo").innerHTML = divContent;
+                }
                                        });
                     }
 
@@ -298,6 +308,26 @@
 
             </div>
 
+<script>
+$(document).ready(function(){
+  $("#region>a").click(function(){
+  $("#region>a").css({"color":"black"});
+  $(this).css({"color":"red"});
+   });
+    $("#perprice>a").click(function(){
+  $("#perprice>a").css({"color":"black"});
+  $(this).css({"color":"red"});
+   });
+    $("#houseDesign>a").click(function(){
+  $("#houseDesign>a").css({"color":"black"});
+  $(this).css({"color":"red"});
+   });
+    $("#houseArea>a").click(function(){
+  $("#houseArea>a").css({"color":"black"});
+  $(this).css({"color":"red"});
+   });
+});
+</script>
 
 
 

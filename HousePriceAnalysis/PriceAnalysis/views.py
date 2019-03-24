@@ -7,7 +7,7 @@ import pymongo
 import json
 
 client = pymongo.MongoClient('mongodb+srv://averjing:Fu.ture1@housepriceanalysis-7vvvm.azure.mongodb.net/?retryWrites=true')
-db = client["yearPriceData"]
+
  # 找到该城市的集合名 放到showhouse中
 # Create your views here.
 
@@ -31,27 +31,30 @@ def showHouse(request, province=' ', city=' '):
 
     if province == ' ':   #只传城市 默认从数据库中搜索该城市的10条信息
 
-        name = city
-        col2 = db.get_collection('Collections')  #
-        city = col2.find_one({'city_name': city}, {'_id': 0, 'collection_name': 1})['collection_name']
-        # print(city)
-        col = db.get_collection(city)  # 重新切换到新表
-        #print(name)
-        area_info = col.find().distinct('area')  # 区域信息 包含1 不要
-        del area_info[0]  # 不要1
-
         db2 = client["lianjia"]
-        col = db2.get_collection('suzhou_ershoufang')  # 切换表
+
+        col2 = db2.get_collection('collection')  #
+        query = col2.find_one({'city': '苏州' }, {'_id': 0, 'name': 1, 'area': 1})
+
+        city_table = query['name']+"_ershoufang"
+
+        # 获取城市对应表明 suzhou_ershoufang
+        area_info = query["area"]
+
+
+        #print(area_info)
+
+        col = db2.get_collection(city_table)  # 重新切换到新表
         data = col.find({}).limit(10)
         data_list = []  # 空集合 传递给views 包含前10条信息
 
         for item in data:
-            #print(item)
             data_list.append([item['title'], item['area'], int(item['price']), item['communityName'], item['房屋户型'], item['建筑面积'], item['户型结构'], item['装修情况'], item['所在楼层']])
-        #print(data_list[0][0])
-        context = {'city': name, 'areas': area_info, 'houseData': data_list, 'count': len(data_list)}
+
+        context = {'city': city, 'areas': area_info, 'houseData': data_list, 'count': len(data_list)}
         return render(request, 'PriceAnalysis/data_analysis.html', context)
     if city == ' ':  # 只传省份
+        db = client["yearPriceData"]
         col = db.get_collection("JS_suzhou")
         title = '2018'
         area_info = col.find().distinct('area')  # 区域信息
@@ -81,7 +84,7 @@ def showHouse3(request):
     # AJax 刷新数据 city value 是前端所选的地区和年份
     #  根据值从数据库中读取指定信息
     #  返回 某地区 某年 房价
-
+    db = client["yearPriceData"]
     city = ''
     year = '2019'
     col2 = db.get_collection('Collections')
@@ -127,34 +130,42 @@ def showHouse3(request):
             info_dic[area] = [0] * 12
     area_info = list(info_dic.keys())
 
-
     #print(info_dic)
     context = {'areas': area_info, 'info_dict': info_dic, 'title': title}  # 上下文字典
-
-
     return JsonResponse(context)
 
 def queryHouse(request):
-    print('sss')
-    name = request.GET.get("city")
-    # 获取区
-    # col2 = db.get_collection('collections')  #
-    # city = col2.find_one({'city_name': '苏州'}, {'_id': 0, 'collection_name': 1})['collection_name']
-    # col = db.get_collection(city)  # 重新切换到新表
-    # area_info = col.find().distinct('area')  # 区域信息 包含1 不要
-    # del area_info[0]  # 不要1
+
+    name = request.GET.get("city") or '吴中.'
+    price = request.GET.get("price") or '0-1000000'
+    house_type = request.GET.get("type")
+    area = request.GET.get("area") or '0-10000'
+
+    # name 后面多了一个" " ??? 很迷
+
+    #print(name)
+    print(price)
+    print(len(price))
+
+    price_list = price.split('-')
+    area_list = area.split('-')
 
     db2 = client["lianjia"]
     col = db2.get_collection('suzhou_ershoufang')  # 切换表
-    data = col.find({'area': "吴中"}).limit(10)
+    data = col.find(
+        {'area': name[:-1],
+         '房屋户型': {'$regex': house_type},
+         'price': {'$gt': int(price_list[0]), '$lt': int(price_list[1])},
+         '建筑面积': {'$gt': int(area_list[0]), '$lt': int(area_list[1])}}
+    ).limit(10)  #
     data_list = []  # 空集合 传递给views 包含前10条信息
 
     for item in data:
-        #print(item)
+
         data_list.append(
             [item['title'], item['area'], int(item['price']), item['communityName'], item['房屋户型'], item['建筑面积'],
-             item['户型结构'], item['装修情况'], item['所在楼层']])
-    print(data_list[0][0])
-    context = {'city': '苏州', 'houseData': data_list, 'count': len(data_list)}
-    #return render(request, 'PriceAnalysis/data_analysis.html', context)
+             item['房屋朝向'], item['装修情况'], item['所在楼层']])
+
+    context = {'houseData': data_list, 'count': len(data_list)}
+
     return JsonResponse(context)
