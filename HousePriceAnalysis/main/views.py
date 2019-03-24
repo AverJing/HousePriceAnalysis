@@ -1,13 +1,23 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import JsonResponse
 from main.models import User
 # Create your views here.
+def index(request, location="苏州"):
+    print(location)
+    return render(request,'index.html', {'location':location})
+
+def selectCity(request):
+    return render(request, 'cityTest.html')
+
 def main_html(request):
     return render(request,'index.html')
+
 def new_login(request):
     return render(request,'Newlogin.html')
+
 def new_register(request):
     return render(request,'register.html')
+    
 def login(request):
     username = request.POST.get('username')  # request.POST.get('name')也可以获取
     password = request.POST.get('password')
@@ -24,6 +34,18 @@ def login(request):
         request.session['islogin'] = True
         return JsonResponse({'res': 1})
     return JsonResponse({'res': 0})
+
+def logout(request):
+    if not request.session.get('islogin', None):
+        # 如果本来就未登录，也就没有登出一说
+        return redirect("/")
+    request.session.flush()
+    # 或者使用下面的方法
+    # del request.session['is_login']
+    # del request.session['user_id']
+    # del request.session['user_name']
+    return redirect("/")
+
 def ajaxregister(request):
     username = request.POST.get('username')
     password = request.POST.get('password')

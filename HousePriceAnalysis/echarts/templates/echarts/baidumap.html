@@ -1,418 +1,318 @@
 <!doctype html>
 <html>
-
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
-    <title>房价地图</title>
-    <link rel="stylesheet" href="https://cache.amap.com/lbs/static/main1119.css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+	    body,html,#map {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+	</style>
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=j8KuxCvLuzdrVmN43DloULXghzqNCOy2"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js"></script>
+
     {% load static %}
-    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=ez1LpvMNlQYeEkNvDwsReSHeGRhbGXhg"></script>
-    <style>
-    #share {
-        display: none;
-        float: right;
-        font-size: 14px;
-        line-height: 170%
-    }
-    .mapDemo {
-        position: relative;
-        width: 100%;
-        height: 100%;
-    }
-    .demo-wrapper {
-        position: relative;
-        height: 100%;
-        background: rgba(0, 0, 0, .03);
-        border: 3px solid black;
-    }
-    .timeline-wrapper {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        right: 10px;
-        height: 30px;
-        background: #fff;
-        transition: 1s ease all;
-        border-radius: 4px;
-        box-shadow: 0 1px 5px rgba(0, 0, 0, .65)
-    }
-    #loading {
-        position: absolute;
-        height: 100%;
-        display: table;
-        background: #2980B9;
-        width: 100%;
-        z-index: 9999;
-    }
-    .table-cell {
-        display: table-cell;
-        vertical-align: middle;
-    }
-    .py4 {
-        padding-top: 4rem;
-        padding-bottom: 4rem;
-    }
-    .mt2 {
-        margin-top: 2rem;
-    }
-    .mb0 {
-        margin-bottom: 0;
-    }
-    .mb2 {
-        margin-bottom: 2rem;
-    }
-    .center {
-        text-align: center;
-    }
-    .bubble {
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        transition: background-color .15s ease-in-out;
-        cursor: pointer
-    }
-    .bubble p {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis
-    }
-    .bubble-1 {
-        background: #2980B9 no-repeat 0 0;
-        box-shadow: 0 2px 2px rgba(0, 0, 0, .2);
-        border-radius: 50%;
-        overflow: hidden;
-        width: 92px;
-        height: 92px;
-        line-height: 1.6
-    }
-    .bubble-1 .name {
-        font-size: 14px;
-        font-weight: 800;
-        margin-top: 24px
-    }
-    </style>
+
+    <title>房价地图</title>
 </head>
 
 <body>
-    <div class="demo-wrapper">
-        <div id="loading">
-            <div class="table-cell py4 center">
-                <h1 class="h1 mt2 mb0">Loading...</h1>
-                <p class="small mb2">数据加载中...</p>
-            </div>
-        </div>
-        <div class="mapDemo" style="position: relative;">
-            <div id="container" width="100%" height="100%" style="position: absolute; left: 0px; top: 0px;"></div>
-        </div>
-    </div>
-    </div>
-    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-    <script>
-    var o = void 0,
-        u = void 0,
-        f = {},
-        d = {
-            color: "#fff",
-            borderWidth: "0",
-            padding: "0",
-            zIndex: "2",
-            backgroundColor: "transparent",
-            textAlign: "center",
-            fontFamily: '"Hiragino Sans GB", "Microsoft Yahei UI", "Microsoft Yahei", "微软雅黑", "Segoe UI", Tahoma, "宋体\\5b8b\\4f53", SimSun, sans-serif'
-        },
-        m = function(e) {
-            clearTimeout(u),
-                u = setTimeout(function() {
-                    /*List.default.trigger("update", {
-                        channel: e
-                    })*/
-                }, "zoom" === e || "drag" === e ? 100 / 3 : 100)
-        };
-    var g_conf = {
-        minimumZoom: 11,
-        cityName: '苏州',
-        mapWrapper: 'container'
-    };
-    var area = {{ area|safe }},
-        prices = {{ prices|safe }},
-        houses = {{ houses|safe }},
-        bubbles = [],
-        tags = [];
-    var MokaData = [];
-    /**
-     * 工具函数集合
-     * @type {Object}
-     */
-    var Utils = {
-        init: function() {
-            this.addNewMethods();
-        },
-        addNewMethods: function() {
-            String.trim || (String.prototype.trim = function() {
-                for (var e = this.replace(/^\s\s*/, ""), t = /\s/, a = e.length; t.test(e.charAt(--a));)
-                ;
-                return e.slice(0, a + 1)
-            });
-            String.replaceTpl || (String.prototype.replaceTpl = function(e) {
-                return this.replace(/#\{([^}]*)\}/gm, function(t, a) {
-                    return e[a.trim()]
-                })
-            });
-            String.htmlEncode || (String.prototype.htmlEncode = function() {
-                return String(this).replace(/\x26/g, "&amp;").replace(/\x3c/g, "&lt;").replace(/\x3E/g, "&gt;").replace(/\x22/g, "&quot;").replace(/\x27/g, "&#39;").replace(/\xA9/g, "&copy;")
-            });
-        },
-        replaceTpl: function(e, t, a) {
-            var n = String(e),
-                i = a || /#\{([^}]*)\}/gm,
-                l = String.trim || function(e) {
-                    return e.replace(/^\s+|\s+$/g, "")
-                };
-            return n.replace(i, function(e, a) {
-                return t[l(a)]
-            })
-        }
-    };
-    Utils.init();
-    /**
-     * 地图组件
-     * @type {Object}
-     */
-    var Maps = {
-        tpl: '<div class="bubble bubble-1" ' +
-            'style="background: #115599 no-repeat 0 0;' +
-            'box-shadow: 0 2px 2px rgba(0, 0, 0, .2);' +
-            'border-radius: 50%;' +
-            'overflow: hidden;' +
-            'width: 92px;' +
-            'height: 92px;' +
-            'line-height: 1.6" ' +
-            'data-xftrack="10144" ' +
-            'data-longitude="#{longitude}" ' +
-            'data-latitude="#{latitude}" ' +
-            'data-id="#{id}">' +
-            '   <p class="name" ' +
-            '   title="#{name}" ' +
-            '   style="font-size: 14px;' +
-            '   font-weight: 800;' +
-            '   margin-top: 20px">' +
-            '       #{name}' +
-            '   </p>' +
-            '   <p>均价：<span class="count">#{price}</span>万</p>' +
-            '</div>',
-        init: function() {
-            (o = new BMap.Map(g_conf.mapWrapper, {
-                enableMapClick: !1,
-                minZoom: g_conf.minimumZoom,
-                maxZoom: g_conf.maximumZoom
-            })).enableScrollWheelZoom(),
-                o.disableInertialDragging();
-            o.addEventListener("tilesloaded", function e() {
-                    var t = $(".progress-bar");
-                    t.addClass("progress-bar-done"),
-                        setTimeout(function() {
-                            t.addClass("progress-bar-over"),
-                                setTimeout(function() {
-                                    t.hide(200)
-                                }, 150)
-                            $('#loading').hide();
-                        }, 20),
-                        o.addControl(new BMap.ScaleControl({
-                            anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
-                            offset: new BMap.Size(20, 20)
-                        })),
-                        setTimeout(function() {
-                            o.removeEventListener("tilesloaded", e)
-                        }, 0);
-                    Maps.getBundury();
-                }),
-                o.centerAndZoom(g_conf.cityName, g_conf.minimumZoom),
-                setTimeout(function() {
-                    o.addEventListener("zoomend", function() {
-                        console.log("zoom");
-                        var curr_zoom = o.getZoom();
-                        if (curr_zoom < g_conf.minimumZoom+2) {
-                            console.info("showall");
-                            Maps.bubble.showAll();
-                            Maps.tag.hideAll();
-                        }
-                        else {
-                            Maps.bubble.hideAll();
-                            Maps.tag.showAll();
-                        }
-                        m("zoom")
-                    });
-                    o.addEventListener("dragend", function() {
-                        console.log("drag");
-                        m("drag")
-                    });
-                }, 100)
-        },
-        boundary: {
-            add: function(e, t) {
-                if (!f[e]) {
-                    var a = new BMap.Polygon(t, {
-                        strokeWeight: 2,
-                        strokeColor: "#115599",
-                        strokeOpacity: 1,
-                        fillOpacity: 0,
-                        fillColor: "#115599",
-                        enableMassClear: !1
-                    });
-                    f[e] = a, f[e].hide(),
-                        o.addOverlay(a)
-                }
-            },
-            show: function(e) {
-                f[e] && f[e].show()
-            },
-            hide: function(e) {
-                f[e] && f[e].hide()
-            }
-        },
-        tag: {
-            render: function() {
-                for (var i = 0;i < houses.length;i++){
-                    tag = new BMap.Marker(new BMap.Point(houses[i].longitude, houses[i].latitude));
-                    var icon = new BMap.Icon('{% static "echarts/image/house_icon.png"%}', new BMap.Size(20, 20));
-                    var shadow = new BMap.Icon('{% static "echarts/image/house_icon.png"%}', new BMap.Size(0, 0));
-                    tag.setIcon(icon);
-                    tag.setShadow(shadow);
-                    var label = new BMap.Label(
-                        houses[i].area + "<br/>" + houses[i].name + "<br/>售价：" + houses[i].price,
-                        {offset: new BMap.Size(-20, -50)}
-                    );
-                    label.setStyle({
-                        color: "#115599",
-                        borderWidth: "50",
-                        borderColor: "#115599",
-                        zIndex: "2",
-                        backgroundColor: "#fff",
-                        textAlign: "center",
-                        fontFamily: "微软雅黑"
-                    });
-                    tag.setLabel(label);
-                    tag.getLabel().hide();
-                    tag.addEventListener('mouseover', function () {
-                        this.setZIndex(4);
-                        this.getLabel().show();
-                    });
-                    tag.addEventListener('mouseout', function () {
-                        this.setZIndex(2);
-                        this.getLabel().hide();
-                    });
-                    tag.hide();
-                    o.addOverlay(tag);
-                    tags.push(tag);
-                }
-            },
-            hideAll: function () {
-                for (var i = 0;i < tags.length;i++){
-                    tags[i].hide();
-                }
-            },
-            showAll: function () {
-                for (var i = 0;i < tags.length;i++){
-                    tags[i].show();
-                }
-            }
-        },
-        bubble: {
-            clear: function() {
-                o.clearOverlays()
-            },
-            render: function(data, tpl, a, n) {
-                $.each(data, function(e, i) {
-                    var r = void 0,
-                        s = [];
-                    r = new BMap.Label(Utils.replaceTpl(tpl, i), {
-                        position: new BMap.Point(i.longitude, i.latitude),
-                        offset: new BMap.Size(-46, -46)
-                    });
-                    if (void 0 !== i.border && i.border.length > 0) {
-                        var e = i.id;
-                        Maps.boundary.add(e, i.border);
-                    }
-                    r.addEventListener("mouseover", function() {
-                            Maps.boundary.show($(this.V).children(".bubble-1").data("id"))
-                        }),
-                        r.addEventListener("mouseout", function() {
-                            Maps.boundary.hide($(this.V).children(".bubble-1").data("id"))
-                        }),
-                        r.addEventListener("mouseup", function() {
-                            console.info($(this.V).children(".bubble-1").data("id") + "clicked");
-                            o.centerAndZoom($(this.V).children(".bubble-1").data("id"), g_conf.minimumZoom+2);
-                            Maps.boundary.show($(this.V).children(".bubble-1").data("id"))
-                            Maps.bubble.hideAll();
-                        }),
-                        r.setStyle(d),
-                        o.addOverlay(r),
-                        bubbles.push(r),
-                        function(e) {
-                            setTimeout(function() {
-                                e.setStyle({
-                                    zIndex: "2"
-                                })
-                            }, 1)
-                        }(r);
-                })
-            },
-            hideAll: function () {
-                for (var i = 0;i < bubbles.length;i++){
-                    bubbles[i].hide();
-                }
-            },
-            showAll: function () {
-                for (var i = 0;i < bubbles.length;i++){
-                    bubbles[i].show();
-                }
-            }
-        },
-        getBundury: function() {
-            var bdary = new BMap.Boundary();
-            $.each(area, function(index, item) {
-                (function(index, item) {
-                    bdary.get(item, function(rs) { //获取行政区域
-                        var a = {};
-                        a.id = item;
-                        a.name = item;
-                        a.border = rs.boundaries[0];
-                        a.price = prices[index];
-                        MokaData.push(a);
-                        if (MokaData.length == area.length) {
-                            Maps.getBunduryCenter();
-                        }
-                    });
-                })(index, item)
-            })
-        },
-        getBunduryCenter: function(param) {
-            var myGeo = new BMap.Geocoder();
-            // 将地址解析结果显示在地图上,并调整地图视野
-            var count = 0;
-            $.each(MokaData, function(index, item) {
-                (function(i, t) {
-                    myGeo.getPoint("苏州市" + t.name, function(point) { //获取行政区域
-                        if (point) {
-                            MokaData[i].longitude = point.lng;
-                            MokaData[i].latitude = point.lat;
-                        }
-                        count++;
-                        if (count == MokaData.length) {
-                            Maps.bubble.clear();
-                            Maps.bubble.render(MokaData, Maps.tpl, 1);
-                            Maps.tag.render();
-                        }
-                    }, "苏州市");
-                })(index, item)
-            })
-        },
-    }
-    Maps.init();
-    </script>
+    <div id="map"></div>
 </body>
-
 </html>
+<script type="text/javascript">
+    var conf = {
+        minZoomLevel: 8,//最小缩放级数
+        divideZoomLevel: 12,//区域/楼盘显示分界级数
+    };
+    var areas = {{ area|safe }},//区域名列表
+        houses = {{ houses|safe }},//楼盘列表
+        center = {{ center|safe }},//中心坐标
+        finaldata = [],//处理后数据列表
+        heatdata = [],//热度图数据列表
+        maxprice = 0,//最高房价
+        heatshow = false;//热度图显示标识
+
+    //百度地图
+    var baidumap = new BMap.Map('map', {
+        minZoom: conf.minZoomLevel
+    });
+    baidumap.enableScrollWheelZoom(true);
+    baidumap.disableInertialDragging();
+    baidumap.centerAndZoom(new BMap.Point(center.lng, center.lat), 12);
+    baidumap.setCurrentCity(conf.cityName);
+    //缩放监听器
+    baidumap.addEventListener('zoomend', function () {
+        console.info('zoom');
+        var curr_zoom = baidumap.getZoom();
+        var curr_center = baidumap.getCenter();
+        var curr_area_index = 0,
+            minDist = -1;
+        for (var i = 0;i < finaldata.length;i++){
+            var dist = baidumap.getDistance(curr_center, finaldata[i].bubble.getPosition());
+            if (minDist === -1||dist < minDist){
+                curr_area_index = i;
+                minDist = dist;
+            }
+        }
+        if (curr_zoom > conf.divideZoomLevel){
+            hideBubbles();
+            showMarkers(curr_area_index);
+        }
+        else {
+            hideAllMarkers();
+            showBubbles();
+        }
+    });
+    //拖拽监听器
+    baidumap.addEventListener('dragend', function () {
+        console.info('drag');
+        var curr_zoom = baidumap.getZoom();
+        if (curr_zoom > conf.divideZoomLevel){
+            var curr_center = baidumap.getCenter();
+            var curr_area_index = 0,
+                minDist = -1;
+            for (var i = 0;i < finaldata.length;i++){
+                var dist = baidumap.getDistance(curr_center, finaldata[i].bubble.getPosition());
+                if (minDist === -1||dist < minDist){
+                    curr_area_index = i;
+                    minDist = dist;
+                }
+            }
+            hideAllMarkers();
+            showMarkers(curr_area_index);
+        }
+
+    });
+
+    //处理后数据初始化
+    for (var i = 0;i < areas.length;i++){
+        var area = {};
+        area.name = areas[i];//区域名
+        area.price = 0;//区域均价
+        area.maxlng = 0;//区域最大经度
+        area.minlng = 0;//区域最小经度
+        area.maxlat = 0;//区域最大纬度
+        area.minlat = 0;//区域最小纬度
+        area.housecount = 0;//区域楼盘数量
+        area.bubble = void 0;//区域显示气泡
+        area.markers = [];//区域楼盘显示标记列表
+        finaldata.push(area);
+    }
+
+    //生成楼盘标记，统计各区域最大最小经纬度
+    for (var i = 0;i < houses.length;i++){
+        if (houses[i].price != '暂无'){
+            var price = parseInt(houses[i].price);
+            var heatpoint = {
+                "lng": houses[i].longitude,
+                "lat": houses[i].latitude,
+                "count": price
+            };
+            heatdata.push(heatpoint);
+            if (maxprice < price) maxprice = price;
+        }
+        for (var j = 0;j < finaldata.length;j++){
+            if (finaldata[j].name === houses[i].area){
+                finaldata[j].maxlng =
+                    (finaldata[j].maxlng===0||finaldata[j].maxlng < houses[i].longitude)?
+                        houses[i].longitude:finaldata[j].maxlng;
+                finaldata[j].minlng =
+                    (finaldata[j].minlng===0||finaldata[j].minlng > houses[i].longitude)?
+                        houses[i].longitude:finaldata[j].minlng;
+                finaldata[j].maxlat =
+                    (finaldata[j].maxlat===0||finaldata[j].maxlat < houses[i].latitude)?
+                        houses[i].latitude:finaldata[j].maxlat;
+                finaldata[j].minlat =
+                    (finaldata[j].minlat===0||finaldata[j].minlat > houses[i].latitude)?
+                        houses[i].latitude:finaldata[j].minlat;
+                if (houses[i].price != '暂无'){
+                    finaldata[j].price += parseInt(houses[i].price);
+                    finaldata[j].housecount += 1;
+                }
+                var marker = new BMap.Marker(
+                    new BMap.Point(houses[i].longitude, houses[i].latitude),{
+                        zIndex: 1
+                    });
+                var icon = new BMap.Icon('{% static "echarts/image/house_icon.png"%}', new BMap.Size(20, 20));
+                var shadow = new BMap.Icon('{% static "echarts/image/house_icon.png"%}', new BMap.Size(0, 0));
+                marker.setIcon(icon);
+                marker.setShadow(shadow);
+                var label = new BMap.Label(
+                    houses[i].area + "<br/>" +
+                    houses[i].name + "<br/>" +
+                    "售价：" + houses[i].price,
+                    {offset: new BMap.Size(-20, -60)}
+                );
+                label.setStyle({
+                    color: "#115599",
+                    borderWidth: "50",
+                    borderColor: "#115599",
+                    zIndex: "2",
+                    backgroundColor: "#fff",
+                    textAlign: "center",
+                    fontFamily: "微软雅黑"
+                });
+                marker.setLabel(label);
+                marker.getLabel().hide();
+                marker.addEventListener('mouseover', function () {
+                    this.setZIndex(2);
+                    this.getLabel().show();
+                });
+                marker.addEventListener('mouseout', function () {
+                    this.setZIndex(1);
+                    this.getLabel().hide();
+                });
+                marker.hide();
+                baidumap.addOverlay(marker);
+                finaldata[j].markers.push(marker);
+            }
+        }
+    }
+
+    //计算区域均价，生成区域显示气泡
+    for (var i = 0;i < areas.length;i++){
+        finaldata[i].price /= finaldata[i].housecount;
+        finaldata[i].price /= 10000;
+        finaldata[i].price = finaldata[i].price.toFixed(2);
+        avg_price = finaldata[i].price + '万'
+        if (finaldata[i].housecount == 0){
+            avg_price = '暂无'
+        }
+
+        var bubble = new BMap.Label(
+            '<p style="font-size: 14px;' +
+            'margin-top: 20px">' + finaldata[i].name + '</p>' +
+            '<p>均价：' + avg_price + '</p>', {
+                position: new BMap.Point(
+                    finaldata[i].maxlng/2+finaldata[i].minlng/2, finaldata[i].maxlat/2+finaldata[i].minlat/2
+                ),
+                offset: new BMap.Size(-45, -45)
+            });
+        bubble.setStyle({
+            color: '#fff',
+            borderWidth: 0,
+            borderRadius: '50%',
+            textAlign: 'center',
+            backgroundColor: '#115599',
+            width: '90px',
+            height: '90px',
+            cursor: "pointer"
+        });
+        bubble.addEventListener('mouseover', function () {//鼠标停留监听
+            this.setStyle({
+                backgroundColor: '#cc3344'
+            });
+        });
+        bubble.addEventListener('mouseout', function () {//鼠标离开监听
+            this.setStyle({
+                backgroundColor: '#115599'
+            });
+        });
+        bubble.addEventListener('mouseup', function () {//鼠标点击监听
+            baidumap.centerAndZoom(this.getPosition(), conf.divideZoomLevel+1);
+        });
+        baidumap.addOverlay(bubble);
+        finaldata[i].bubble = bubble;
+    }
+/*
+    //生成热度图
+    heatmapOverlay = new BMapLib.HeatmapOverlay({"radius":40});
+	baidumap.addOverlay(heatmapOverlay);
+	heatmapOverlay.setDataSet({data:heatdata,max:50000});
+	//是否显示热力图
+    function openHeatmap(){
+        heatmapOverlay.show();
+    }
+	function closeHeatmap(){
+        heatmapOverlay.hide();
+    }
+    closeHeatmap();
+    function setGradient(){
+     	var gradient = {
+     	    .2:'rgb(100, 180, 100)',
+			.5:'rgb(255, 255, 0)',
+			.8:'rgb(255, 0, 0)'
+        };
+     	var colors = document.querySelectorAll("input[type='color']");
+     	colors = [].slice.call(colors,0);
+     	colors.forEach(function(ele){
+			gradient[ele.getAttribute("data-key")] = ele.value;
+     	});
+        heatmapOverlay.setOptions({"gradient":gradient,"opacity":50});
+    }
+    setGradient();
+
+    // 定义一个控件类,即function
+	function HeatControl(){
+	  // 默认停靠位置和偏移量
+	  this.defaultAnchor = BMAP_ANCHOR_TOP_LEFT;
+	  this.defaultOffset = new BMap.Size(10, 10);
+	}
+
+	// 通过JavaScript的prototype属性继承于BMap.Control
+	HeatControl.prototype = new BMap.Control();
+
+	// 自定义控件必须实现自己的initialize方法,并且将控件的DOM元素返回
+	// 在本方法中创建个div元素作为控件的容器,并将其添加到地图容器中
+	HeatControl.prototype.initialize = function(map){
+        // 创建一个DOM元素
+        var div = document.createElement("div");
+        // 添加文字说明
+        div.appendChild(document.createTextNode("热力图开关"));
+        // 设置样式
+        div.style.cursor = "pointer";
+        div.style.color = "#fff";
+        div.style.border = "#115599";
+        div.style.borderWidth
+        div.style.backgroundColor = "#115599";
+        // 绑定事件,点击一次放大两级
+        div.onclick = function(e){
+            if (heatshow){
+                closeHeatmap();
+            }
+            else {
+                openHeatmap();
+            }
+            heatshow = !heatshow;
+        };
+        // 添加DOM元素到地图中
+        map.getContainer().appendChild(div);
+        // 将DOM元素返回
+        return div;
+	};
+	// 创建控件
+	var myHeatCtrl = new HeatControl();
+	// 添加到地图当中
+	baidumap.addControl(myHeatCtrl);
+*/
+    function showMarkers(index) {//显示选定区域的楼盘标记
+        for (var i = 0;i < finaldata[index].markers.length;i++){
+            finaldata[index].markers[i].show();
+        }
+    }
+
+    function hideMarkers(index) {
+        for (var i = 0;i < finaldata[index].markers.length;i++){
+            finaldata[index].markers[i].hide();
+        }
+    }
+
+    function hideAllMarkers() {//隐藏所有楼盘标记
+        for (var index = 0;index < finaldata.length;index++){
+            for (var i = 0;i < finaldata[index].markers.length;i++){
+                finaldata[index].markers[i].hide();
+            }
+        }
+    }
+
+    function showBubbles() {//显示区域气泡
+        for (var i = 0;i < finaldata.length;i++){
+            finaldata[i].bubble.show();
+        }
+    }
+
+    function hideBubbles() {//隐藏区域气泡
+        for (var i = 0;i < finaldata.length;i++){
+            finaldata[i].bubble.hide();
+        }
+    }
+</script>

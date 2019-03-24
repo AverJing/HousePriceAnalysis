@@ -47,17 +47,24 @@
 					</button>
 					<!-- Logo -->
 					<div class="logo">
-						<a class="navbar-brand logo-w3l button" href="index.html">WE  HOME</a>
+                        <a class="navbar-brand logo-w3l button" href="/">WE  HOME</a>
+                        <li><a href="{% url 'selectCity' %}"> {{ location|safe }} </a></li>
 					</div>
 					<!-- //Logo -->
 				</div>
 
 				<div id="navbar" class="navbar-collapse navbar-right collapse">
 					<ul class="nav navbar-nav navbar-right cross-effect" id="cross-effect">
-						<li><a class="scroll" href="#agileabout" data-link-alt="首页">首页</a></li>
-						<li><a class="scroll" href="#offer" data-link-alt="城市">城市</a></li>
-						<li><a  href="/excellentHouse" data-link-alt="我们">看房</a></li>
-						<li><a href="/newlogin" data-link-alt="登录" >登录</a></li>
+						<li><a href="#agileabout" data-link-alt="首页">首页</a></li>
+                        <li><a href="{% url 'PriceAnalysis:showHouse' location %}" data-link-alt="城市">城市</a></li>
+                        <li><a href="{% url 'baidumap' location %}" data-link-alt="城市">地图</a></li>
+						<li><a href="/excellentHouse" data-link-alt="我们">看房</a></li>
+                        {% if request.session.islogin %}
+                        <li><a href="#">{{ request.session.username }}</a></li>
+                        <li><a href="/logout" data-link-alt="注销" >注销</a></li>
+                        {% else %}
+                        <li><a href="{% url 'newlogin' %}" data-link-alt="登录" >登录</a></li>
+                        {% endif %}
 						<li><a href="/ajaxregister" data-link-alt="注册">注册</a></li>
 					</ul>
 				</div><!-- //Navbar-Collapse -->
@@ -90,18 +97,9 @@
 					<h3>南京</h3>-->
 
 				<li>
-					<img src="{% static 'images/zhengzhou.jpg' %}" alt="Couch Hunter">
-					<h3>郑州</h3>
+					<div id="container4" class="echartdiv"></div>
 				</li>
 
-				<li class="fourth-slide agileinfo">
-					<img src="{% static 'images/shanghai.jpg' %}" alt="Couch Hunter">
-					<h3>上海</h3>
-				</li>
-				<li class="fifth-slide wthree">
-					<img src="{% static 'images/beijing.jpg' %}" alt="Couch Hunter">
-					<h3>北京</h3>
-				</li>
 			</ul>
 		</div>
 		<!-- //Slider -->
@@ -568,7 +566,6 @@ var convertData = function(data) {
     }
     //console.log(res);
     return res;
-
 };
 
 var convertedData = [
@@ -603,10 +600,10 @@ option = {
     animationDurationUpdate: 1000,
     animationEasingUpdate: 'cubicInOut',
     title: [{
-        text: '全国主要城市最新房价信息',
-        link: 'http://pages.anjuke.com/expert/newexpert.html',
-        subtext: 'data from Anjuke',
-        sublink: 'http://pages.anjuke.com/expert/newexpert.html',
+        //text: '全国主要城市最新房价信息',
+        //link: 'http://pages.anjuke.com/expert/newexpert.html',
+        //subtext: 'data from Anjuke',
+        //sublink: 'http://pages.anjuke.com/expert/newexpert.html',
         left: 'center',
         textStyle: {
             color: '#fff'
@@ -649,7 +646,7 @@ option = {
                 show: false
             }
         },
-        roam: true,
+        roam: false,
         itemStyle: {
             normal: {
                 areaColor: '#323c48',
@@ -1186,9 +1183,9 @@ var convertData = function (data) {
 option = {
     backgroundColor: '#404a59',
     title: {
-        text: '全国主要城市房价涨跌形势',
-        subtext: '数据来源于安居客',
-        sublink: 'http://www.anjuke.com',
+        //text: '全国主要城市房价涨跌形势',
+        //subtext: '数据来源于安居客',
+        //sublink: 'http://www.anjuke.com',
         left: 'center',
         textStyle: {
             color: '#fff'
@@ -1232,7 +1229,7 @@ option = {
     },
     geo: {
         map: 'china',
-        roam:true, //地图可以放大缩小
+        roam:false, //地图可以放大缩小
         label: {
             emphasis: {
                 show: false
@@ -1287,6 +1284,203 @@ option = {
             myChart.resize();
         }
     </script>
+
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors//static/echarts-gl//static/echarts-gl.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors//static/echarts-stat/ecStat.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+    <script type="text/javascript">
+        var dom = document.getElementById('container4');
+        var myChartContainer = function () {
+            dom.style.width = window.innerWidth+'px';
+            dom.style.height = window.innerHeight+'px';
+        };
+        myChartContainer();
+        var myChart = echarts.init(dom, 'light', {renderer: 'canvas'});
+var Data = [
+        {"name": "河北", "value": 8215}, {"name": "广东", "value": 12079}, {"name": "云南", "value": 7511},
+        {"name": "广西", "value": 6164}, {"name": "吉林", "value": 5127}, {"name": "江苏", "value": 12018},
+        {"name": "内蒙古", "value": 6273}, {"name": "辽宁", "value": 5763}, {"name": "安徽", "value": 7785},
+        {"name": "湖北", "value": 6816}, {"name": "山西", "value": 5865}, {"name": "浙江", "value": 15167},
+        {"name": "贵州", "value": 5650}, {"name": "福建", "value": 12952}, {"name": "山东", "value": 8293},
+        {"name": "黑龙江", "value": 4443}, {"name": "河南", "value": 5717}, {"name": "陕西", "value": 6587},
+        {"name": "新疆", "value": 4872}, {"name": "四川", "value": 7136}, {"name": "江西", "value": 7440},
+        {"name": "甘肃", "value": 6319}, {"name": "湖南", "value": 5807}, {"name": "青海", "value": 7140},
+        {"name": "西藏", "value": 10808}, {"name": "宁夏", "value": 4112},
+
+        {"name": "重庆", "value": 11869}, {"name": "北京", "value": 60701}, {"name": "天津", "value": 21927},
+        {"name": "上海", "value": 49569},
+        {"name": "海南", "value": 7689}
+];
+var option = {
+    title: [
+        {
+
+            //text: "全国房价热度图",
+            //subtext: "data from 安居客",
+            left: "center",
+            top: "auto",
+            textStyle: {
+                color: "#fff",
+                fontSize: 18
+            },
+            "subtextStyle": {
+                "fontSize": 12
+            }
+        }
+    ],
+    toolbox: {
+        show: true,
+        orient: "vertical",
+        left: "95%",
+        top: "center",
+        feature: {
+            saveAsImage: {
+                show: true,
+                title: "save as image"
+            },
+            /*myBack: {
+                show: true,
+                title: "返回",
+                icon: 'image://http://echarts.baidu.com/images/favicon.png',
+                onclick: function () {
+                    var map_level = {{ map_level|safe }};
+                    if (map_level == 2){
+                        window.location.href = '../';
+                    }
+                    else if (map_level == 3){
+                        window.location.href = './';
+                    }
+                }
+            },*/
+        },
+    },
+    series_id: 7858556,
+    tooltip: {
+        trigger: "item",
+        triggerOn: "mousemove|click",
+        axisPointer: {
+            type: "line"
+        },
+        textStyle: {
+            fontSize: 14
+        },
+        backgroundColor: "rgba(50,50,50,0.7)",
+        borderColor: "#333",
+        borderWidth: 0,
+        formatter: '{b}平均房价：{c}'
+    },
+    series: [
+        {
+            type: "map",
+            symbol: "circle",
+            label: {
+                normal: {
+                    show: true,
+                    position: "inside",
+                    textStyle: {
+                        fontSize: 12
+                    }
+                },
+                emphasis: {
+                    show: true,
+                    position: "inside",
+                    textStyle: {
+                        "fontSize": 16
+                    }
+                }
+            },
+            mapType: 'china',
+            data: Data,
+            roam: false,
+            showLegendSymbol: false,
+        }
+    ],
+    legend: [
+        {
+            data: [
+                ""
+            ],
+            selectedMode: "multiple",
+            show: true,
+            left: "center",
+            top: "top",
+            orient: "horizontal",
+            textStyle: {
+                fontSize: 12
+            }
+        }
+    ],
+    backgroundColor: "#404a59",
+    animation: true,
+    color: [
+        "#c23531",
+        "#2f4554",
+        "#61a0a8",
+        "#d48265",
+        "#749f83",
+        "#ca8622",
+        "#bda29a",
+        "#6e7074",
+        "#546570",
+        "#c4ccd3",
+        "#f05b72",
+        "#ef5b9c",
+        "#f47920",
+        "#905a3d",
+        "#fab27b",
+        "#2a5caa",
+        "#444693",
+        "#726930",
+        "#b2d235",
+        "#6d8346",
+        "#ac6767",
+        "#1d953f",
+        "#6950a1",
+        "#918597",
+        "#f6f5ec"
+    ],
+    visualMap: {
+        type: "continuous",
+        min: 4000,
+        max: 10000,
+        text: [
+            "high",
+            "low"
+        ],
+        textStyle: {
+            "color": "#fff"
+        },
+        inRange: {
+            color: [
+                "#50a3ba",
+                "#eac763",
+                "#d94e5d"
+            ]
+        },
+        calculable: true,
+        splitNumber: 5,
+        orient: "vertical",
+        left: "left",
+        top: "bottom",
+        showLabel: true
+    }
+};
+myChart.setOption(option);
+window.onresize = function(){
+             myChartContainer();
+             myChart.resize();
+        }
+/*myChart.on('click', function (params) {
+    var next_map = params.name.split("市")[0];
+    var map_level = 12;
+    if (map_level != 3){
+        window.location.href = next_map;
+    }
+})*/
+</script>
 
 <!--上面是增加Echarts的js代码-->
 <!-- //Smooth-Scrolling-JavaScript -->

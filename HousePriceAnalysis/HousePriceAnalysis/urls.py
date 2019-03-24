@@ -27,32 +27,33 @@ import PriceAnalysis.views as pv
 import waterflow.views as waterflowV
 
 urlpatterns = [
+    path('', mainV.main_html),
+    path('select/', mainV.selectCity, name="selectCity"),
     path('', include(('PriceAnalysis.urls', 'PriceAnalysis'), namespace='PriceAnalysis')),  # , namespace='lea
     #path('index/', pv.index),
     # path('', pv.index, name='index'),
     # path('show', pv.showHouse, name='showHouse'),  # base :
     # path('home', pv.homePage, name='homePage'),
-    path('main/', mainV.main_html),
-    path('newlogin/',mainV.new_login),#转到新的ajax登录页面
+    #path('main/', mainV.main_html),
+    path('newlogin',mainV.new_login, name="newlogin"),#转到新的ajax登录页面
     path('ajaxregister/',mainV.new_register),#转到新的ajax注册页面
     path('ajaxlogin',mainV.login),
-    path('index/',mainV.indexAddEcharts),
+    path('reg',mainV.ajaxregister),
+    path('logout/', mainV.logout),
+    #path('index/',mainV.indexAddEcharts),
     path('excellentHouse/',waterflowV.excellent_house),
     path('admin/', admin.site.urls),
-    path('reg',mainV.ajaxregister),
-
-    path('', include(('PriceAnalysis.urls', 'PriceAnalysis'), namespace='PriceAnalysis')),  # , namespace='lea
+    
 
     #path('index/', loginV.index),
-    path('login/', loginV.login),
-    path('logout/', loginV.logout),
+    path('login/', loginV.login), 
     path('register/', loginV.register),
     path('captcha/', include('captcha.urls')),
     path('map/', chartV.echart),
-    path('echarts/index/', chartV.index),
-    path('echarts/map/', chartV.getAll),
-    path('echarts/baidumap/',chartV.baiduMap),
+    #path('echarts/index/', chartV.index),
+    #path('echarts/map/', chartV.getAll),
+    path('echarts/baidumap/<str:locations>',chartV.baiduMap, name="baidumap"),
     path('admin/', admin.site.urls),
-
+    path('<str:location>/', mainV.index, name="index"), 
     #path('', pv.showHouse, name='showHouse', namespace='PriceAnalysis'),
 ]

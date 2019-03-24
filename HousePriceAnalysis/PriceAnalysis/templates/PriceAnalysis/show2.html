@@ -1,42 +1,154 @@
-{% extends "../basenav.html" %}
-{% block title %}
+
+
+{% extends "../login/base.html" %}
+
+
+
+    {% block title %}
         房价展示
     {% endblock title %}
+{% block header %}
+    <div class="jumbotron" style="padding:20">
+
+
+        <div class="panel panel-warning">
+
+            <nav class="navbar navbar-default" style="margin-bottom:0; height:70">
+              <div class="container-fluid" style="margin: 15 0 15 20" >
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header" >
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <div class="navbar-brand" style="font-size:25; padding:5 0 0 0">
+                        <div >
+                            唯家
+                        <span class="glyphicon glyphicon-home" aria-hidden="true" ></span>
+                        </div>
+
+                  </div>
+
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="margin-left:150; font-size:16">
+                  <ul class="nav navbar-nav">
+
+                      <li>
+                        <a href="#">
+                            <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> {{ pro }}
+                        </a>
+
+                    </li>
+
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                          城区选择 <span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu">
+                            {% for city in cities %}
+
+                            <li><a onclick="set_option('2019','{{ city|addslashes }} ')">{{ city }}</a></li>
+
+
+                             {% empty %}
+                                <li>出错了 >_< !!</li>
+                            {% endfor %}
+                            <li role="separator" class="divider"></li>
+                        </ul>
+                    </li>
+
+                      <li>
+                        <a href="#">
+                            地图展示 <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+                        </a>
+
+                    </li>
+                  </ul>
+                  <form class="navbar-form navbar-left" style="width:350">
+                    <div class="input-group">
+                      <input type="text" class="form-control" placeholder="输入地区看房价">
+                      <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">
+                            <span class="glyphicon glyphicon-search"></span>
+                            .
+                        </button>
+                      </span>
+                    </div><!-- /input-group -->
+                  </form>
+
+                </div><!-- /.navbar-collapse -->
+              </div><!-- /.container-fluid -->
+            </nav>
+
+        </div>
+
+
+    </div>
+{% endblock header %}
+
 {% block content %}
-<div class="panel panel-default" style="margin-top:100px;">
-    <div class="panel-body">
-        <table>
-            <tr>
-                <td >
-                    <div id="container" style="width: 900; height:500; margin:5 130 5 105 "></div>
-                </td>
-            </tr>
-        </table>
-      </div>
-          <div class="panel-heading">
-          <p style="text-align:center; bottom:15; font-size:20;" id="title">{{ title }}房价走势图
+    <h3></h3>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+          <p style="text-align:center; bottom:15; font-size:20" id="title">{{ title }}房价走势图
           </p>
           <p id="result"></p>
           <!--点击按钮 调用setOption函数，传递所查询年份参数，获取数据，-->
 
           <div class="btn-group " role="group" aria-label="..." style="left: 370;">
-              <button type="button" class="btn btn-info" onclick="set_option(2019)">2019</button>
-              <button type="button" class="btn btn-info" onclick="set_option(2018)">2018</button>
-              <button type="button" class="btn btn-info" onclick="set_option(2017)">2017</button>
-              <button type="button" class="btn btn-info" onclick="set_option(2016)">2016</button>
-              <button type="button" class="btn btn-info" onclick="set_option(2015)">2015</button>
-              <button type="button" class="btn btn-info" onclick="set_option(2014)">2014</button>
-              <button type="button" class="btn btn-info" onclick="set_option(2013)">2013</button>
-          </div>
-          </div>
-    </div>
-    <div class="panel panel-default" style="margin-top:80px;">
+              <button type="button" class="btn btn-default" onclick="set_option(2019)">2019</button>
+              <button type="button" class="btn btn-default" onclick="set_option(2018)">2018</button>
+              <button type="button" class="btn btn-default" onclick="set_option(2017)">2017</button>
+              <button type="button" class="btn btn-default" onclick="set_option(2016)">2016</button>
+              <button type="button" class="btn btn-default" onclick="set_option(2015)">2015</button>
+              <button type="button" class="btn btn-default" onclick="set_option(2014)">2014</button>
+              <button type="button" class="btn btn-default" onclick="set_option(2013)">2013</button>
 
+            </div>
+
+
+      </div>
       <div class="panel-body">
-          <div id="container2" style="height:500"></div>
-          <div class="panel-heading">
+        <table>
+            <tr>
+                <td >
+                    <div id="container" style="width: 900; height:500; margin:5 130 5 105 "></div>
+
+                </td>
+
+                <!--<td>-->
+                    <!--<div id="showinfo" style="font-size: 16px;font-weight: bold;">-->
+                    <!--<p>吴中2月二手房均价-->
+                        <!--<em style="color: #f60;font-style: normal; font-size: 20px; font-family:Microsoft YaHei;">-->
+                            <!--17379-->
+                        <!--</em>-->
+                        <!--元/m²-->
+                    <!--</p>-->
+                    <!--<p>吴中1月二手房均价-->
+                        <!--<em style="color: #f60;font-style: normal; font-size: 20px; font-family:Microsoft YaHei;">-->
+                            <!--17150-->
+                        <!--</em>-->
+                        <!--元/m²</p>-->
+                    <!--<p>环比上月上涨 1.32% ↑，同比去年同期上涨 18.47% ↑</p>-->
+                <!--</div>-->
+                <!--</td>-->
+            </tr>
+        </table>
+
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
           <p style="text-align:center; font-size:20" id="title2">苏州各区房价对比图</p>
       </div>
+      <div class="panel-body">
+          <div id="container2" style="height:500"></div>
             <script type="text/javascript">
 
 
@@ -242,16 +354,41 @@
                              }
                       });
                   }
-if (myChart.option && typeof myChart.option === "object") {
-myChart.setOption(myChart.option, true);
+
+
+
+if (option && typeof option === "object") {
+myChart.setOption(option, true);
 }
-if (myChart2.option && typeof myChart2.option === "object") {
-myChart2.setOption(myChart2.option, true);
+if (option && typeof option === "object") {
+myChart2.setOption(option, true);
 }
 
-</script>
+
+       </script>
+            <script type="text/javascript">
+
+
+
+
+                //var data = [220, 182, 191, 234, 290, 330, 310, 123, 442];
+
+            </script>
+
+
       </div>
     </div>
+    <ul>
+        <!--view返回数据集 pricehistory-->
+
+        <ul>
+             <li>展示信息</li>
+
+        </ul>
+
+
+</ul>
+
 {% endblock content %}
 
 

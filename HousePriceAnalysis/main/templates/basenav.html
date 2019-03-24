@@ -1,0 +1,95 @@
+<html>
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <!-- Fonts -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Montserrat:400,700"	   type="text/css" media="all">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500" type="text/css" media="all">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Yatra+One"			   type="text/css" media="all">
+<!-- //Fonts -->
+    <!-- Font-Awesome-File-Links -->
+<!-- CSS --> <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" 	 type="text/css" media="all">
+<!-- TTF --> <link rel="stylesheet" href="{% static 'fonts/fontawesome-webfont.ttf' %}" type="text/css" media="all">
+<!-- //Font-Awesome-File-Links -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"			type="text/css" media="all">
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+    {% if request.session.map %}
+    <!-- 引入Echarts文件，使用static关键字-->
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+       <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=bYDVcpClsHGONyldgXqPxM6q5VnKOp31"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+
+  {% endif %}
+    <title>{% block title %}唯家{% endblock %}</title>
+    {% block css %}{% endblock %}
+</head>
+<body>
+	<div class="w3lsnavigation">
+			<nav class="navbar navbar-inverse agilehover-effect wthreeeffect navbar-default">
+
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<!-- Logo -->
+					<div class="logo">
+						<a class="navbar-brand logo-w3l button" href="index.html">WE  HOME</a>
+					</div>
+					<!-- //Logo -->
+				</div>
+
+				<div id="navbar" class="navbar-collapse navbar-right collapse">
+					<ul class="nav navbar-nav navbar-right cross-effect" id="cross-effect">
+						<li><a href="/" data-link-alt="首页">首页</a></li>
+						<li><a href="{% url 'PriceAnalysis:showHouse' '江苏'%}" data-link-alt="城市">城市</a></li>
+						<li><a  href="/excellentHouse" data-link-alt="我们">看房</a></li>
+                        {% if request.session.islogin %}
+                        <li><a href="#" >{{ request.session.username }}</a></li>
+                        <li><a href="/logout" data-link-alt="注销" >注销</a></li>
+                        {% else %}
+                        <li><a href="/newlogin" data-link-alt="登录" >登录</a></li>
+                        {% endif %}
+						<li><a href="/ajaxregister" data-link-alt="注册">注册</a></li>
+					</ul>
+				</div><!-- //Navbar-Collapse -->
+
+			</nav>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="container">
+                <div class="page-header">
+                    {% block header %}{% endblock header %}
+                </div>
+                <div class="page-content">
+                    {% block content %}{% endblock content %}
+                </div>
+    </div>
+</body>
+</html>
