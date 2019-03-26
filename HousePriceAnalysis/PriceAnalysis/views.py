@@ -140,12 +140,13 @@ def queryHouse(request):
     price = request.GET.get("price") or '0-1000000'
     house_type = request.GET.get("type")
     area = request.GET.get("area") or '0-10000'
-
+    search = request.GET.get("search") or ' '
+    page = request.GET.get("page") or 0
     # name 后面多了一个" " ??? 很迷
 
     #print(name)
-    print(price)
-    print(len(price))
+    #print(price)
+    print(page)
 
     price_list = price.split('-')
     area_list = area.split('-')
@@ -156,16 +157,16 @@ def queryHouse(request):
         {'area': name[:-1],
          '房屋户型': {'$regex': house_type},
          'price': {'$gt': int(price_list[0]), '$lt': int(price_list[1])},
-         '建筑面积': {'$gt': int(area_list[0]), '$lt': int(area_list[1])}}
-    ).limit(10)  #
+         '建筑面积': {'$gt': int(area_list[0]), '$lt': int(area_list[1])},
+         'title': {'$regex': search}}
+    ).skip(int(page)).limit(10)  #
     data_list = []  # 空集合 传递给views 包含前10条信息
 
     for item in data:
-
         data_list.append(
             [item['title'], item['area'], int(item['price']), item['communityName'], item['房屋户型'], item['建筑面积'],
              item['房屋朝向'], item['装修情况'], item['所在楼层']])
-
+    print(len(data_list))
     context = {'houseData': data_list, 'count': len(data_list)}
 
     return JsonResponse(context)

@@ -1,4 +1,3 @@
-
 {% extends "../login/base.html" %}
 
 
@@ -67,7 +66,7 @@
 
 <div id="header">
 
-<div class="site-search">
+<div class="site-search" >
      <div class="navbar-brand" style="font-size:25; padding:5 0 0 0">
                         <div >
                             唯家
@@ -88,8 +87,8 @@
 </div>
 <div class="search-box" id="j-search">
 	<form class="search-form" method="GET" action="">
-        <input class="input-search" type="text" name="kw" maxlength="100" autocomplete="off"  placeholder="请输入楼盘名称、地址或房源特征">
-		<input class="btn-search" type="button" value="搜索" id="search-btn">
+        <input class="input-search" type="text" id="kw" maxlength="100" autocomplete="off"  placeholder="请输入楼盘名称、地址或房源特征">
+		<input class="btn-search" type="button" value="搜索" id="search-btn" onclick="show()">
 
         <!-- 阻止enter键自动提交表单 -->
         <input type="text" name="" style="display: none">
@@ -101,7 +100,7 @@
 <!-- ===== sub-nav-mod Starts used =====-->
 
 </div>
-<div id="container">
+<div id="container"style="background-color:#f9f9f9" >
     <div class="filter-nav">
         <div class="filter-mod" id="bubble_target">
             <div class="filter-item" >
@@ -181,10 +180,9 @@
         <div class="condition">
             <a class="light" href="#"><span>默认排序</span></a>
             <a class="" href="#" rel="nofollow"><span>价格</span><i class="list-ico defult-down"></i></a>
-            <a class="" href="#" rel="nofollow"><span>开盘时间</span><i class="list-ico defult-down"></i></a>
         </div>
             <span class="result">
-                共有<em>{{ count }}</em>个符合要求的苏州楼盘</h1>
+                共有<em id="count">{{ count }}</em>个符合要求的苏州楼盘</h1>
             </span>
     </div>
 </div>
@@ -219,7 +217,7 @@
                         </div>
                     </a>
             </div>
-            <a class="favor-pos">
+            <a class="favor-pos" style="margin-right:20">
                 <p class="price">单价<span>{{ data.2 }}</span>元/㎡</p>
             </a>
             </div>
@@ -230,17 +228,27 @@
                     </div>
                     <!--房子展示页-->
 </div>
-
+             <div id="select-page" class="pagination" style="margin:30 0 30 400">
+                            <span class="prev-page stat-disable">上一页</span>
+                             <a class="curr-page" onclick="select(0,4)">1</a>
+                             <a onclick="select(1,4)">2</a>
+                             <a onclick="select(2,4)">3</a>
+                             <a onclick="select(3,4)">4</a>
+                             <a onclick="select(4,4)">5</a>
+                             <a class="next-page next-link">下一页</a>
+            </div>
 
             <script type="text/javascript">
-
                     <!--document.getElementById("city").value='吴江';-->
                     <!--document.getElementById("price").value=0;-->
                     <!--document.getElementById("house_type").value='';-->
                     <!--document.getElementById("area").value='';-->
 
-                    function select(str,flag){
+                     function show(){
+                        select('0-1000000',1);
+                    };
 
+                    function select(str,flag){
                         if (flag==0)
                             document.getElementById("city").value=str;
                         if (flag==1)
@@ -249,20 +257,22 @@
                             document.getElementById("house_type").value=str;
                         if (flag==3)
                             document.getElementById("area").value=str;
-
+                        if  (flag == 4)
+                            var page = str;
                     var array = new Array();
                     array[0]=document.getElementById("city").value;
                     array[1]=document.getElementById("price").value;
                     array[2]=document.getElementById("house_type").value;
                     array[3]=document.getElementById("area").value;
-
                     // 根据参数去数据库中查询
-
                     //alert(array[0]+array[1]+array[2]+array[3]);
-                    query(array[0],array[1],array[2],array[3]);
+                    query(array[0],array[1],array[2],array[3], page);
                     };
+                    function query(cities, prices, types, areas, pages){
+                                //alert(pages);
+                                // 直接从搜索框中获取值
+                                var searchs = document.getElementById("kw").value;
 
-                    function query(cities, prices, types, areas){
 
                                 $.ajax({
                                         url:"/queryHouse",
@@ -271,12 +281,14 @@
                                              city: cities,
                                              price: prices,
                                              type:types,
-                                             area:areas
+                                             area:areas,
+                                             search: searchs,
+                                             page : pages
                                         },
-
                                          success:function(data){
-                                                // 展示页面
 
+                                                document.getElementById("count").innerHTML = data.count
+                                                // 展示页面
                                                  var houseDivRemove=document.getElementById("houseInfo").innerHTML = "";//清空div内容
                                                 //一下为查询数据展示
                                                 var divContent='';
@@ -295,8 +307,6 @@
                 }
                                        });
                     }
-
-
                                 (function() {
                     var j = document.createElement('script'); j.async = true;j.src = '//ifx.anjuke.com/s?p=943&c=19&o=1&f=rec_loupanlist&st=ajk';
                     var k = document.getElementsByTagName('head')[0]; if(k)k.insertBefore(j,k.lastChild);
@@ -325,6 +335,12 @@ $(document).ready(function(){
     $("#houseArea>a").click(function(){
   $("#houseArea>a").css({"color":"black"});
   $(this).css({"color":"red"});
+   });
+
+
+    $("#select-page>a").click(function(){
+  $("a").removeClass("curr-page");
+  $(this).addClass("curr-page");
    });
 });
 </script>
