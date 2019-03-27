@@ -1,15 +1,15 @@
 /*my  div style */
 .echartdiv{
         position: relative;
-        width: 100%;
-        height:800px;
+        width: 90%;
+        height:700px;
         border:1px solid red;
         margin-top:70px;
     }
 .echartdiv2{
         position: relative;
-        width: 100%;
-        height:800px;
+        width: 90%;
+        height:700px;
         border:1px solid red;
         margin-top:70px;
     }

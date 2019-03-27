@@ -14,6 +14,7 @@
 <!-- TTF --> <link rel="stylesheet" href="{% static 'fonts/fontawesome-webfont.ttf' %}" type="text/css" media="all">
 <!-- //Font-Awesome-File-Links -->
     <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/style.css' %}"			type="text/css" media="all">
     <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
@@ -30,7 +31,8 @@
        <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=bYDVcpClsHGONyldgXqPxM6q5VnKOp31"></script>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
-
+       <!-- <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=j8KuxCvLuzdrVmN43DloULXghzqNCOy2"></script> -->        
+       <script type="text/javascript" src="http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js"></script>
   {% endif %}
     <title>{% block title %}唯家{% endblock %}</title>
     {% block css %}{% endblock %}
@@ -64,24 +66,13 @@
                         <li><a href="/logout" data-link-alt="注销" >注销</a></li>
                         {% else %}
                         <li><a href="/newlogin" data-link-alt="登录" >登录</a></li>
-                        {% endif %}
-						<li><a href="/ajaxregister" data-link-alt="注册">注册</a></li>
+                        <li><a href="/ajaxregister" data-link-alt="注册">注册</a></li>
+                        {% endif %}						
 					</ul>
 				</div><!-- //Navbar-Collapse -->
 
 			</nav>
         </div>
-
-
-
-
-
-
-
-
-
-
-
 
 
     <div class="container">

@@ -3,15 +3,12 @@
         房价展示
     {% endblock title %}
 {% block content %}
-<div class="panel panel-default" style="margin-top:100px;">
+<div class="panel panel-default" style="margin-top:30px;">
     <div class="panel-body">
         <table>
             <tr>
                 <td >
                     <div id="container" style="width: 900; height:500; margin:5 130 5 105 "></div>
-
-
-<!-- 删掉的部分-->
 
           <div class="panel-heading">
           <p style="text-align:center; bottom:15; font-size:20;" id="title">{{ title }}房价走势图
@@ -20,6 +17,7 @@
           <!--点击按钮 调用setOption函数，传递所查询年份参数，获取数据，-->
 
           <div class="btn-group " role="group" aria-label="..." style="left: 370;">
+              <button type="button" class="btn btn-info" onclick="set_option_forecast(2019)" style="margin-right: 10px">房价预测</button>
               <button type="button" class="btn btn-info" onclick="set_option(2019)">2019</button>
               <button type="button" class="btn btn-info" onclick="set_option(2018)">2018</button>
               <button type="button" class="btn btn-info" onclick="set_option(2017)">2017</button>
@@ -27,10 +25,11 @@
               <button type="button" class="btn btn-info" onclick="set_option(2015)">2015</button>
               <button type="button" class="btn btn-info" onclick="set_option(2014)">2014</button>
               <button type="button" class="btn btn-info" onclick="set_option(2013)">2013</button>
+
           </div>
           </div>
     </div>
-    <div class="panel panel-default" style="margin-top:80px;">
+    <div class="panel panel-default" style="margin-top:50px;">
 
       <div class="panel-body"></div>
         <!--jcy分支的内容-->
@@ -74,10 +73,10 @@
 
                         mysource[i]={
                             month: areas[i],  // 分成 i 个区
-                            '一季度': (mydata[i][0]+mydata[i][1]+mydata[i][2])/3,
-                            '二季度': (mydata[i][3]+mydata[i][4]+mydata[i][5])/3,
-                            '三季度': (mydata[i][6]+mydata[i][7]+mydata[i][8])/3,
-                            '四季度': (mydata[i][9]+mydata[i][10]+mydata[i][11])/3
+                            '一季度': ((mydata[i][0]+mydata[i][1]+mydata[i][2])/3).toFixed(0), //保留小数点后0位
+                            '二季度': ((mydata[i][3]+mydata[i][4]+mydata[i][5])/3).toFixed(0),
+                            '三季度': ((mydata[i][6]+mydata[i][7]+mydata[i][8])/3).toFixed(0),
+                            '四季度': ((mydata[i][9]+mydata[i][10]+mydata[i][11])/3).toFixed(0)
 
                         };
 
@@ -116,6 +115,43 @@
                             type: 'value',
                             scale: true   //刻度自适应
                         },
+                        graphic: [
+                                        {
+                                            type: 'image',
+                                            id: 'logo',
+                                            right: 20,
+                                            top: 20,
+                                            z: -10,
+                                            bounding: 'raw',
+                                            origin: [75, 75],
+                                            style: {
+                                                image: 'http://echarts.baidu.com/images/favicon.png',
+                                                width: 150,
+                                                height: 150,
+                                                opacity: 0.4
+                                            }
+                                        }, {
+                                            type: 'group',
+                                            //rotation: Math.PI / 4,
+                                            bounding: 'raw',
+                                            right: 110,
+                                            bottom: 310,
+                                            z: 100,
+                                            children: [                                               
+                                                {
+                                                    type: 'text',
+                                                    left: 'center',
+                                                    top: 'center',
+                                                    z: 100,
+                                                    style: {
+                                                        fill: '#000',
+                                                        text: 'WE HOME',
+                                                        font: 'bold 26px Yatra One'
+                                                    }
+                                                }
+                                            ]
+                                        },                                                                 
+                                    ],
                         series: myseries
                     });
 
@@ -146,6 +182,43 @@
                         yAxis: {},
                         // Declare several bar series, each will be mapped
                         // to a column of dataset.source by default.
+                        graphic: [
+                                        {
+                                            type: 'image',
+                                            id: 'logo',
+                                            right: 20,
+                                            top: 20,
+                                            z: -10,
+                                            bounding: 'raw',
+                                            origin: [75, 75],
+                                            style: {
+                                                image: 'http://echarts.baidu.com/images/favicon.png',
+                                                width: 150,
+                                                height: 150,
+                                                opacity: 0.4
+                                            }
+                                        }, {
+                                            type: 'group',
+                                            //rotation: Math.PI / 4,
+                                            bounding: 'raw',
+                                            right: 110,
+                                            bottom: 310,
+                                            z: 100,
+                                            children: [                                               
+                                                {
+                                                    type: 'text',
+                                                    left: 'center',
+                                                    top: 'center',
+                                                    z: 100,
+                                                    style: {
+                                                        fill: '#000',
+                                                        text: 'WE HOME',
+                                                        font: 'bold 26px Yatra One'
+                                                    }
+                                                }
+                                            ]
+                                        },                                                       
+                                    ],
                         series: [
                             {type: 'bar'},
                             {type: 'bar'},
@@ -155,7 +228,76 @@
                         ]
                     });
 
-
+                //预测数据展示
+    function set_option_forecast(years='2019',cities='')
+    {
+        //点击按钮和下拉框会调用Ajax函数， 下拉框可以不传值，按钮只传一个值
+        // 异步刷新 调用views.showForecast函数，传入year 返回data 该年份各地区的历史房价
+        if (cities=='')  //只改变时间 不传城市 获取上次
+        {
+            cities = document.getElementById("title2").value;
+        }
+        $.ajax({
+            url:"/forecastPrice",
+            type:"GET",
+            data:{
+                year: years,
+                city: cities,
+            },
+            success:function(data){//data 是从后台返回的值， 包括地区areas， 房价
+                document.getElementById("title").innerHTML=years+"年房价走势预测图";
+                document.getElementById("title").value=years;
+                var mydata = new Array()  //数组存放每个地区某一年的价格
+                var myseries = new Array()
+                var print_info = '';
+                if (data.areas.length == 0) {
+                    print_info = '无法查询到数据'
+                }
+                for (var i=0; i < data.areas.length; i++) //注意 data.
+                {
+                    mydata[i]= data.info_dict[data.areas[i]];
+                    myseries[i] = {
+                        type: 'effectScatter',
+                        coordinateSystem: 'cartesian2d',
+                        showEffectOn: 'render',
+                        hoverAnimation: true,
+                        symbol:'circule',
+                        itemStyle: {
+                            normal: {
+                                shadowBlur: 10,
+                                shadowColor:'rgba(0, 0, 0, 0.5)'
+                            }
+                        },
+                        zlevel: 1,
+                        name: data.areas[i],
+                        type:'line',
+                        smooth: true, // 曲线平滑
+                        data:[mydata[i][0],mydata[i][1],mydata[i][2],{value:mydata[i][3],name:'4月预测值',symbolSize:20},
+                            {value:mydata[i][4],name:'5月预测值',symbolSize:20},{value:mydata[i][5],name:'6月预测值',symbolSize:20}]
+                    };
+                }
+                //console.log(myseries);
+                //console.log(mydata);
+                var option = {
+                    title: {text: print_info,},
+                    legend: {
+                        selectedMode: 'single', //单选
+                        data:  data.areas,
+                        inactiveColor:'#a7a7a7',
+                        itemWidth: 50,
+                        itemHeight: 35,
+                    },
+                    yAxis: {
+                        type: 'value',
+                        scale: true   //刻度自适应
+                    },
+                    series: myseries,
+                }
+                myChart.setOption(option);
+            }
+        });
+    }
+    
                   function set_option(years='2019',cities='')
                   {
 
@@ -203,11 +345,10 @@
                                         //alert(mydata[i])
                                         mysource[i]={
                                             month: data.areas[i],  // 分成 i 个区
-                                            '一季度': (mydata[i][0]+mydata[i][1]+mydata[i][2])/3,
-                                            '二季度': (mydata[i][3]+mydata[i][4]+mydata[i][5])/3,
-                                            '三季度': (mydata[i][6]+mydata[i][7]+mydata[i][8])/3,
-                                            '四季度': (mydata[i][9]+mydata[i][10]+mydata[i][11])/3
-
+                                            '一季度': ((mydata[i][0]+mydata[i][1]+mydata[i][2])/3).toFixed(0), //保留小数点后0位
+                                            '二季度': ((mydata[i][3]+mydata[i][4]+mydata[i][5])/3).toFixed(0),
+                                            '三季度': ((mydata[i][6]+mydata[i][7]+mydata[i][8])/3).toFixed(0),
+                                            '四季度': ((mydata[i][9]+mydata[i][10]+mydata[i][11])/3).toFixed(0)
                                         };
 
                                     }

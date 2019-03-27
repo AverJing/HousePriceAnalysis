@@ -4,6 +4,11 @@ body {
 	background: #FFF;
 	font-family: 'Roboto', sans-serif;
 	height:100%;/*自己加的测试效果可以删除*/
+
+	background:url(./images/background.jpg)  no-repeat center center;
+    background-size:cover;
+    background-attachment:fixed;
+    background-color:#CCCCCC;
 }
 
 body a {
@@ -93,6 +98,7 @@ a:focus, a:hover {
 	.navbar-inverse {
 		background-color: rgba(0, 0, 0, 0.75);
 		border: none;
+		margin-top: 0;
 		margin-bottom: 0;
 		padding: 10px 0;
 		border-radius: 0;
@@ -282,13 +288,13 @@ a:focus, a:hover {
 /*-- About --*/
 
 .agileabout {
-	padding: 100px 0;
+	padding: 20px 0;
 }
 
 .agileabout h1, .offer h3, .wthreeservices h3, .w3portfolioaits h3, .aitscontactw3l h3 {
-	font-size: 50px;
-	font-weight: 700;
-	margin-bottom: 50px;
+	font-size: 20px;
+	font-weight: 200;
+	margin-bottom: 10px;
 	color: #b28159;
 }
 
@@ -317,6 +323,24 @@ a:focus, a:hover {
 	color: #777;
 	font-size: 15px;
 	line-height: 30px;
+}
+
+.home-nav {
+	text-align: center;
+}
+
+.home-nav ul li {
+	display: inline-block;
+	padding: 0 25px;
+	border-right: solid 1px #939090;
+	border-right-style: dashed;
+}
+
+.home-nav ul li a {
+	color: #D6D6D6;
+}
+.home-nav ul li a:hover{
+	color: #12FFB9;
 }
 
 /*-- //About --*/

@@ -27,7 +27,7 @@ import PriceAnalysis.views as pv
 import waterflow.views as waterflowV
 
 urlpatterns = [
-    path('', mainV.main_html),
+    path('', mainV.index),
     path('select/', mainV.selectCity, name="selectCity"),
     path('', include(('PriceAnalysis.urls', 'PriceAnalysis'), namespace='PriceAnalysis')),  # , namespace='lea
     #path('index/', pv.index),

@@ -1,23 +1,16 @@
-<!doctype html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-    <style type="text/css">
-	    body,html,#map {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
-	</style>
-    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=j8KuxCvLuzdrVmN43DloULXghzqNCOy2"></script>
-    <script type="text/javascript" src="http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js"></script>
+{% extends "../basenav.html" %}
+{% load static %}
 
-    {% load static %}
+{% block content %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<style type="text/css">
+    #map {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}label{max-width:none;}
+</style>
+ 
 
-    <title>房价地图</title>
-</head>
-
-<body>
-    <div id="map"></div>
-</body>
-</html>
+<div id="map"></div>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 <script type="text/javascript">
     var conf = {
         minZoomLevel: 8,//最小缩放级数
@@ -95,6 +88,7 @@
         area.housecount = 0;//区域楼盘数量
         area.bubble = void 0;//区域显示气泡
         area.markers = [];//区域楼盘显示标记列表
+        area.polygon = void 0;
         finaldata.push(area);
     }
 
@@ -179,9 +173,12 @@
         }
 
         var bubble = new BMap.Label(
-            '<p style="font-size: 14px;' +
-            'margin-top: 20px">' + finaldata[i].name + '</p>' +
-            '<p>均价：' + avg_price + '</p>', {
+            '<div class="bubble" data-id="' + i + '">' +
+            '   <p style="font-size: 14px;' +
+            '   margin-top: 20px">' + finaldata[i].name + '</p>' +
+            '   <p>均价：' + avg_price + '</p>' +
+            '</div>'
+            , {
                 position: new BMap.Point(
                     finaldata[i].maxlng/2+finaldata[i].minlng/2, finaldata[i].maxlat/2+finaldata[i].minlat/2
                 ),
@@ -195,24 +192,128 @@
             backgroundColor: '#115599',
             width: '90px',
             height: '90px',
+            left:'0px',
             cursor: "pointer"
-        });
-        bubble.addEventListener('mouseover', function () {//鼠标停留监听
-            this.setStyle({
-                backgroundColor: '#cc3344'
-            });
-        });
-        bubble.addEventListener('mouseout', function () {//鼠标离开监听
-            this.setStyle({
-                backgroundColor: '#115599'
-            });
-        });
-        bubble.addEventListener('mouseup', function () {//鼠标点击监听
-            baidumap.centerAndZoom(this.getPosition(), conf.divideZoomLevel+1);
         });
         baidumap.addOverlay(bubble);
         finaldata[i].bubble = bubble;
     }
+
+    var boundary = new BMap.Boundary();
+    for (var i = 0;i < areas.length;i++) {
+        (function(areaName) {
+            boundary.get(areaName, function (rs) {
+                console.info(areaName);
+                console.info(rs);
+                var index = 0;
+                for (;index < finaldata.length;++index){
+                    if (finaldata[index].name == areaName)break;
+                }
+                console.info(index);
+                if (rs.boundaries.length == 0){
+                    finaldata[index].polygon = null;
+                }
+                else{
+                    var ply = new BMap.Polygon(rs.boundaries[0],
+                        {
+                            strokeWeight: 2,
+                            strokeColor: "#115599",
+                            fillColor: "#115599",
+                            fillOpacity: .2
+                        }); //建立多边形覆盖物
+                        baidumap.addOverlay(ply);  //添加覆盖物
+                    ply.hide();
+                    finaldata[index].polygon = ply;
+                }
+
+                if (index == finaldata.length-1){
+                    addPolygon();
+                }
+            });
+        })(finaldata[i].name)
+
+    }
+    function addPolygon() {
+        for (var i = 0;i < finaldata.length;++i){
+            finaldata[i].bubble.addEventListener('mouseover', function () {//鼠标停留监听
+                this.setStyle({
+                    zIndex: 999,
+                    backgroundColor: '#cc3344'
+                });
+                var index = $(this.V).children(".bubble").data("id");
+                finaldata[index].polygon.show();
+            });
+            finaldata[i].bubble.addEventListener('mouseout', function () {//鼠标离开监听
+                this.setStyle({
+                    zIndex: 2,
+                    backgroundColor: '#115599'
+                });
+                var index = $(this.V).children(".bubble").data("id");
+                finaldata[index].polygon.hide();
+            });
+            finaldata[i].bubble.addEventListener('mouseup', function () {//鼠标点击监听
+                baidumap.centerAndZoom(this.getPosition(), conf.divideZoomLevel+1);
+            });
+        }
+    }
+    var boundary = new BMap.Boundary();
+    for (var i = 0;i < areas.length;i++) {
+        (function(areaName) {
+            boundary.get(areaName, function (rs) {
+                console.info(areaName);
+                console.info(rs);
+                var index = 0;
+                for (;index < finaldata.length;++index){
+                    if (finaldata[index].name == areaName)break;
+                }
+                console.info(index);
+                if (rs.boundaries.length == 0){
+                    finaldata[index].polygon = null;
+                }
+                else{
+                    var ply = new BMap.Polygon(rs.boundaries[0],
+                        {
+                            strokeWeight: 2,
+                            strokeColor: "#115599",
+                            fillColor: "#115599",
+                            fillOpacity: .2
+                        }); //建立多边形覆盖物
+                        baidumap.addOverlay(ply);  //添加覆盖物
+                    ply.hide();
+                    finaldata[index].polygon = ply;
+                }
+
+                if (index == finaldata.length-1){
+                    addPolygon();
+                }
+            });
+        })(finaldata[i].name)
+
+    }
+    function addPolygon() {
+        for (var i = 0;i < finaldata.length;++i){
+            finaldata[i].bubble.addEventListener('mouseover', function () {//鼠标停留监听
+                this.setStyle({
+                    zIndex: 999,
+                    backgroundColor: '#cc3344'
+                });
+                var index = $(this.V).children(".bubble").data("id");
+                finaldata[index].polygon.show();
+            });
+            finaldata[i].bubble.addEventListener('mouseout', function () {//鼠标离开监听
+                this.setStyle({
+                    zIndex: 2,
+                    backgroundColor: '#115599'
+                });
+                var index = $(this.V).children(".bubble").data("id");
+                finaldata[index].polygon.hide();
+            });
+            finaldata[i].bubble.addEventListener('mouseup', function () {//鼠标点击监听
+                baidumap.centerAndZoom(this.getPosition(), conf.divideZoomLevel+1);
+            });
+        }
+    }
+
 /*
     //生成热度图
     heatmapOverlay = new BMapLib.HeatmapOverlay({"radius":40});
@@ -316,3 +417,5 @@
         }
     }
 </script>
+
+{% endblock content %}

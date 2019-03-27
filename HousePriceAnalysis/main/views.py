@@ -1,10 +1,25 @@
 from django.shortcuts import render,redirect
 from django.http import JsonResponse
 from main.models import User
+import json
+import requests
 # Create your views here.
-def index(request, location="苏州"):
-    print(location)
-    return render(request,'index.html', {'location':location})
+def index(request, location=""):
+    ip = request.META['REMOTE_ADDR']
+    url = "http://whois.pconline.com.cn/ipJson.jsp?ip=%s&json=true" % ip
+    a = requests.get(url=url)
+    info = json.loads(a.text)
+    result = '苏州'
+    try:
+        if info["city"] != '':
+            result = info["city"].split('市')[0]
+    except:
+        pass
+
+    if location != "":
+        return render(request,'index.html', {'location':location})
+    else:
+        return render(request,'index.html', {'location':result})
 
 def selectCity(request):
     return render(request, 'cityTest.html')
@@ -26,7 +41,6 @@ def login(request):
     try:
         user = User.objects.get(name=username)
     except:
-
         return JsonResponse({'res': 0})
 
     if user.password == password:

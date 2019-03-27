@@ -64,8 +64,8 @@
                         <li><a href="/logout" data-link-alt="注销" >注销</a></li>
                         {% else %}
                         <li><a href="{% url 'newlogin' %}" data-link-alt="登录" >登录</a></li>
+                        <li><a href="/ajaxregister" data-link-alt="注册">注册</a></li>
                         {% endif %}
-						<li><a href="/ajaxregister" data-link-alt="注册">注册</a></li>
 					</ul>
 				</div><!-- //Navbar-Collapse -->
 
@@ -115,7 +115,19 @@
 	<div class="agileabout" id="agileabout">
 		<div class="container">
 
-			<h1>About Us</h1>
+            <div class="home-nav">
+                <ul>
+                    <li>
+                        <a href="{% url 'PriceAnalysis:index' '北京' %}"><h1>北京</h1></a>
+                    </li>
+                    <li>
+                        <a href="{% url 'PriceAnalysis:index' '上海' %}"><h1>上海</h1></a>
+                    </li>
+                    <li>
+                        <a href="{% url 'PriceAnalysis:index' '深圳' %}"><h1>深圳</h1></a>
+                    </li>
+                </ul>
+            </div>
 
 			<div class="col-md-6 agileabout-grid agileabout-grid-1">
 				<h2>Lorem Ipsum <span>Couch</span></h2>
@@ -166,7 +178,7 @@
 				jQuery(document).ready(function($) {
 					$(".scroll").click(function(event){
 						event.preventDefault();
-						$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+						$('html,body').animate({scrollTop:$(this.hash).offset().top},500);
 					});
 				});
 			</script>
@@ -177,7 +189,7 @@
         var dom = document.getElementById("container3");
         var myChartContainer = function () {
             dom.style.width = window.innerWidth+'px';
-            dom.style.height = window.innerHeight+'px';
+            dom.style.height = window.innerHeight * 0.8+'px';
         };
         myChartContainer();
         var myChart = echarts.init(dom);
@@ -791,7 +803,7 @@ option = {
         var dom = document.getElementById("container2");
         var myChartContainer = function () {
             dom.style.width = window.innerWidth+'px';
-            dom.style.height = window.innerHeight+'px';
+            dom.style.height = window.innerHeight * 0.8+'px';
         };
         myChartContainer();
         var myChart = echarts.init(dom);
@@ -1230,6 +1242,7 @@ option = {
     geo: {
         map: 'china',
         roam:false, //地图可以放大缩小
+        zoom: 1.2,
         label: {
             emphasis: {
                 show: false
@@ -1295,7 +1308,7 @@ option = {
         var dom = document.getElementById('container4');
         var myChartContainer = function () {
             dom.style.width = window.innerWidth+'px';
-            dom.style.height = window.innerHeight+'px';
+            dom.style.height = window.innerHeight * 0.8+'px';
         };
         myChartContainer();
         var myChart = echarts.init(dom, 'light', {renderer: 'canvas'});
@@ -1395,6 +1408,7 @@ var option = {
             mapType: 'china',
             data: Data,
             roam: false,
+            zoom:1.2,
             showLegendSymbol: false,
         }
     ],
