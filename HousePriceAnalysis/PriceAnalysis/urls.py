@@ -16,4 +16,7 @@ urlpatterns = [
     path('historyPrice/', views.showHouse3, name='showHouse3'),
     path('forecastPrice/',views.showForecast,name = 'showForecast'),
     path('queryHouse/', views.queryHouse, name='queryHouse'),
+   
+    path('pricepredict/<str:city>', views.pricepredict, name="pricePredict"),
+    path('predict/', views.predict, name='predict'),
 ]

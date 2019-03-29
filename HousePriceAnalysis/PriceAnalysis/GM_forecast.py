@@ -6,6 +6,7 @@ import math
 def level_check(data):
     # 原始数据级比校验
     n = len(data)
+    #print(n)
     grade_ratio = []
     for i in range(len(data)):
         if (i < n - 1):
@@ -27,7 +28,7 @@ def level_check(data):
 def data_handle(data,c):
     #print('平移处理',c)
     for i in range(len(data)):
-        data[i] = data[i]+c
+        data[i] = data[i]+c*200
     if level_check(data):
         return #函数出口
     else:
@@ -90,7 +91,7 @@ def forecast(data,c):
     s22 /= n
 
     #求后验差比值:残差方差/原始数据方差
-    C = s22 / s12
+    #C = s22 / s12
     """
     指标C是后验差检验的两个重要指标，指标越小越好，C越小
     表示s12大而s22小，s12大表示原始数据方差大，即原始数据离散程度大
@@ -106,27 +107,27 @@ def forecast(data,c):
             cout = cout+1
         else:
             cout = cout
-    P = cout / n
+    #P = cout / n
     """
        指标P越大越好，P越大，残差与残差平均值之差小于给定值0.6754的点较多，即拟合值（预测值）分布比较均匀
     """
     #print(C,P)
-    if (C <= 0.35 and P >= 0.95):
-        #预测精度为一级
-        print('预测精度为一级(好)：')
-    elif (C <=0.5 and P >= 0.8 ):
-        print('预测精度为二级(合格)：')
-    elif (C <= 0.65 and P >= 0.7):
-        print('预测精度为三级(勉强)：')
-    else:
-        print('预测精度为四级(不合格)：')
+    # if (C <= 0.35 and P >= 0.95):
+    #     #预测精度为一级
+    #     print('预测精度为一级(好)：')
+    # elif (C <=0.5 and P >= 0.8 ):
+    #     print('预测精度为二级(合格)：')
+    # elif (C <= 0.65 and P >= 0.7):
+    #     print('预测精度为三级(勉强)：')
+    # else:
+    #     print('预测精度为四级(不合格)：')
 
     m = 3  # 预测的个数
-    print('往后3个月的预测值为：')
+    #print('往后3个月的预测值为：')
     res = np.zeros(m)
     for i in range(0, m):
         res[i] = round((X0[0] - u / a) * (1 - math.exp(a)) * math.exp(-a * (i + n))-c,0) # 返回数据，不保留小数
-        print(res[i])
+        #print(res[i])
     return res
 
 

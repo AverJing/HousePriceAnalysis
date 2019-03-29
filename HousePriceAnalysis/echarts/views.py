@@ -106,7 +106,7 @@ def getlnglat(address):
     temp = json.loads(res) #对json数据进行解析
     return temp 
 
-def baiduMap(request, locations="南京"):
+def baiduMap(request, locations="南京", base=False):
     # 查询所有的数据
     # inform = models.House.objects.to_json()
     if not request.session.get('islogin', None):
@@ -144,4 +144,7 @@ def baiduMap(request, locations="南京"):
             'houses': json.dumps(houses),
             'location':locations
         }
-        return render(request, "echarts/baidumap.html", json_data)
+        if base:
+            return render(request, "echarts/baidumapBase.html", json_data)
+        else:
+            return render(request, "echarts/baidumap.html", json_data)

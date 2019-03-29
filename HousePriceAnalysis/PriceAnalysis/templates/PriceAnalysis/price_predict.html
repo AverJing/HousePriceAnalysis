@@ -1,0 +1,251 @@
+{% extends "../basenav.html" %}
+
+    {% block title %}
+        房价展示
+
+{% endblock title %}
+{% block header %}
+{% endblock header %}
+{% block content %}
+    <script src="https://zz.bdstatic.com/linksubmit/push.js"></script><script src="//hm.baidu.com/hm.js?c5899c8768ebee272710c9c5f365a6d8"></script><script type="text/javascript" async="" src="https://cdn.zampda.net/s.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script> -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <link rel="stylesheet" rev="stylesheet" href="https://include.anjukestatic.com/aifang/res/2019031801/b/Aifang_Web_Loupan_Listv4_ListIndex.css" type="text/css">
+    <link rel="stylesheet" rev="stylesheet" href="//pages.anjukestatic.com/kfstouch/icons/Fonts-PC-XF/20181226001/iconfont.css" type="text/css">
+    <script type="text/javascript">var PAGESTART = +new Date();</script>
+    <link rel="shortcut icon" href="//pages.anjukestatic.com/xinfang/favicon.ico">
+    <!-- INIT START -->
+    <script type="text/javascript">
+        var anjuke_web_global_InitTracker=function(city_id,city_cookie_name,guid_cookie_name,base_domain,cookie_path){
+            var expire=365*5;
+            var guid=this.getCookie(guid_cookie_name);
+            if(null==guid){
+                guid=this.createGuid();this.setCookie(guid_cookie_name,guid,expire,cookie_path,base_domain);
+            }else{
+                this.setCookie(guid_cookie_name,guid,expire+1,cookie_path,base_domain);
+            }
+            if(city_id!=this.getCookie(city_cookie_name)){
+                this.setCookie(city_cookie_name,city_id,expire,cookie_path,base_domain);
+            }
+            var session_cookie_name='sessid';var session_id=this.getCookie(session_cookie_name);if(null==session_id){
+                session_id=this.createGuid();this.setCookie(session_cookie_name,session_id,0,cookie_path,base_domain);
+            }
+            this.setCookie('isp', 'true', expire, cookie_path, base_domain);
+        };anjuke_web_global_InitTracker.prototype.createGuid=function(){
+            return(this.S4()+this.S4()+"-"+this.S4()+"-"+this.S4()+"-"+this.S4()+"-"+this.S4()+this.S4()+this.S4());
+        };anjuke_web_global_InitTracker.prototype.S4=function(){
+            return(((1+Math.random())*0x10000)|0).toString(16).substring(1).toUpperCase();
+        };anjuke_web_global_InitTracker.prototype.getCookie=function(check_name){
+            var a_all_cookies=document.cookie.split(';');var a_temp_cookie='';var cookie_name='';var cookie_value='';var b_cookie_found=false;for(i=0;i<a_all_cookies.length;i++){
+                a_temp_cookie=a_all_cookies[i].split('=');cookie_name=a_temp_cookie[0].replace(/^\s+|\s+$/g,'');if(cookie_name==check_name){
+                    b_cookie_found=true;if(a_temp_cookie.length>1){
+                        cookie_value=unescape(a_temp_cookie[1].replace(/^\s+|\s+$/g,''));
+                    }
+                    return cookie_value;break;
+                }
+                a_temp_cookie=null;cookie_name='';
+            }
+            if(!b_cookie_found){
+                return null;
+            }
+        };anjuke_web_global_InitTracker.prototype.setCookie=function(name,value,expires,path,domain,secure){
+            var today=new Date();today.setTime(today.getTime());if(expires){
+                expires=expires*1000*60*60*24;
+            }
+            var expires_date=new Date(today.getTime()+(expires));document.cookie=name+"="+escape(value)+
+                ((expires)?";expires="+expires_date.toGMTString():"")+
+                ((path)?";path="+path:"")+
+                ((domain)?";domain="+domain:"")+
+                ((secure)?";secure":"");
+        };
+        new anjuke_web_global_InitTracker('19','ctid','aQQ_ajkguid','anjuke.com','/');
+    </script>
+
+<div id="header">
+
+<div class="site-search">
+     <div class="navbar-brand" style="font-size:25px; padding:5px 0 0 0">
+         <div >
+             唯家
+         </div>
+     </div>
+
+    <div class="sel-city">
+        <a href="javascript:" class="sel-opt">
+            <span class="city">
+                {{ city }}
+            </span>
+        </a>
+    </div>
+<!-- ===== sub-nav-mod Starts used =====-->
+</div>
+<div style="height: 400px; width: 1200px">
+    <div id="container" style="height: 60%; width: 100%;">
+        <div class="filter-nav" style="margin-top: 0; float: left; width: 80%; height: 100%">
+            <div class="filter-mod" id="bubble_target">
+                <div class="filter-item" style="width: 97%">
+                    <label class="item-title">区域找房：</label>
+                    <div class="item-area">
+                        <div class="item-hd" id="region">
+                            {% for item in areas %}
+                                {% if item != "" %}
+                                    <input type="radio" name="area" value="{{ item }}" checked='checked'>{{ item }}
+                                {% endif %}
+                            {% empty %}
+                             <li>出错了 >_< !!</li>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <!-- 朝向-->
+                <div class="filter-item"  style="width: 97%">
+                    <label class="item-title">朝向：</label>
+                    <div class="item-mod" id="direction">
+                        <input type="radio" name="direction" value="东"/>东
+                        <input type="radio" name="direction" value="南"/>南
+                        <input type="radio" name="direction" value="西"/>西
+                        <input type="radio" name="direction" value="北"/>北
+                        <input type="radio" name="direction" value="东南"/>东南
+                        <input type="radio" name="direction" value="西南"/>西南
+                        <input type="radio" name="direction" value="东北"/>东北
+                        <input type="radio" name="direction" value="西北" checked='checked'/>西北
+                    </div>
+                </div>
+                <!-- 装修-->
+                <div class="filter-item"  style="width: 97%">
+                    <label class="item-title">装修情况：</label>
+                    <div class="item-mod" id="renovation">
+                        <input type="radio" name="renovation" value="精装"/>精装
+                        <input type="radio" name="renovation" value="简装"/>简装
+                        <input type="radio" name="renovation" value="毛坯" checked='checked'/>毛坯
+                    </div>
+                </div>
+                <!-- 面积-->
+                <div class="filter-item" style="width: 97%">
+                    <label class="item-title"> 房屋面积：</label>
+                    <div class="item-mod" id="measure">
+                        <input id="measure-input" type="number" style="width: 60px" value="150">平方米
+                    </div>
+                </div>
+                <!-- 楼层-->
+                <div class="filter-item" style="width: 97%">
+                    <label class="item-title"> 所在楼层：</label>
+                    <div class="item-mod" id="level">
+                        <input id="level-input" type="number" style="width: 60px" value="15">层
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="float: left; width: 20%; height: 100%">
+            <input style="font-size: 50px; width: 100%; height: 100%" type="button" value="估价" onclick="predict()"/>
+        </div>
+    </div>
+
+    <div style="background-color: #61d2c6; height: 40%; width: 100%;">
+        <p id="predict-price" style="margin: 20px; font-size: 100px; float: left">0</p>
+        <p id="predict-price" style="margin: 20px;  font-size: 30px; float: left">元/平方米</p>
+    </div>
+</div>
+
+    <script type="text/javascript">
+        function predict(){
+            var args = new Array();
+            var area = document.getElementsByName('area');
+            for (var i = 0;i < area.length;++i){
+                if (area[i].checked){
+                    args.push(area[i].value);
+                    break;
+                }
+            }
+            args.push(document.getElementById("level-input").value);
+            args.push(document.getElementById("measure-input").value);
+            var direction = document.getElementsByName('direction');
+            for (var i = 0;i < direction.length;++i){
+                if (direction[i].checked){
+                    args.push(direction[i].value);
+                    break;
+                }
+            }
+            var renovation = document.getElementsByName('renovation');
+            for (var i = 0;i < renovation.length;++i){
+                if (renovation[i].checked){
+                    args.push(renovation[i].value);
+                }
+            }
+            $.ajax({
+                url: "/predict",
+                type: "GET",
+                data: {
+                    city: '{{ city }}',
+                    args: args
+                },
+                success: function (data) {
+                    var price = document.getElementById('predict-price');
+                    price.innerText = data['result'];
+                }
+            });
+        }
+    </script>
+</div>
+
+<script>
+$(document).ready(function(){
+  $("#direction>a").click(function(){
+  $("#direction>a").css({"color":"black"});
+  $(this).css({"color":"red"});
+   });
+    $("#perprice>a").click(function(){
+  $("#perprice>a").css({"color":"black"});
+  $(this).css({"color":"red"});
+   });
+    $("#houseDesign>a").click(function(){
+  $("#houseDesign>a").css({"color":"black"});
+  $(this).css({"color":"red"});
+   });
+    $("#houseArea>a").click(function(){
+  $("#houseArea>a").css({"color":"black"});
+  $(this).css({"color":"red"});
+   });
+   $("#select-page>a").click(function(){
+  $("a").removeClass("curr-page");
+  $(this).addClass("curr-page");
+   });
+});
+</script>
+
+<script type="text/javascript">
+	var google_tag_params = {
+			listing_id         : [440888,441155,443989],
+			listing_pagetype   : "searchresults",
+			listing_totalvalue : 0		};
+    var google_conversion_id    = 947155934;
+    var google_custom_params    = window.google_tag_params;
+    var google_remarketing_only = true;
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script><iframe name="google_cookie_match_frame" title="Google cookie match frame" width="1" height="1" src="https://bid.g.doubleclick.net/xbbe/pixel?d=KAE" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" style="display:none" scrolling="no"></iframe>
+
+
+</div>
+
+
+
+
+
+<script type="text/javascript" async="" defer="" src="//pages.anjukestatic.com/prism/performance.js?v=1456202590"></script>
+<script type="text/javascript">
+;window.perfConfig = {
+    pageName : 'Aifang_Web_Loupan_Listv4_ListIndexPage',
+    siteName : 'aifang'
+};
+</script>
+<script type="text/javascript" src="//pages.anjukestatic.com/xinfang/js/jquery-1.9.1/jquery-underscore.min.js"></script>
+
+
+<script type="text/javascript" crossorigin="" src="https://include.anjukestatic.com/aifang/res/2019031801/b/Aifang_Web_Loupan_Listv4_ListIndex.js"></script>
+<script type="text/javascript" src="//j1.58cdn.com.cn/wmda/js/statistic_v000.js"></script>
+
+<script src="data:text/javascript;charset=utf-8,window"></script><script type="module" src="data:text/javascript;charset=utf-8,var test_module_scope = true; window.callback_989653(typeof window.test_module_scope === 'undefined')"></script></body></html>
+
+{% endblock content %}

@@ -56,9 +56,9 @@
 				<div id="navbar" class="navbar-collapse navbar-right collapse">
 					<ul class="nav navbar-nav navbar-right cross-effect" id="cross-effect">
 						<li><a href="#agileabout" data-link-alt="首页">首页</a></li>
-                        <li><a href="{% url 'PriceAnalysis:showHistory' location %}" data-link-alt="城市">城市</a></li>
-                        <li><a href="{% url 'baidumap' location %}" data-link-alt="城市">地图</a></li>
-						<li><a href="{% url 'PriceAnalysis:showHouse' location %}" data-link-alt="我们">看房</a></li>
+                        <li><a href="{% url 'PriceAnalysis:showHistory' location %}" data-link-alt="历史房价">历史房价</a></li>
+                        <!-- <li><a href="{% url 'baidumap' location %}" data-link-alt="地图">地图</a></li> -->
+						<li><a href="{% url 'PriceAnalysis:showHouse' location %}" data-link-alt="二手房">二手房</a></li>
                         {% if request.session.islogin %}
                         <li><a href="#">{{ request.session.username }}</a></li>
                         <li><a href="/logout" data-link-alt="注销" >注销</a></li>
@@ -118,23 +118,26 @@
             <div class="home-nav">
                 <ul>
                     <li>
-                        <a href="{% url 'PriceAnalysis:index' '北京' %}"><h1>北京</h1></a>
+                        <a href="{% url 'PriceAnalysis:index' '北京' %}"><h1 style="font-size: 27px">北京</h1></a>
                     </li>
                     <li>
-                        <a href="{% url 'PriceAnalysis:index' '上海' %}"><h1>上海</h1></a>
+                        <a href="{% url 'PriceAnalysis:index' '上海' %}"><h1 style="font-size: 27px">上海</h1></a>
                     </li>
                     <li>
-                        <a href="{% url 'PriceAnalysis:index' '深圳' %}"><h1>深圳</h1></a>
+                        <a href="{% url 'PriceAnalysis:index' '深圳' %}"><h1 style="font-size: 27px">深圳</h1></a>
                     </li>
                 </ul>
             </div>
 
-			<div class="col-md-6 agileabout-grid agileabout-grid-1">
-				<h2>Lorem Ipsum <span>Couch</span></h2>
-				<h4>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...</h4>
-				<p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores.</p>
+			<div class="col-md-6 agileabout-grid agileabout-grid-1" style="padding:50px 50px 0px 200px">
+				<h2>唯家 <span>科技</span></h2>
+                <h4>数据挖掘 分析 预测</h4>
+                <p>人生的旅途，唯有家是最温馨的港湾</p>
+                <p>我们是一个活泼又聪明，充满热情的小家庭</p>
+                <p>相亲相爱的一家人 </p>
+                <p>WeHome@163.com</p>
 			</div>
-			<div class="col-md-6 agileabout-grid agileabout-grid-2">
+			<div class="col-md-6 agileabout-grid agileabout-grid-2" style="padding:40px 50px 0px 100px">
 				<img src="{% static 'images/about.jpg' %}" alt="Couch Hunter">
 			</div>
 			<div class="clearfix"></div>

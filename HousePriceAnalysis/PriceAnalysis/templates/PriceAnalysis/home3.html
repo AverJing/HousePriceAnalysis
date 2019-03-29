@@ -1,0 +1,79 @@
+{% extends "../basenav.html" %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/divbg.css' %}"			type="text/css" media="all">
+{% endblock %}
+
+{% block content %}
+    <div class="container"><div class="backgroundImageFilter"> </div>
+    <div style="height:400; background-color: #f9f9f9; margin-top:10;opacity:0.8">
+                    <div style="float:left;">
+                        <div id="left" style="color: #fff; background-color: rgba(91,210,198, 1); height:385; width:800;">
+                             <div style="padding: 45 40 45 40;">
+                                 <div id="title" style="height:55; width:720">
+                                     <div style="float: left; font-weight: 700; font-size: 55px; line-height: 55px;">
+                                         {{location|safe}}
+                                     </div>
+                                 </div>
+            
+                                 <div style="height:100; width:700; margin-top:140">
+                                     <div style="height:24; width:700; margin-bottom:20">
+                                         <span style="font-size: 18px; font-weight: 700; float: left;">
+                                            02月链家参考均价
+                                         </span>
+                                         <span style="font-size: 18px; font-weight: 700; float: right;">
+                                            二手房数量
+                                         </span>
+                                     </div>
+                                     <div style="height:60; width:700;">
+                                         <span id="price" style="font-family: tahoma;font-weight: 700;font-size: 80px;line-height: 60px; float: left;">
+                                             {{average|safe}}
+                                         </span>
+                                         <span style="font-size: 24px;line-height: 24px;margin-left: 10px;position: relative;top: 38px;float:left">
+                                                元/㎡
+                                         </span>
+                                         
+                                         <span style="font-size: 24px;line-height: 24px;margin-left: 10px;position: relative;top: 38px;float:right;">
+                                            套
+                                        </span>
+                                        <span id="price" style="font-family: tahoma; font-weight: 700;font-size: 80px;line-height: 60px; float:right;">
+                                                {{count|safe}} 
+                                            </span>                           
+                                     </div>
+                                 </div>
+                             </div>
+                        </div>
+                    </div>
+                    <div id="right" style="float: right;width: 650;">
+                        <div style="padding: 0 20px 0 30px;">
+                            <ul style="list-style: none;">
+                                <li style="height: 80px; line-height: 20px; padding: 20px 0 9px;border-bottom: 1px solid #f8f8f8; font-weight: 700;">
+                                    优质小区推荐：世茂滨江花园
+                                </li>
+                                <li>
+                                    特色：<span>罕见朝南户型观天鹅湖，坐拥黄浦江，有阳台，采光佳。</span>
+                                </li>   
+                                <li>
+                                    户型：<span>两室两厅一厨一卫</span>&nbsp;&nbsp;<span>建筑面积：139m²</span>
+                                </li> 
+                                <li>
+                                    状态：
+                                        <i class="status-icon onsale">在售 + </i>
+                                        <i class="status-icon wuyetp">低楼层（共38层）+ </i>
+                                        <span class="tag">精装 + </span>
+                                        <span class="tag">浦东</span>
+                                        <p>单价：<span></span>93512元/㎡</p> 
+                                </li> 
+                            </ul>
+                        </div>
+                    </div>
+            </div>      
+            {% if request.session.islogin %}
+            <div style="height:400px; width:100%; float:left;">
+                    <iframe frameborder="0" height="100%" width="100%" src="{% url 'baidumap' location  True %}"></iframe>  
+            </div>   
+            {% endif %}       
+               
+  
+        </div>
+{% endblock content %}

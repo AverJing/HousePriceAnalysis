@@ -1,0 +1,34 @@
+
+/* .bgset{
+    background: url("https://www.lifeofpix.com/wp-content/uploads/2018/09/warsaw-alley-pic-1600x900.jpg") no-repeat;
+    background-size:contain;  
+    background-attachment:fixed;
+	background-repeat:no-repeat;
+} */
+
+body{
+    width:100%;
+    margin: 0%;
+    padding:0px;
+} 
+    .backgroundImageFilter,
+    .container {
+        width: 100%;
+        height: 100%;
+    }
+    .container {
+        margin: auto;
+        position: relative;
+    }
+    .backgroundImageFilter {
+        position: absolute;
+        background-image: url("https://www.lifeofpix.com/wp-content/uploads/2018/09/warsaw-alley-pic-1600x900.jpg");
+        background-repeat: repeat;
+        background-size: 100% 100%;     
+        background-position: center;
+        z-index: -1;
+        transition: filter 1s;
+    }
+    .container:hover  .backgroundImageFilter {
+        filter: blur(3px);
+    }

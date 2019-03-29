@@ -1,18 +1,21 @@
 {% extends "../basenav.html" %}
 {% block title %}
         房价展示
-    {% endblock title %}
+{% endblock title %}
+
+<body>
+</body>
+
 {% block content %}
 <div class="panel panel-default" style="margin-top:30px;">
-    <div class="panel-body">
-        <table>
-            <tr>
-                <td >
-                    <div id="container" style="width: 900; height:500; margin:5 130 5 105 "></div>
+    <div class="panel-body"></div>     
+        
+            <div class="panel-heading">
+                    <p style="text-align:center; font-size:20" id="title">{{ title }}房价走势图</p>
+            </div> 
 
-          <div class="panel-heading">
-          <p style="text-align:center; bottom:15; font-size:20;" id="title">{{ title }}房价走势图
-          </p>
+           <div id="container" style="width: 900; height:500; margin:5 130 5 105 "></div>
+
           <p id="result"></p>
           <!--点击按钮 调用setOption函数，传递所查询年份参数，获取数据，-->
 
@@ -27,21 +30,17 @@
               <button type="button" class="btn btn-info" onclick="set_option(2013)">2013</button>
 
           </div>
-          </div>
+          
     </div>
     <div class="panel panel-default" style="margin-top:50px;">
 
       <div class="panel-body"></div>
         <!--jcy分支的内容-->
-              <div id="container2" style="height:500"></div>
-          <div class="panel-heading">
-          <p style="text-align:center; font-size:20" id="title2">{{location}}各区房价对比图</p>
-      </div> 
-
+        <div class="panel-heading">
+            <p style="text-align:center; font-size:20" id="title2">{{location}}各区房价对比图</p>
+        </div>           
           <div id="container2" style="height:450"></div>
             <script type="text/javascript">
-
-
                     // 初始刷新时  从view中传递的数据
 
                     //document.getElementById("title2").value = "苏州";
@@ -68,6 +67,8 @@
                                 name: areas[i],
                                 type:'line',
                                 smooth: true,
+                                symbol:'circule',
+                                symbolSize:10,
                                 data: mydata[i]
                         };
 
@@ -91,8 +92,17 @@
                             trigger: 'item'
                         },
                         legend: {
+                            type: 'scroll',                           
+                            data: (function (){
+                                var area = {{ areas|safe }};
+                                var list = [];
+                                for (var i = 0; i < area.length; i++) {
+                                    list.push(area[i]);
+                                }
+                                return list;
+                            })(),
                             selectedMode: 'single', //单选
-                            data:  {{ areas|safe }},
+                            //data:  {{ areas|safe }},
                             inactiveColor:'#a7a7a7',
                             itemWidth: 50,
                             itemHeight: 35,
@@ -119,8 +129,8 @@
                                         {
                                             type: 'image',
                                             id: 'logo',
-                                            right: 20,
-                                            top: 20,
+                                            right: 0,                                          
+                                            bottom: 80,
                                             z: -10,
                                             bounding: 'raw',
                                             origin: [75, 75],
@@ -134,8 +144,8 @@
                                             type: 'group',
                                             //rotation: Math.PI / 4,
                                             bounding: 'raw',
-                                            right: 110,
-                                            bottom: 310,
+                                            right: 70,
+                                            bottom: 60,
                                             z: 100,
                                             children: [                                               
                                                 {
@@ -152,9 +162,8 @@
                                             ]
                                         },                                                                 
                                     ],
-                        series: myseries
-                    });
-
+                        series: myseries                                            
+                    });                  
 
                    var dom2 = document.getElementById("container2");
                    var myChart2 = echarts.init(dom2);
@@ -186,7 +195,7 @@
                                         {
                                             type: 'image',
                                             id: 'logo',
-                                            right: 20,
+                                            right: 70,
                                             top: 20,
                                             z: -10,
                                             bounding: 'raw',
@@ -201,7 +210,7 @@
                                             type: 'group',
                                             //rotation: Math.PI / 4,
                                             bounding: 'raw',
-                                            right: 110,
+                                            right: 140,
                                             bottom: 310,
                                             z: 100,
                                             children: [                                               
@@ -233,10 +242,9 @@
     {
         //点击按钮和下拉框会调用Ajax函数， 下拉框可以不传值，按钮只传一个值
         // 异步刷新 调用views.showForecast函数，传入year 返回data 该年份各地区的历史房价
-        if (cities=='')  //只改变时间 不传城市 获取上次
-        {
-            cities = document.getElementById("title2").value;
-        }
+        
+        cities = "{{location}}";
+        
         $.ajax({
             url:"/forecastPrice",
             type:"GET",
@@ -281,6 +289,15 @@
                 var option = {
                     title: {text: print_info,},
                     legend: {
+                        type: 'scroll',                           
+                            data: (function (){
+                                var area = data.areas;
+                                var list = [];
+                                for (var i = 0; i < area.length; i++) {
+                                    list.push(area[i]);
+                                }
+                                return list;
+                            })(),
                         selectedMode: 'single', //单选
                         data:  data.areas,
                         inactiveColor:'#a7a7a7',
@@ -304,7 +321,7 @@
                         //点击按钮和下拉框会调用Ajax函数， 下拉框可以不传值，按钮只传一个值
                         // 异步刷新 调用views.showHouse3函数，传入year 返回data 该年份各地区的历史房价
                         //alert('sss')
-                        //var cities = document.getElementById("cmbCity").value
+                        var cities = "{{ location }}";//document.getElementById("title2").value
 
                         $.ajax({
                             url:"/historyPrice",
@@ -396,8 +413,7 @@ myChart2.setOption(myChart2.option, true);
 }
 
 </script>
-      </div>
-    </div>
+
 {% endblock content %}
 
 

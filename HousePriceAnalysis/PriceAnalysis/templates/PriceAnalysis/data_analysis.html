@@ -76,14 +76,14 @@
     <div class="sel-city">
    <a href="javascript:" class="sel-opt">
        <span class="city">
-           传过来的城市{{ city }}
+           {{ city }}   
        </span>
    </a>
 
 </div>
 <div class="map-search">
     <a href="{% url 'baidumap' location %}" class="map-tab item-on" ><i class="list-ico map-ico"></i>地图搜房</a>
-    <!-- <a href="{% url 'baidumap' location %}">地图找房</a> -->
+    <a href="{% url 'PriceAnalysis:pricePredict' location %}" class="map-tab item-on" ><i class="map-ico glyphicon glyphicon-yen"></i> 房源估价</a>
 </div>
 <div class="search-box" id="j-search">
 	<form class="search-form" method="GET" action="">
@@ -112,7 +112,9 @@
                     <div class="item-hd" id="region">
                         <!-- seo学校列表页-->
                         {% for item in areas %}
-                            <a class="select-item multi-item" onclick="select('{{ item|addslashes }} ',0)">{{ item }}</a>
+                            {% if item != "" %}
+                                <a class="select-item multi-item" onclick="select('{{ item|addslashes }} ',0)">{{ item }}</a>
+                            {% endif %}
                         {% empty %}
                          <li>出错了 >_< !!</li>
                         {% endfor %}
@@ -139,24 +141,24 @@
              <div class="filter-item" >
                     <label class="item-title">户型：</label>
                     <div class="item-mod" id="houseDesign">
-                        <a class="multi-item" rel="nofollow" onclick="select('室',2)"><em class="letter iconfont"></em>全部</a>
-                        <a class="multi-item" rel="nofollow" onclick="select('1室',2)"><em class="letter iconfont"></em>一室</a>
-                        <a class="multi-item" rel="nofollow" onclick="select('2室',2)"><em class="letter iconfont"></em>二室</a>
-                        <a class="multi-item" rel="nofollow" onclick="select('3室',2)"><em class="letter iconfont"></em>三室</a>
-                        <a class="multi-item" rel="nofollow" onclick="select('4室',2)"><em class="letter iconfont"></em>四室</a>
-                        <a class="multi-item" rel="nofollow" onclick="select('5室及以上',2)"><em class="letter iconfont"></em>五室及以上</a>
+                        <a class="multi-item" rel="nofollow" onclick="select('室',2)">全部</a>
+                        <a class="multi-item" rel="nofollow" onclick="select('1室',2)">一室</a>
+                        <a class="multi-item" rel="nofollow" onclick="select('2室',2)">二室</a>
+                        <a class="multi-item" rel="nofollow" onclick="select('3室',2)">三室</a>
+                        <a class="multi-item" rel="nofollow" onclick="select('4室',2)">四室</a>
+              
                     </div>
              </div>
                 <div class="filter-item">
                         <label class="item-title"> 房屋面积：</label>
                         <div class="item-mod" id="houseArea">
-                            <a class="multi-item" onclick="select('0-10000',3)"><em class="letter iconfont"></em>全部</a>
-                            <a class="multi-item" onclick="select('0-50',3)"><em class="letter iconfont"></em>50m²以下</a>
-                            <a class="multi-item" onclick="select('51-90',3)"><em class="letter iconfont"></em>50-90m²</a>
-                            <a class="multi-item" onclick="select('91-120',3)"><em class="letter iconfont"></em>90-120m²</a>
-                            <a class="multi-item" onclick="select('121-150',3)"><em class="letter iconfont"></em>120-150m²</a>
-                            <a class="multi-item" onclick="select('151-200',3)"><em class="letter iconfont"></em>150-200m²</a>
-                            <a class="multi-item" onclick="select('201-10000',3)"><em class="letter iconfont"></em>200m²以上</a>
+                            <a class="multi-item" onclick="select('0-10000',3)">全部</a>
+                            <a class="multi-item" onclick="select('0-50',3)">50m²以下</a>
+                            <a class="multi-item" onclick="select('51-90',3)">50-90m²</a>
+                            <a class="multi-item" onclick="select('91-120',3)">90-120m²</a>
+                            <a class="multi-item" onclick="select('121-150',3)">120-150m²</a>
+                            <a class="multi-item" onclick="select('151-200',3)">150-200m²</a>
+                            <a class="multi-item" onclick="select('201-10000',3)">200m²以上</a>
                         </div>
                  </div>
             <!--更多-->
@@ -184,9 +186,9 @@
             <a class="" href="#" rel="nofollow"><span>价格</span><i class="list-ico defult-down"></i></a>
             <a class="" href="#" rel="nofollow"><span>开盘时间</span><i class="list-ico defult-down"></i></a>
         </div>
-            <span class="result">
-                共有<em>{{ count }}</em>个符合要求的{{city}}楼盘</h1>
-            </span>
+            <!-- <span class="result">
+                共有<em id="amount">{{ count }}</em>个符合要求的{{city}}楼盘</h1>
+            </span> -->
     </div>
 </div>
 <div class="resource-ifx resource-ifx-filter" data-resource_id="1310310" data-region_id="" data-subregion_id="" data-city_id="19" data-soj="zybh-pc-31" data-limit="2"></div>
@@ -243,11 +245,7 @@
 
             <script type="text/javascript">
 
-                    <!--document.getElementById("city").value='吴江';-->
-                    <!--document.getElementById("price").value=0;-->
-                    <!--document.getElementById("house_type").value='';-->
-                    <!--document.getElementById("area").value='';-->
-
+                   
                     function select(str,flag){
 
                         if (flag==0)
@@ -294,9 +292,9 @@
 
                                          success:function(data){
                                                 // 展示页面
-
                                                  var houseDivRemove=document.getElementById("houseInfo").innerHTML = "";//清空div内容
-                                                //一下为查询数据展示
+                                                 //document.getElementById("amount").innerHTML = data.count;
+                                                 //一下为查询数据展示
                                                 var divContent='';
                                                 for(var i=0;i<data.houseData.length;i++){
                                                 divContent+='<div class="key-list imglazyload" style="width:1160"><div class="item-mod" rel="nofollow">';

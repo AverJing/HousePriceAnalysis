@@ -4,7 +4,7 @@ from mongoengine.queryset.visitor import Q
 from django.shortcuts import HttpResponse
 from django.http import JsonResponse
 import pymongo
-import json
+import json,pickle
 from PriceAnalysis.GM_forecast import *   # 导入灰色预测模型
 
 client = pymongo.MongoClient('mongodb+srv://averjing:Fu.ture1@housepriceanalysis-7vvvm.azure.mongodb.net/?retryWrites=true')
@@ -24,22 +24,29 @@ def getCityPinyin(city):
 def index(request, city="苏州"):
     #return render(request, 'PriceAnalysis/base.html')
     #return render(request, 'PriceAnalysis/home.html')
+    
     query = getCityPinyin(city)
+
     col = db2.get_collection(query["name"]+"_ershoufang")
-    data = col.find()
-    price = 0
-    count = 0
-    for item in data:
-        try:
-            price += int(item['price'])
-        except:
-            continue
-        count += 1
-    json_data = {
-        'average': price//count,
-        'count':count,
-        'location':city
-    }
+    data = col.aggregate(
+        [{"$group": {"_id":None, "sum": {"$sum": "$price"}, "count":{"$sum": 1}}}]
+    )
+    # house_data= col.find().limit(3)
+    # data = col.find()
+    # price = 0
+    # count = 0
+    # for item in data:
+    #     try:
+    #         price += int(item['price'])
+    #     except:
+    #         continue
+    #     count += 1
+    for e in data:
+        json_data = {
+                'average': e["sum"]//e["count"],
+                'count':int(e["count"]),
+                'location':city
+        }    
     #print(json_data)
     return render(request, 'PriceAnalysis/home.html', json_data)
 
@@ -63,6 +70,7 @@ def showHouse(request, city='苏州'):
     #if province == ' ':   #只传城市 默认从数据库中搜索该城市的10条信息
 
     query = getCityPinyin(city)
+
     city_table = query["name"]+"_ershoufang"
      # 获取城市对应表明 suzhou_ershoufang
     area_info = query["area"]
@@ -116,8 +124,9 @@ def showHouse3(request):
     year = '2019'
     col2 = db.get_collection('Collections')
 
-    if request.GET.get("district") is not None:
+    if request.GET.get("city") is not None:
         city = request.GET.get("city")
+        #print(len(city))
     else:
         pass
 
@@ -130,7 +139,7 @@ def showHouse3(request):
     if city == '':
         city = 'JS_suzhou'
     else:
-        name = city[:-1]  # 去空格
+        name = city  # 去空格
 
         city = col2.find_one({'city_name': name}, {'_id': 0, 'collection_name': 1})['collection_name']
 
@@ -180,21 +189,25 @@ def queryHouse(request):
     query = getCityPinyin(city)
 
     col = db2.get_collection(query['name']+"_ershoufang")  # 切换表
+    col.find().distinct("area")
+    #print(col)
     data = col.find(
         {'area': {'$regex': name[:-1]},
         '房屋户型': {'$regex': house_type},
          'price': {'$gt': int(price_list[0]), '$lt': int(price_list[1])},
          '建筑面积': {'$gt': int(area_list[0]), '$lt': int(area_list[1])},
-         'title': {'$regex': search}
+         'title': {'$regex': search}        
         }
     ).skip(int(page)*10).limit(10)  #
     data_list = []  # 空集合 传递给views 包含前10条信息
     
     for item in data:
-        data_list.append(
-            [item['title'], item['area'], int(item['price']), item['communityName'], item['房屋户型'], item['建筑面积'],
-             item['房屋朝向'], item['装修情况'], item['所在楼层']])
-    context = {'houseData': data_list, 'count': len(data_list)}
+        if item['title'] != '已下架':
+            data_list.append(
+                [item['title'], item['area'], int(item['price']), item['communityName'], item['房屋户型'], item['建筑面积'],
+                item['房屋朝向'], item['装修情况'], item['所在楼层']])
+    context = {'houseData': data_list, 'count': 10}
+    
     return JsonResponse(context)
 
     #预测数据
@@ -212,11 +225,10 @@ def showForecast(request):
     else:
         pass
 
-
     if city == '':
         city = 'JS_suzhou'
     else:
-        name = city[:-1]
+        name = city
 
         city = col2.find_one({'city_name': name}, {'_id': 0, 'collection_name': 1})['collection_name']
 
@@ -244,9 +256,12 @@ def showForecast(request):
         price_current_year.reverse()
         for i in price_current_year:
             price_last_year.append(i)
+        if len(price_last_year) != 15:          
+            continue
 
         # price_last_year 是预测数列
         origin_data = price_last_year[:]  # 作平移处理时保留原始数据,两个数组互不影响，单纯的赋值是引用地址的传递
+        #print(price_last_year)
         if level_check(price_last_year):  # 判断原始数据是否符合级别校验
             #print("符合级别校验,未做平移处理！")
             forecast_data = forecast(price_last_year, 0)
@@ -262,7 +277,6 @@ def showForecast(request):
         for i in forecast_data:
             price_current_year.append(i)
         info_dic[area] = price_current_year
-
     area_info = list(info_dic.keys())
 
     #print(area_info)
@@ -270,4 +284,55 @@ def showForecast(request):
     context = {'areas': area_info, 'info_dict': info_dic, 'title': title}  # 上下文字典
 
 
+    return JsonResponse(context)
+
+def pricepredict(request, city='苏州'):
+    query = getCityPinyin(city)
+
+    # 获取城市对应表明 suzhou_ershoufang
+    area_info = query["area"]
+    # print(area_info)
+
+    context = {'city': city, 'areas': area_info, 'location': city}
+    # print(context)
+    return render(request, 'PriceAnalysis/price_predict.html', context)
+
+def predict(request):
+    cityName = request.GET.get('city')
+    data = request.GET.getlist('args[]')
+    trans_file = open('PriceAnalysis/static/model/data.json', 'r')
+    trans_data = json.load(trans_file)
+    area = []
+    direction = []
+    renovation = []
+    for td in trans_data:
+        if td['city'] == cityName:
+            area = td['area']
+            renovation = td['renovation']
+            direction = td['direction']
+    #print(area)
+    for a in area:
+        if a['name'] == data[0]:
+            #print(a)
+            data[0] = a['value']
+    data[1] = float(data[1])
+    data[2] = float(data[2])
+    for d in direction:
+        if d['name'] == data[3]:
+            data[3] = d['value']
+    for r in renovation:
+        if r['name'] == data[4]:
+            data[4] = r['value']
+
+    X = [data]
+    #print(X)
+    query = getCityPinyin(cityName)
+
+    model_file = open('PriceAnalysis/static/model/'+query["name"]+'.pickle', 'rb')
+    model = pickle.load(model_file)
+    result = model.predict(X)
+    context = {'result': int(result[0])}
+
+    model_file.close()
+    trans_file.close()
     return JsonResponse(context)

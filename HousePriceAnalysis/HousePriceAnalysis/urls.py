@@ -42,7 +42,7 @@ urlpatterns = [
     path('logout/', mainV.logout),
     #path('index/',mainV.indexAddEcharts),
     path('excellentHouse/',waterflowV.excellent_house),
-    path('admin/', admin.site.urls),
+    #path('admin/', admin.site.urls),
     
 
     #path('index/', loginV.index),
@@ -53,7 +53,8 @@ urlpatterns = [
     #path('echarts/index/', chartV.index),
     #path('echarts/map/', chartV.getAll),
     path('echarts/baidumap/<str:locations>',chartV.baiduMap, name="baidumap"),
+    path('echarts/baidumap/<str:locations>/<str:base>',chartV.baiduMap, name="baidumap"),
     path('admin/', admin.site.urls),
     path('<str:location>/', mainV.index, name="index"), 
-    #path('', pv.showHouse, name='showHouse', namespace='PriceAnalysis'),
+    #path('', pv.showHouse, name='showHouse', namespace='PriceAnalysis'), 
 ]
